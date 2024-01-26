@@ -1,5 +1,5 @@
-name: Plugin Name
-view: Popup # Tab or Popup if has an GUI
+name: Autonomous Robotic Sample Handling
+view: Tab # Tab or Popup if has an GUI
 
 acquisition_modes: 
   - name: Plugin Acquisition
@@ -8,7 +8,15 @@ acquisition_modes:
 ###################################################################
 # how to add plugin device in the .navigate/configuration.yaml file
 #
-# plugin_device:
+# robot_arm:
 #   hardware:
 #     type: PluginDevice
 ###################################################################
+robot_arm:
+  hardware:
+    type: Meca500
+    ip_address: 192.168.0.100
+
+motor:
+  hardware:
+    type: Meca500

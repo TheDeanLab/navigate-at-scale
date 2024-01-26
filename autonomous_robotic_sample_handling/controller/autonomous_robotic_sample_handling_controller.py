@@ -1,4 +1,4 @@
-class PluginNameController:
+class AutonomousRoboticSampleHandlingController:
     def __init__(self, view, parent_controller=None):
         self.view = view
         self.parent_controller = parent_controller
@@ -16,7 +16,8 @@ class PluginNameController:
         """
 
         print("*** Move button is clicked!")
-        self.parent_controller.execute("move_plugin_device", self.variables["plugin_name"].get())
+
+        self.parent_controller.execute("move_robot_arm", self.variables["autonomous_robotic_sample_handling"].get())
 
 
     
