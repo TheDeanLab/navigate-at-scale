@@ -9,15 +9,4 @@ class AutonomousRoboticSampleHandlingController:
         # #################################
         # ##### Example Widget Events #####
         # #################################
-        self.buttons["move"].configure(command=self.move)
-
-    def move(self, *args):
-        """Example function to move the plugin device
-        """
-
-        print("*** Move button is clicked!")
-
-        self.parent_controller.execute("move_robot_arm", self.variables["autonomous_robotic_sample_handling"].get())
-
-
     
