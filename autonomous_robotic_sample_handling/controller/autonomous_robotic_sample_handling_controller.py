@@ -8,7 +8,7 @@ class AutonomousRoboticSampleHandlingController:
 
         self.variables = self.view.get_variables()
         self.buttons = self.view.buttons
-        print(self.buttons)
+        # print(self.buttons)
 
         # Initialize sub-controllers
         # self.robot_arm_controller = RobotArmController(self.view, self.parent_controller)
