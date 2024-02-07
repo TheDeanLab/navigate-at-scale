@@ -17,5 +17,7 @@ class RobotArmController:
 
         self.buttons["zero"].configure(command=self.zero_joints)
 
-        def zero_joints(self):
-            print("Test zero joints")
+    def zero_joints(self):
+        self.parent_controller.execute(
+            "zero_joints"
+        )

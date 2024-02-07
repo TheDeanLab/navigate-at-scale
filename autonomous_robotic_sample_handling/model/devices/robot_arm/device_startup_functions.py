@@ -3,8 +3,8 @@ import os
 from pathlib import Path
 
 # Third party imports
-import mecademicpy.robot as mdr
-from tkinter import messagebox
+# import mecademicpy.robot as mdr
+# from tkinter import messagebox
 
 # Local application imports
 from navigate.tools.common_functions import load_module_from_file
@@ -39,12 +39,12 @@ def load_device(configuration, is_synthetic=False):
     #     device_type = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["type"]
     # return DummyDeviceConnection()
 
-    device_type = "Me"
-    if device_type == "Me":
-        module = load_module_from_file("robot_arm", r"C:\Kushal\10-19 College\17 Fall 2023\Senior Design I\navigate-at-scale\autonomous_robotic_sample_handling\model\devices\robot_arm\robot_arm.py")
-        return module.connect_to_robot_arm(None)
-
-    return DummyDeviceConnection()
+    if is_synthetic:
+        print("*** Building Synthetic Connection")
+        return DummyDeviceConnection()
+    # else:
+    #     module = load_module_from_file("robot_arm", r"C:\Kushal\10-19 College\17 Fall 2023\Senior Design I\navigate-at-scale\autonomous_robotic_sample_handling\model\devices\robot_arm\robot_arm.py")
+    #     return module.connect_to_robot_arm(None)
 
 def start_device(microscope_name, device_connection, configuration, is_synthetic=False):
     """ Start the Robot ARm

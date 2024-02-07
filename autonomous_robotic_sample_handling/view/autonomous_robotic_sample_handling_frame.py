@@ -48,18 +48,21 @@ class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
         self.robot_init.grid(
             row=0, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
         )
+        self.buttons.update(RobotInitialization.get_buttons(self.robot_init))
 
         # Quick Command Buttons
         self.move_sequence = MoveSequence(self)
         self.move_sequence.grid(
             row=5, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
         )
+        self.buttons.update(MoveSequence(self.move_sequence))
 
         # Pause and Play Buttons
         self.pause_play = PausePlay(self)
         self.pause_play.grid(
             row=0, column=3, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
         )
+        self.buttons.update()
 
         # Test button for model-controller relationship
         # self.buttons['zero'] = ttk.Button(self, text="Zero Joints")
@@ -127,7 +130,8 @@ class RobotInitialization(tk.Frame):
             "import": ttk.Button(self, text="Load Positions from Disk"),
             "connect": ttk.Button(self, text="Connect Robot"),
             "export": ttk.Button(self, text="Home Robot"),
-            "launch": ttk.Button(self,text='Move Robot')
+            "launch": ttk.Button(self,text='Move Robot'),
+            "zero": ttk.Button(self, text="Zero Joints")
         }
         counter = 0
         for key, button in self.buttons.items():
@@ -139,11 +143,16 @@ class RobotInitialization(tk.Frame):
                 row, column = 1, 0
             elif counter == 3:
                 row, column = 1,1
+            elif counter == 4:
+                row, column = 2, 0
 
             button.grid(
                 row=row, column=column, sticky=tk.NSEW, padx=(4, 1), pady=(4, 6)
             )
             counter += 1
+
+    def get_buttons(self):
+        return self.buttons
 
 class MoveSequence(tk.Frame):
     """MoveSequence
@@ -196,6 +205,9 @@ class MoveSequence(tk.Frame):
                 row=row, column=column, sticky=tk.NSEW, padx=(4, 1), pady=(4, 6)
             )
             counter += 1
+
+    def get_buttons(self):
+        return self.buttons
 
 class PausePlay(tk.Frame):
     """PausePlay
