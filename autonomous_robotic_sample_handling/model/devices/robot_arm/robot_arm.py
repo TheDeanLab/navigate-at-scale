@@ -15,7 +15,7 @@ def start_robot_arm(device: mdr.Robot, configuration):
 
 class RobotArm:
     """A Robot Arm class"""
-    def __init__(self, device_connection, *args):
+    def __init__(self, device_connection: mdr.Robot, *args):
         """ Initialize the Custom Device
 
         Parameters
