@@ -61,6 +61,10 @@ class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
             row=0, column=3, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
         )
 
+        # Test button for model-controller relationship
+        # self.buttons['zero'] = ttk.Button(self, text="Zero Joints")
+        # self.buttons['zero'].grid(row=6, column=1, sticky=tk.NSEW, padx=10, pady=10)
+
     # Getters
     def get_variables(self):
         """Returns a dictionary of the variables for the widgets in this frame.
@@ -178,7 +182,6 @@ class MoveSequence(tk.Frame):
             "stop": ttk.Button(self, text="STOP"),
             "sample_carousel": ttk.Button(self, text="Sample to carousel"),
             "sample_microscope": ttk.Button(self, text="Sample to microscope"),
-            
         }
         counter = 0
         for key, button in self.buttons.items():

@@ -11,15 +11,11 @@ class SyntheticRobotArm:
         """
         pass
 
-    def move(self, robot):
-        """ Move the Synthetic Robot Arm
+    def zero_joints(self):
+        """ Zero the joints of the synthetic device """
 
-        Parameters
-        ----------
-        robot : Mecademicpy.Robot
-            The robot object representing the Meca500 robot arm.
-        """
-        print("*** Synthetic Device receive command: move")
+        print("*** Synthetic robot receive command: zero joints")
+
 
     @property
     def commands(self):

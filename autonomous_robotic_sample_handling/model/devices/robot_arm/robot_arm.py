@@ -9,7 +9,6 @@ def connect_to_robot_arm(configuration):
 
 def start_robot_arm(device: mdr.Robot, configuration):
     print("Activating and Homing robot arm")
-    device.Move
     device.ActivateAndHome()
     device.Delay(2)
     device.Disconnect()
@@ -26,12 +25,12 @@ class RobotArm:
         args : list
             The arguments for the device
         """
-        self.device_connection = device_connection
+        self.robot = device_connection
 
-    def zero_joints(self, robot):
+    def zero_joints(self):
         """Zero the joints"""
         print("Custom device is going to zero joints")
-        robot.MoveJoints(0, 0, 0, 0, 0, 0)
+        self.robot.MoveJoints(0, 0, 0, 0, 0, 0)
         print('Robot has completed movement')
 
     @property
@@ -43,4 +42,4 @@ class RobotArm:
         commands : dict
             commands that the device supports
         """
-        return {"move_robot_arm": lambda *args: self.move(args[0])}
+        return {"zero_joints": lambda *args: self.zero_joints(args[0])}

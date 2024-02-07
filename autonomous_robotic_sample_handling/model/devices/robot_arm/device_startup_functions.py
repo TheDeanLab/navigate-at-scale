@@ -32,11 +32,13 @@ def load_device(configuration, is_synthetic=False):
     object
         The device connection object
     """
-    print("*** loading connection to robo arm!")
+    # print("*** loading connection to robo arm!")
     # if is_synthetic:
     #     device_type = "synthetic"
     # else:
     #     device_type = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["type"]
+    # return DummyDeviceConnection()
+
     device_type = "Me"
     if device_type == "Me":
         module = load_module_from_file("robot_arm", r"C:\Kushal\10-19 College\17 Fall 2023\Senior Design I\navigate-at-scale\autonomous_robotic_sample_handling\model\devices\robot_arm\robot_arm.py")
