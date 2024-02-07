@@ -43,6 +43,10 @@ class RobotArm:
         """Activates and Homes the Robot"""
         self.robot.ActivateAndHome()
 
+    def LoadRobotConfig(self):
+        """Imports limits defined in the yaml file. Needs to be called before ActivateAndHome"""
+        self.robot.SetJointLimits()
+        self.robot.SetTorqueLimits()
     
 
     @property

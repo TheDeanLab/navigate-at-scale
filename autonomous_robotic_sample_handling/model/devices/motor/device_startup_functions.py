@@ -7,13 +7,15 @@ import clr
 from navigate.tools.common_functions import load_module_from_file
 from navigate.model.device_startup_functions import device_not_found
 
-from autonomous_robotic_sample_handling.API import Thorlabs.MotionControl.DeviceManagerCLI.dll
-from autonomous_robotic_sample_handling.API import Thorlabs.MotionControl.GenericMotorCLI.dll
-from autonomous_robotic_sample_handling.API import Thorlabs.MotionControl.Benchtop.StepperMotorCLI.dll
+#TODO: Figure out an easier/more elegant way to join paths. The .s in the dll file name is problematic?
+absolute_path = "C:/Users/abhik/Documents/Senior Design/navigate-at-scale/autonomous_robotic_sample_handling/API"
+DeviceManagerCLI = os.path.join(absolute_path, "Thorlabs.MotionControl.DeviceManagerCLI.dll")
+GenericMotorCLI = os.path.join(absolute_path, "Thorlabs.MotionControl.GenericMotorCLI.dll")
+StepperMotorCLI = os.path.join(absolute_path, "Thorlabs.MotionControl.Benchtop.StepperMotorCLI.dll")
 
-clr.AddReference("Thorlabs.MotionControl.DeviceManagerCLI.dll")
-clr.AddReference("Thorlabs.MotionControl.GenericMotorCLI.dll")
-clr.AddReference("Thorlabs.MotionControl.Benchtop.StepperMotorCLI.dll")
+clr.AddReference(DeviceManagerCLI)
+clr.AddReference(GenericMotorCLI)
+clr.AddReference(StepperMotorCLI)
 
 from Thorlabs.MotionControl.DeviceManagerCLI import *
 from Thorlabs.MotionControl.GenericMotorCLI import *
@@ -35,10 +37,10 @@ def load_device(configuration, is_synthetic=False):
     """
     serial_no = "40405424"
     DeviceManagerCLI.BuildDeviceList()
-    device = BenchtopStepperMotor.CreateBenchtopStepperMotor(self.serial_no)
-    device.Connect(self.serial_no)
+    device = BenchtopStepperMotor.CreateBenchtopStepperMotor(serial_no)
+    device.Connect(serial_no)
     
-    channel = self.device.GetChannel(1)
+    channel = device.GetChannel(1)
     
     #Check if Controller Initializes Rotary Stage
     if not channel.IsSettingsInitialized():
