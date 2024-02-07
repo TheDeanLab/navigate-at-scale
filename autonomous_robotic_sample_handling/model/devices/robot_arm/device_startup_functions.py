@@ -35,22 +35,8 @@ def load_device(configuration, is_synthetic=False):
     -------
     device_connection : object
     """
-    with mdr.Robot() as robot:
-        try:
-            robot.Connect(address='192.168.0.100')
-            print('Robot has connected')
-            #print("Homing the robot")
-            #robot.Home()
-            #print("Waiting until the robot is homed.")
-            #robot.WaitHomed()
-            #print("Moving robot to a start position")
-            #robot.MoveJoints(0, 0, 45, 0, -45, 0)
-            #print("Activating the robot")
-            #robot.ActivateRobot()
-            #print("Homing the robot")
-            #robot.Home()
-        except:
-            messagebox.showerror("Error", "The robot could not connect")
+    robot = mdr.Robot()
+    robot.Connect()       
     return type("DeviceConnection", (object,), {})
 
 
