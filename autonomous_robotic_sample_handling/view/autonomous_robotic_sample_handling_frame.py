@@ -1,7 +1,6 @@
 # Standard Imports
 import tkinter as tk
 from tkinter import ttk
-import logging
 from pathlib import Path
 
 
@@ -25,6 +24,11 @@ class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
         """
         ttk.Frame.__init__(self, root, *args, **kwargs)
 
+        self.root = root
+        self.root.title("Autonomous Robotic Sample Handling")
+        self.root.resizable(True, True)
+        self.root.geometry("")
+
         # Formatting
         tk.Grid.columnconfigure(self, "all", weight=1)
         tk.Grid.rowconfigure(self, "all", weight=1)
@@ -39,9 +43,6 @@ class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
         # ######## Example Widgets ########
         # ##### add your widgets here #####
         # #################################
-
-        tk.Grid.columnconfigure(self, "all", weight=1)
-        tk.Grid.rowconfigure(self, "all", weight=1)
 
         # Robot Initialization Buttons
         self.robot_init = RobotInitialization(self)
@@ -93,7 +94,8 @@ class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
         """
         return self.inputs
 
-class RobotInitialization(tk.Frame):
+
+class RobotInitialization(ttk.Frame):
     """RobotInitialization
 
     RobotInitialization is a frame that contains the widgets for initializing
@@ -120,6 +122,7 @@ class RobotInitialization(tk.Frame):
     def __init__(self, settings_tab, *args, **kwargs):
         text_label = 'Robot Initialization'
         ttk.Labelframe.__init__(self, settings_tab, text=text_label, *args, **kwargs)
+        print("Robot Initialization Frame Created!")
 
         # Formatting
         tk.Grid.columnconfigure(self, "all", weight=1)
@@ -154,7 +157,8 @@ class RobotInitialization(tk.Frame):
     def get_buttons(self):
         return self.buttons
 
-class MoveSequence(tk.Frame):
+
+class MoveSequence(ttk.Frame):
     """MoveSequence
 
     MoveSequence is a frame that contains the widgets for initializing
@@ -209,7 +213,8 @@ class MoveSequence(tk.Frame):
     def get_buttons(self):
         return self.buttons
 
-class PausePlay(tk.Frame):
+
+class PausePlay(ttk.Frame):
     """PausePlay
 
     PausePlay is a frame that contains the widgets for pausing and resuming
@@ -233,39 +238,39 @@ class PausePlay(tk.Frame):
     Methods
     -------
     """
-    def __init__(pauseplay_frame, settings_tab, *args, **kwargs):
-        ttk.Labelframe.__init__(pauseplay_frame, settings_tab, *args, **kwargs)
+    def __init__(self, settings_tab, *args, **kwargs):
+        ttk.Labelframe.__init__(self, settings_tab, *args, **kwargs)
 
         # Formatting
-        tk.Grid.columnconfigure(pauseplay_frame, "all", weight=1)
-        tk.Grid.rowconfigure(pauseplay_frame, "all", weight=1)
+        tk.Grid.columnconfigure(self, "all", weight=1)
+        tk.Grid.rowconfigure(self, "all", weight=1)
 
         #Path to pause and play buttons
         image_directory = Path(__file__).resolve().parent
-        pauseplay_frame.pause_image = tk.PhotoImage(
+        self.pause_image = tk.PhotoImage(
             file=image_directory.joinpath("images", "pause.png")
         ).subsample(32,32)
-        pauseplay_frame.play_image = tk.PhotoImage(
+        self.play_image = tk.PhotoImage(
             file=image_directory.joinpath("images", "play.png")
         ).subsample(32,32)
 
         # Pause Button
-        pauseplay_frame.pause_btn = tk.Button(
-            pauseplay_frame, 
-            image=pauseplay_frame.pause_image,
+        self.pause_btn = tk.Button(
+            self,
+            image=self.pause_image,
             borderwidth=0,
         )
         # Play Button  
-        pauseplay_frame.play_btn = tk.Button(
-            pauseplay_frame,
-            image=pauseplay_frame.play_image,
+        self.play_btn = tk.Button(
+            self,
+            image=self.play_image,
             borderwidth=0,
         )
 
         # Gridding out Buttons
-        pauseplay_frame.play_btn.grid(
+        self.play_btn.grid(
             row=0, column=0, rowspan=1, columnspan=1, padx=2, pady=2
         )
-        pauseplay_frame.pause_btn.grid(
+        self.pause_btn.grid(
             row=0, column=2, rowspan=1, columnspan=1, padx=2, pady=2
         )

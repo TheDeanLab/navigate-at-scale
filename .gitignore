@@ -7,3 +7,4 @@ autonomous_robotic_sample_handling/view/.DS_Store
 __pycache__/
 *.py[cod]
 *$py.class
+*.egg-info*

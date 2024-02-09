@@ -1,21 +1,37 @@
-from autonomous_robotic_sample_handling.controller.sub_controllers import (
+# Standard Library Imports
+
+# Third Party Imports
+
+# Local Imports
+from autonomous_robotic_sample_handling.view.autonomous_robotic_sample_handling_frame import (
+    AutonomousRoboticSampleHandlingFrame
+)
+from autonomous_robotic_sample_handling.controller.sub_controllers.robot_arm_controller import (
     RobotArmController
 )
-class AutonomousRoboticSampleHandlingController:
-    def __init__(self, view, parent_controller=None):
-        self.view = view
-        self.parent_controller = parent_controller
 
-        self.variables = self.view.get_variables()
-        self.buttons = self.view.buttons
-        # print(self.buttons)
+class AutonomousRoboticSampleHandlingController:
+    def __init__(self,
+                 root,
+                 ):
+        """ Initialize the Autonomous Robotic Sample Handling Controller
+
+        Parameters
+        ----------
+        root : object
+            The root object (e.g., the Tkinter root object)
+        """
+
+        # Initialize attributes
+        self.root = root
+        self.view = AutonomousRoboticSampleHandlingFrame(root)
+        self.view.pack(expand=True, fill="both")
 
         # Initialize sub-controllers
-        # self.robot_arm_controller = RobotArmController(self.view, self.parent_controller)
-
-        self.buttons["zero"].configure(command=self.zero_joints)
+        self.robot_arm_controller = RobotArmController(
+            parent_controller=self
+        )
 
     def zero_joints(self):
-        self.parent_controller.execute(
-            "zero_joints"
-        )
+        self.robot_arm_controller.zero_joints()
+
