@@ -121,9 +121,9 @@ class RobotInitialization(tk.Frame):
         # Initializing Button
         self.buttons = {
             "import": ttk.Button(self, text="Load Positions from Disk"),
-            "connect": ttk.Button(self, text="Connect Robot"),
-            "export": ttk.Button(self, text="Home Robot"),
-            "launch": ttk.Button(self,text='Move Robot')
+            "activate": ttk.Button(self, text="Activate Robot"),
+            "export": ttk.Button(self, text="Save Positions to Disk "),
+            "launch": ttk.Button(self,text='Launch Robot Jog Wizard')
         }
         counter = 0
         for key, button in self.buttons.items():
@@ -132,6 +132,7 @@ class RobotInitialization(tk.Frame):
             elif counter == 1:
                 row, column = 0, 1
             elif counter == 2:
+                row, column = 0, 2
                 row, column = 1, 0
             elif counter == 3:
                 row, column = 1,1
@@ -166,7 +167,7 @@ class MoveSequence(tk.Frame):
     -------
     """
     def __init__(self, settings_tab, *args, **kwargs):
-        text_label = 'Quick Commands'
+        text_label = 'Move Sequence'
         ttk.Labelframe.__init__(self, settings_tab, text=text_label, *args, **kwargs)
 
         # Formatting

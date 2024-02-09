@@ -8,10 +8,9 @@ from navigate.tools.common_functions import load_module_from_file
 from navigate.model.device_startup_functions import device_not_found
 
 #TODO: Figure out an easier/more elegant way to join paths. The .s in the dll file name is problematic?
-absolute_path = "C:/Users/abhik/Documents/Senior Design/navigate-at-scale/autonomous_robotic_sample_handling/API"
-DeviceManagerCLI = os.path.join(absolute_path, "Thorlabs.MotionControl.DeviceManagerCLI.dll")
-GenericMotorCLI = os.path.join(absolute_path, "Thorlabs.MotionControl.GenericMotorCLI.dll")
-StepperMotorCLI = os.path.join(absolute_path, "Thorlabs.MotionControl.Benchtop.StepperMotorCLI.dll")
+DeviceManagerCLI = os.path.relpath("./autonomous_robotic_sample_handling/API/Thorlabs.MotionControl.DeviceManagerCLI.dll")
+GenericMotorCLI = os.path.relpath("./autonomous_robotic_sample_handling/API/Thorlabs.MotionControl.GenericMotorCLI.dll")
+StepperMotorCLI = os.path.relpath("./autonomous_robotic_sample_handling/API/Thorlabs.MotionControl.StepperMotorCLI.dll")
 
 clr.AddReference(DeviceManagerCLI)
 clr.AddReference(GenericMotorCLI)
