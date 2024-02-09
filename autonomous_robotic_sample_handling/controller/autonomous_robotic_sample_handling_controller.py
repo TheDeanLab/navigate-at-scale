@@ -1,6 +1,6 @@
-# from robot_arm_controller import RobotArmController
-
-
+from autonomous_robotic_sample_handling.controller.sub_controllers import (
+    RobotArmController
+)
 class AutonomousRoboticSampleHandlingController:
     def __init__(self, view, parent_controller=None):
         self.view = view
