@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=43.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "navigate-at-scale"
+description = "High-Throughput Tissue Imaging."
+authors = [{name = "The Dean Lab, UT Southwestern Medical Center"}]
+readme = "README.md"
+license = {file = "LICENSE.md"}
+dynamic = ["version"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3.9",
+]
+
+requires-python = "==3.9.7"
+dependencies = ['mecademicpy']
+
+[project.scripts]
+navigate = "autonomous_robotic_sample_handling.main:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-xvfb",
+    "pytest-cov",
+    "pre-commit",
+    ]
+
+docs = [
+    "numpydoc",
+    "nbconvert",
+    "sphinx<6.0.0",
+    "sphinx_rtd_theme",
+    "sphinx-copybutton",
+    "sphinx-issues",
+    "sphinx-design",
+    "pyyaml",
+    "pydata_sphinx_theme==0.10.0rc2",
+    "sphinx-toolbox"
+]
+
+[project.urls]
+Source = "https://github.com/TheDeanLab/navigate-at-scale"
+
+[tool.setuptools.dynamic]
+version = {file = "navigate-at-scale/VERSION"}
