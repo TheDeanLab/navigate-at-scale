@@ -13,7 +13,7 @@ microscopy. It is designed to work with a Mecademic Meca500 robotic arm and a Th
 HDR50 rotation stage. The plugin provides a user-friendly interface for setting up and 
 running high-throughput imaging experiments.
 
-** Authors
+**Authors**
 - Sai Bommisetty
 - Joy Camposagrado
 - James Harrigan
