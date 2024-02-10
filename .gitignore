@@ -8,3 +8,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.egg-info*
+*_autosummary*
+docs/build/*
+*DS_Store
