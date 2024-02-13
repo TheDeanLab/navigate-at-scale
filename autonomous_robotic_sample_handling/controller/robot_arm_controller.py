@@ -1,7 +1,8 @@
-#from autonomous_robotic_sample_handling.model.devices.robot_arm.robot_arm import RobotArm
-#from autonomous_robotic_sample_handling.view.popups.robot_wizard_popup import RobotWizardPopup
+from autonomous_robotic_sample_handling.model.devices.robot_arm.robot_arm import RobotArm
+from autonomous_robotic_sample_handling.view.popups.robot_wizard_popup import RobotWizardPopup
+from autonomous_robotic_sample_handling.controller.autonomous_robotic_sample_handling_controller import AutonomousRoboticSampleHandlingController
 
-class RobotArmController:
+class RobotArmController(AutonomousRoboticSampleHandlingController):
     def __init__(self, view, parent_controller=None):
         """ Initialize the Robot Arm Controller
         Parameters
@@ -18,7 +19,7 @@ class RobotArmController:
         self.buttons = self.view.buttons
 
         self.buttons["zero"].configure(command=self.zero_joints)
-        self.buttons["connect"].configure(command=self.connect_robot)
+        self.buttons["activate"].configure(command=self.connect_robot)
         self.buttons["launch"].configure(command=self.launch_robot_wizard)
 
     def launch_robot_wizard(self):
@@ -31,7 +32,7 @@ class RobotArmController:
         --------
         >>> self.launch_tiling_wizard()
         """
-
+        print("sick")
         if hasattr(self, "robot_wizard_controller"):
             self.robot_wizard_controller.showup()
             return
