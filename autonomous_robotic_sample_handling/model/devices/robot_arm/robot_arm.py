@@ -43,8 +43,12 @@ class RobotArm:
         self.robot.MoveJoints(a, b, c, d, e, f)
 
     def move_pose(self, a, b, c, d, e, f):
-        """Move Robot Linearly"""
+        """Move Robot to a given Pose"""
         self.robot.MovePose(a, b, c, d, e, f)
+
+    def move_lin_rel_wrf(self, x, y, z, alpha, beta, gamma):
+        """Move Robot Linearly with respect to the World Reference Frame"""
+        self.robot.MoveLinRelWrf(x, y, z, alpha, beta, gamma)
 
     def delay(self, wait):
         """Makes the Robot wait"""
