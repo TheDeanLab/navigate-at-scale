@@ -27,11 +27,21 @@ class AutonomousRoboticSampleHandlingController:
         self.view = AutonomousRoboticSampleHandlingFrame(root)
         self.view.pack(expand=True, fill="both")
 
+        # Get the variables and buttons from the view
+        self.variables = self.view.get_variables()
+        self.buttons = self.view.buttons
+
+        self.buttons['sample_carousel'].configure(command=self.move_robot_arm_to_loading_zone)
+
         # Initialize sub-controllers
         self.robot_arm_controller = RobotArmController(
             parent_controller=self
         )
 
-    def zero_joints(self):
-        self.robot_arm_controller.zero_joints()
+    def move_robot_arm_to_loading_zone(self):
+        self.robot_arm_controller.move_joints(0, 0, 45, 0, -45, 0)
+        self.robot_arm_controller.move_lin_rel_wrf(100, 0, -50, 0, 0, 0)
+        print("Moving robot arm to loading zone")
+
+
 
