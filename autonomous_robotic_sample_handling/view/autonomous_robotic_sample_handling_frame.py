@@ -56,18 +56,14 @@ class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
         self.move_sequence.grid(
             row=5, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
         )
-        self.buttons.update(MoveSequence(self.move_sequence))
+        self.buttons.update(MoveSequence.get_buttons(self.move_sequence))
 
         # Pause and Play Buttons
         self.pause_play = PausePlay(self)
         self.pause_play.grid(
             row=0, column=3, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
         )
-        self.buttons.update()
-
-        # Test button for model-controller relationship
-        # self.buttons['zero'] = ttk.Button(self, text="Zero Joints")
-        # self.buttons['zero'].grid(row=6, column=1, sticky=tk.NSEW, padx=10, pady=10)
+        self.buttons.update(PausePlay.get_buttons(self.pause_play))
 
     # Getters
     def get_variables(self):
@@ -132,8 +128,8 @@ class RobotInitialization(ttk.Frame):
         self.buttons = {
             "import": ttk.Button(self, text="Load Positions from Disk"),
             "connect": ttk.Button(self, text="Connect Robot"),
-            "export": ttk.Button(self, text="Home Robot"),
-            "launch": ttk.Button(self,text='Move Robot'),
+            "disconnect": ttk.Button(self, text="Disconnect Robot"),
+            "move": ttk.Button(self,text='Move Robot'),
             "zero": ttk.Button(self, text="Zero Joints")
         }
         counter = 0
@@ -254,23 +250,18 @@ class PausePlay(ttk.Frame):
             file=image_directory.joinpath("images", "play.png")
         ).subsample(32,32)
 
-        # Pause Button
-        self.pause_btn = tk.Button(
-            self,
-            image=self.pause_image,
-            borderwidth=0,
-        )
-        # Play Button  
-        self.play_btn = tk.Button(
-            self,
-            image=self.play_image,
-            borderwidth=0,
-        )
+        self.buttons = {
+            "pause": tk.Button(self, image=self.pause_image, borderwidth=0),
+            "play": tk.Button(self, image=self.play_image, borderwidth=0),
+        }
 
         # Gridding out Buttons
-        self.play_btn.grid(
+        self.buttons['play'].grid(
             row=0, column=0, rowspan=1, columnspan=1, padx=2, pady=2
         )
-        self.pause_btn.grid(
+        self.buttons['pause'].grid(
             row=0, column=2, rowspan=1, columnspan=1, padx=2, pady=2
         )
+
+    def get_buttons(self):
+        return self.buttons
