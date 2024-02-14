@@ -42,9 +42,9 @@ def load_device(configuration, is_synthetic=False):
     if is_synthetic:
         print("*** Building Synthetic Connection")
         return DummyDeviceConnection()
-    # else:
-    #     module = load_module_from_file("robot_arm", r"C:\Kushal\10-19 College\17 Fall 2023\Senior Design I\navigate-at-scale\autonomous_robotic_sample_handling\model\devices\robot_arm\robot_arm.py")
-    #     return module.connect_to_robot_arm(None)
+    else:
+        module = load_module_from_file("robot_arm", r"C:\Kushal\10-19 College\17 Fall 2023\Senior Design I\navigate-at-scale\autonomous_robotic_sample_handling\model\devices\robot_arm\robot_arm.py")
+        return module.connect_to_robot_arm(None)
     pass
 
 def start_device(microscope_name, device_connection, configuration, is_synthetic=False):
