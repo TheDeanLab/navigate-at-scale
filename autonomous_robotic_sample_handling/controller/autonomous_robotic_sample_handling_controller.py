@@ -10,6 +10,10 @@ from autonomous_robotic_sample_handling.controller.sub_controllers.robot_arm_con
     RobotArmController
 )
 
+from autonomous_robotic_sample_handling.controller.sub_controllers.motor_controller import (
+    MotorController
+)
+
 class AutonomousRoboticSampleHandlingController:
     def __init__(self,
                  root,
@@ -37,6 +41,10 @@ class AutonomousRoboticSampleHandlingController:
         self.robot_arm_controller = RobotArmController(
             parent_controller=self
         )
+
+        # self.motor_controller = MotorController(
+        #     parent_controller=self
+        # )
 
     def move_robot_arm_to_loading_zone(self):
         self.robot_arm_controller.move_joints(0, 0, 45, 0, -45, 0)
