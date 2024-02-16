@@ -10,6 +10,10 @@ from autonomous_robotic_sample_handling.controller.sub_controllers.robot_arm_con
     RobotArmController
 )
 
+from autonomous_robotic_sample_handling.controller.sub_controllers.multiposition_controller import (
+    MultipositionController
+)
+
 class AutonomousRoboticSampleHandlingController:
     def __init__(self,
                  root,
@@ -34,7 +38,11 @@ class AutonomousRoboticSampleHandlingController:
         self.buttons['sample_carousel'].configure(command=self.move_robot_arm_to_loading_zone)
 
         # Initialize sub-controllers
-        self.robot_arm_controller = RobotArmController(
+        # self.robot_arm_controller = RobotArmController(
+        #     parent_controller=self
+        # )
+
+        self.multiposition_controller = MultipositionController(
             parent_controller=self
         )
 
