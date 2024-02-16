@@ -74,30 +74,31 @@ class Motor():
         self.channel_config.UpdateCurrentConfiguration()
         self.channel.SetSettings(self.chan_settings, True, False)
 
-        self.home()
 
     def home(self):
-        
         print("Homing Motor")
         self.channel.Home(self.timeoutVal)
+        print("finish homing")
 
     def MoveJog(self,MotorDirection):
+        
+         #Pass string or initialize MotorDirection.Forward/Backward outside?
+         
+        if MotorDirection == "Forward":
+            self.channel.MoveJog(self.MotorDirection.Forward,self.timeoutVal)
+        else:
+            self.channel.MoveJog(self.MotorDirection.Backward,self.timeoutVal)
 
-        self.channel.MoveJog(MotorDirection, self.timeoutVal)
         
     def MoveTo(self,Position):
-        
+        print("moving")
         self.channel.MoveTo(Decimal(Position),self.timeoutVal)
+        print("Moving success")
 
     def disconnect(self):
         self.channel.StopPolling()
         self.device.Disconnect()
-
-    def loop(self):
         
-        while True:
-            self.MoveJog()
-            
     def getPosition(self):
         
         return self.channel.Position

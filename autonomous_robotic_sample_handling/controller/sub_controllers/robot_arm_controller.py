@@ -39,6 +39,9 @@ class RobotArmController:
         # )
         self.robot_arm.disconnect()
         print("Controller has disconnected robot")
+        
+    def move_lin(self,a,b,c,d,e,f):
+        self.robot_arm.move_lin(a,b,c,d,e,f)
 
     def move_joints(self, a, b, c, d, e, f):
         self.robot_arm.move_joints(a, b, c, d, e, f)

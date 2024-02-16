@@ -37,19 +37,34 @@ class AutonomousRoboticSampleHandlingController:
 
         self.buttons['sample_carousel'].configure(command=self.move_robot_arm_to_loading_zone)
 
-        # Initialize sub-controllers
-        # self.robot_arm_controller = RobotArmController(
-        #     parent_controller=self
-        # )
+        self.buttons['sample_microscope'].configure(command=self.mainLoop)
+
+        #Initialize sub-controllers
+        self.robot_arm_controller = RobotArmController(
+            parent_controller=self
+        )
 
         self.motor_controller = MotorController(
             parent_controller=self
         )
-
+        
     def move_robot_arm_to_loading_zone(self):
-        self.robot_arm_controller.move_joints(0, 0, 45, 0, -45, 0)
-        self.robot_arm_controller.move_lin_rel_wrf(100, 0, -50, 0, 0, 0)
+        self.robot_arm_controller.move_lin(263.89, 24.28, 159.23, 0, 90, 0)
+        self.robot_arm_controller.zero_joints()
+        #self.robot_arm_controller.move_joints(263.89, 24.28, 159.23, 0, 90, 0)
+        #self.robot_arm_controller.move_lin_rel_wrf(100, 0, -50, 0, 0, 0)
         print("Moving robot arm to loading zone")
+        
+    def CycleStage(self):
+        self.motor_controller.MoveJog("Forward")
+        
+    def mainLoop(self):
+        print("cycling")
+        while True:
+            self.move_robot_arm_to_loading_zone()
+            self.CycleStage()
+        
+    
 
 
 

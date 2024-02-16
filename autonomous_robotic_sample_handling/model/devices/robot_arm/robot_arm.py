@@ -57,6 +57,10 @@ class RobotArm:
     def activate_and_home(self):
         """Activates and Homes the Robot"""
         self.robot.ActivateAndHome()
+        
+    def move_lin(self,a,b,c,d,e,f):
+        
+        self.robot.MoveLin(a,b,c,d,e,f)
 
     def load_robot_config(self):
         """Imports limits defined in the yaml file. Needs to be called before ActivateAndHome"""
