@@ -38,13 +38,13 @@ class AutonomousRoboticSampleHandlingController:
         self.buttons['sample_carousel'].configure(command=self.move_robot_arm_to_loading_zone)
 
         # Initialize sub-controllers
-        self.robot_arm_controller = RobotArmController(
-            parent_controller=self
-        )
-
-        # self.motor_controller = MotorController(
+        # self.robot_arm_controller = RobotArmController(
         #     parent_controller=self
         # )
+
+        self.motor_controller = MotorController(
+            parent_controller=self
+        )
 
     def move_robot_arm_to_loading_zone(self):
         self.robot_arm_controller.move_joints(0, 0, 45, 0, -45, 0)

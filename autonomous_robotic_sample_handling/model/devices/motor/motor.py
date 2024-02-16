@@ -4,13 +4,13 @@ from pathlib import Path
 import time
 import clr
 
-# dll_dir = os.path.join(os.getcwd(), 'autonomous_robotic_sample_handling', 'API', '')
+dll_dir = os.path.join(os.getcwd(), 'autonomous_robotic_sample_handling', 'API', '')
 # #TODO: Figure out an easier/more elegant way to join paths. The .s in the dll file name is problematic?
-# print(dll_dir)
+print(dll_dir)
 #
-# ref_DeviceManagerCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI")
-# ref_GenericMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.GenericMotorCLI")
-# ref_StepperMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.Benchtop.StepperMotorCLI")
+ref_DeviceManagerCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI")
+ref_GenericMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.GenericMotorCLI")
+ref_StepperMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.Benchtop.StepperMotorCLI")
 
 # DeviceManagerCLI = r'%s%s' % (dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI")
 # os.path.relpath("./autonomous_robotic_sample_handling/API/Thorlabs.MotionControl.DeviceManagerCLI.dll")
@@ -22,13 +22,13 @@ import clr
 # print(ref_DeviceManagerCLI)
 # sys.path.append(dll_dir)
 
-# clr.AddReference(ref_DeviceManagerCLI)
-# clr.AddReference(ref_GenericMotorCLI)
-# clr.AddReference(ref_StepperMotorCLI)
+clr.AddReference(ref_DeviceManagerCLI)
+clr.AddReference(ref_GenericMotorCLI)
+clr.AddReference(ref_StepperMotorCLI)
 
-clr.AddReference(r"C:\\Kushal\\10-19 College\\17 Fall 2023\\Senior Design I\\navigate-at-scale\\autonomous_robotic_sample_handling\\API\\Thorlabs.MotionControl.Benchtop.StepperMotorCLI.dll")
-clr.AddReference(r"C:\\Kushal\\10-19 College\\17 Fall 2023\\Senior Design I\\navigate-at-scale\\autonomous_robotic_sample_handling\\API\\Thorlabs.MotionControl.GenericMotorCLI.dll")
-clr.AddReference(r"C:\\Kushal\\10-19 College\\17 Fall 2023\\Senior Design I\\navigate-at-scale\\autonomous_robotic_sample_handling\\API\\Thorlabs.MotionControl.DeviceMangerCLI.dll")
+# clr.AddReference(r"C:\\Kushal\\10-19 College\\17 Fall 2023\\Senior Design I\\navigate-at-scale\\autonomous_robotic_sample_handling\\API\\Thorlabs.MotionControl.Benchtop.StepperMotorCLI.dll")
+# clr.AddReference(r"C:\\Kushal\\10-19 College\\17 Fall 2023\\Senior Design I\\navigate-at-scale\\autonomous_robotic_sample_handling\\API\\Thorlabs.MotionControl.GenericMotorCLI.dll")
+# clr.AddReference(r"C:\\Kushal\\10-19 College\\17 Fall 2023\\Senior Design I\\navigate-at-scale\\autonomous_robotic_sample_handling\\API\\Thorlabs.MotionControl.DeviceMangerCLI.dll")
 
 
 from Thorlabs.MotionControl.DeviceManagerCLI import *
@@ -39,11 +39,13 @@ from System import Decimal
 
 class Motor():
     def __init__(self):
+        
         self.serial_no = "40405424"
         DeviceManagerCLI.BuildDeviceList()
         self.device = BenchtopStepperMotor.CreateBenchtopStepperMotor(self.serial_no)
         self.device.Connect(self.serial_no)
         self.MotorDirection = MD
+        self.timeoutVal = 60000
 
         self.channel = self.device.GetChannel(1)
 
@@ -75,20 +77,50 @@ class Motor():
         self.home()
 
     def home(self):
-
+        
         print("Homing Motor")
-        self.channel.Home(60000)
+        self.channel.Home(self.timeoutVal)
 
-    def MoveJog(self):
-        print("MOVE JOG ENTER")
-        print(self.MotorDirection.Forward)
-        self.channel.MoveJog(self.MotorDirection.Forward, 100000)
-        print("MOVING ROTARY")
+    def MoveJog(self,MotorDirection):
+
+        self.channel.MoveJog(MotorDirection, self.timeoutVal)
+        
+    def MoveTo(self,Position):
+        
+        self.channel.MoveTo(Decimal(Position),self.timeoutVal)
 
     def disconnect(self):
         self.channel.StopPolling()
         self.device.Disconnect()
 
     def loop(self):
+        
         while True:
             self.MoveJog()
+            
+    def getPosition(self):
+        
+        return self.channel.Position
+    
+    def SetJogStepSize(self,JogStepSize):
+        
+        self.channel.SetJogStepSize(Decimal(JogStepSize))
+        
+    def SetJogVelocityParams(self,JogVelocity,JogAccel):
+        
+        self.SetJogVelocityParams(Decimal(JogVelocity),Decimal(JogAccel))
+    
+    @property
+    def commands(self):
+        """Return commands dictionary
+
+        Returns
+        -------
+        commands : dict
+            commands that the device supports
+        """
+        return {
+            "home": lambda *args: self.home(),
+            "disconnect": lambda *args: self.disconnect(),
+            "moveJog": lambda *args: self.MoveJog()
+        }
