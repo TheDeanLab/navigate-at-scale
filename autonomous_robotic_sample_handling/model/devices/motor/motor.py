@@ -5,31 +5,14 @@ import time
 import clr
 
 dll_dir = os.path.join(os.getcwd(), 'autonomous_robotic_sample_handling', 'API', '')
-# #TODO: Figure out an easier/more elegant way to join paths. The .s in the dll file name is problematic?
-print(dll_dir)
-#
+
 ref_DeviceManagerCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI")
 ref_GenericMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.GenericMotorCLI")
 ref_StepperMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.Benchtop.StepperMotorCLI")
 
-# DeviceManagerCLI = r'%s%s' % (dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI")
-# os.path.relpath("./autonomous_robotic_sample_handling/API/Thorlabs.MotionControl.DeviceManagerCLI.dll")
-# GenericMotorCLI = r'%s%s' % (dll_dir, "Thorlabs.MotionControl.GenericMotorCLI")
-# os.path.relpath("./autonomous_robotic_sample_handling/API/Thorlabs.MotionControl.GenericMotorCLI.dll")
-# StepperMotorCLI = r'%s%s' % (dll_dir, "Thorlabs.MotionControl.StepperMotorCLI")
-# os.path.relpath("./autonomous_robotic_sample_handling/API/Thorlabs.MotionControl.StepperMotorCLI.dll")
-
-# print(ref_DeviceManagerCLI)
-# sys.path.append(dll_dir)
-
 clr.AddReference(ref_DeviceManagerCLI)
 clr.AddReference(ref_GenericMotorCLI)
 clr.AddReference(ref_StepperMotorCLI)
-
-# clr.AddReference(r"C:\\Kushal\\10-19 College\\17 Fall 2023\\Senior Design I\\navigate-at-scale\\autonomous_robotic_sample_handling\\API\\Thorlabs.MotionControl.Benchtop.StepperMotorCLI.dll")
-# clr.AddReference(r"C:\\Kushal\\10-19 College\\17 Fall 2023\\Senior Design I\\navigate-at-scale\\autonomous_robotic_sample_handling\\API\\Thorlabs.MotionControl.GenericMotorCLI.dll")
-# clr.AddReference(r"C:\\Kushal\\10-19 College\\17 Fall 2023\\Senior Design I\\navigate-at-scale\\autonomous_robotic_sample_handling\\API\\Thorlabs.MotionControl.DeviceMangerCLI.dll")
-
 
 from Thorlabs.MotionControl.DeviceManagerCLI import *
 from Thorlabs.MotionControl.GenericMotorCLI import *
