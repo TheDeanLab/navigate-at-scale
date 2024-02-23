@@ -6,5 +6,6 @@ API Reference
    :template: custom_module.rst
    :recursive:
 
-   navigate-at-scale.controller
-
+    autonomous_robotic_sample_handling.controller
+    autonomous_robotic_sample_handling.model
+    autonomous_robotic_sample_handling.view
