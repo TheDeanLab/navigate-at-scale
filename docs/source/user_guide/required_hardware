@@ -1,0 +1,47 @@
+==============================
+Required Hardware
+==============================
+
+**navigate-at-scale** is a plugin for **navigate** that enables high-throughput imaging
+of chemically cleared specimens with a light-sheet microscope.
+
+-----------------
+
+Supported Robot
+----------------
+
+**navigate-at-scale** is built around the `Meca500 6-axis robotic arm <http://www.mecademic.com/meca500-industrial-robot-arm/>`_. It includes the following features:
+* 5 micron repeatability.
+* Small footprint.
+* Parallel grippers.
+* 0.5 kg payload.
+* 330 mm reach.
+* Ethernet-based commuinication. 
+
+Supported Rotary Stage
+----------------------
+
+**navigate-at-scale** is built around the `Thorlabs HDR50 - Heavy-Duty Rotation Stage <https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=1064&pn=HDR50>`_. It includes the following features:
+* Continuous 360 degree motarized rotation
+* 50kg (100lb) On-Axis load capacity
+* Variety of mounting options 
+
+Supported Motion Controller
+---------------------------
+
+**navigate-at-scale** is built using the `Thorlabs BSC201 motion controller <https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=1704&pn=BSC201>`_. It includes the following features:
+* Motor speeds up to 3000 RPM
+* 409,600 Microsteps per revolution of motor
+* Seamless operation with Thorlabs stages/motors
+
+
+Supported Parallel Grippers
+---------------------------
+
+**navigate-at-scale** is built using the `Mecademic MEGP 25E eletric parallel gripper <https://www.mecademic.com/product/megp-25e-electric-parallel-gripper/>`_. and the Mecademic MEGP 25E communication cable_. It has the following specifications:
+* 3mm stroke per jaw
+* Grip force range of -40N to +40N
+* Maximum admissible finger length of 32mm
+* Repeatability of 0.020mm
+
+
