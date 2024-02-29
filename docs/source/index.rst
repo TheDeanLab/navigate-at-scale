@@ -32,10 +32,13 @@ running high-throughput imaging experiments.
 
 
 .. toctree::
-   :caption: User Guide
+   :caption: Getting Started
    :maxdepth: 2
 
+   software_installation
    user_guide/hardware_configuration
+   user_guide/gui_walkthrough
+
 
 .. toctree::
    :caption: Development
