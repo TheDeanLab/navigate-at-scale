@@ -5,11 +5,14 @@
 **navigate-at-scale**
 #####################
 
-
 **navigate-at-scale** is a plugin for **navigate**, which aims to enable high-throughput
 microscopy. It is designed to work with a Mecademic Meca500 robotic arm and a Thorlabs
 HDR50 rotation stage. The plugin provides a user-friendly interface for setting up and
 running high-throughput imaging experiments.
+
+    .. image:: user_guide/images/cad_overview.png
+         :alt: Opening **navigate**.
+
 
 .. note::
 
