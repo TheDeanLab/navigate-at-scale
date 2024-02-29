@@ -79,14 +79,12 @@ def start_device(microscope_name, device_connection, configuration, is_synthetic
             "robot_arm",
             os.path.join(Path(__file__).resolve().parent, "robot_arm.py"),
         )
-        print("loaded real module")
         return robot_arm.RobotArm(device_connection=device_connection)
     elif device_type == "synthetic":
         synthetic_device = load_module_from_file(
             "synthetic_device",
             os.path.join(Path(__file__).resolve().parent, "synthetic_device.py"),
         )
-        print("loaded synthetic module")
         return synthetic_device.SyntheticRobotArm(device_connection=device_connection)
     else:
         return device_not_found(microscope_name, device_type)

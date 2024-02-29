@@ -11,6 +11,7 @@ class RobotArmController:
         """
         self.view = view
         self.parent_controller = parent_controller
+
         # Get the variables and buttons from the view
         self.variables = self.view.get_variables()
         self.buttons = self.view.buttons
@@ -33,3 +34,16 @@ class RobotArmController:
         self.parent_controller.execute(
             "disconnect"
         )
+
+    # def move_joints(self, a, b, c, d, e, f):
+    #     self.robot_arm.move_joints(a, b, c, d, e, f)
+    #     print("Robot has finished moving [move_joints]")
+    #
+    # def move_pose(self, a, b, c, d, e, f):
+    #     self.robot_arm.move_pose(a, b, c, d, e, f)
+    #     print("Robot has finished moving [move_pose]")
+    #
+    # def move_lin_rel_wrf(self, x, y, z, alpha, beta, gamma):
+    #     self.robot_arm.move_lin_rel_wrf(x, y, z, alpha, beta, gamma)
+    #     print("Robot has finished moving [lin_rel_wrf]")
+
