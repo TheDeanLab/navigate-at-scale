@@ -16,10 +16,13 @@ classifiers = [
 ]
 
 requires-python = ">=3.9.7"
-dependencies = ['mecademicpy']
+dependencies = [
+    'mecademicpy',
+    'navigate-micro',
+    ]
 
 [project.scripts]
-navigate = "autonomous_robotic_sample_handling.main:main"
+navigate-at-scale = "autonomous_robotic_sample_handling.main:main"
 
 [project.optional-dependencies]
 dev = [

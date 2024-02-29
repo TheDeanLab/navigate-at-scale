@@ -1,7 +1,5 @@
 import os
 import sys
-# from navigate import __version__
-
 sys.path.insert(0, os.path.abspath("../"))
 
 
@@ -75,17 +73,17 @@ pygments_style = "sphinx"
 
 # -- LaTeX output options ----------------------------------------------------
 
-latex_elements = {'preamble': r'''
-                  \usepackage[utf8]{inputenc}
-                  \usepackage{enumitem}
-                  \setlistdepth{99}
-                  \DeclareUnicodeCharacter{03BC}{$\mu$}
-                  ''',
-                  'extraclassoptions': 'openany,oneside'}
+# latex_elements = {'preamble': r'''
+#                   \usepackage[utf8]{inputenc}
+#                   \usepackage{enumitem}
+#                   \setlistdepth{99}
+#                   \DeclareUnicodeCharacter{03BC}{$\mu$}
+#                   ''',
+#                   'extraclassoptions': 'openany,oneside'}
 
-latex_documents = [
-  ('index', 'navigate.tex', 'navigate-at-scale Documentation',
-   'Dean Lab, UT Southwestern Medical Center', 'manual', True),
-]
+# latex_documents = [
+#   ('index', 'navigate.tex', 'navigate-at-scale Documentation',
+#    'Dean Lab, UT Southwestern Medical Center', 'manual', True),
+# ]
 
-latex_domain_indices = False
+# latex_domain_indices = False
