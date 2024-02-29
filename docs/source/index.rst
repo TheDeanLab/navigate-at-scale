@@ -27,8 +27,8 @@ running high-throughput imaging experiments.
     automated systems. Despite these precautions, the complexity and nature of automated
     hardware can lead to unpredictable outcomes. Therefore, the Dean Lab and UT
     Southwestern expressly disclaim any responsibility for any damages, losses, or
-    injuries that may arise from or be related to the use of **navigate**.
-    Users should be aware of these risks and agree to utilize **navigate** at their own risk.
+    injuries that may arise from or be related to the use of **navigate** or **navigate-at-scale**.
+    Users should be aware of these risks and agree to utilize **navigate** and **navigate-at-scale** at their own risk.
 
 
 .. toctree::
@@ -60,10 +60,11 @@ Capstone project at the University of Texas Dallas.
 
 **Funding**
 ============
-**navigate** is supported by the
-`UT Southwestern and University of North Carolina Center for Cell Signaling
-<https://cellularsignaltransduction.org>`_, a Biomedical Technology Development and Dissemination (BTDD)
-Center funded by the NIH National Institute of General Medical Science (RM1GM145399), and
-the `Center for Metastatic Tumor Imaging <https://www.metastasis-imaging.org>`_ program, a
-Cellular Cancer Biology Imaging Research (CCBIR) program funded by the NIH National Cancer Institute (U54CA268072).
+**navigate** and **navigate-at-scale** is supported by:
+
+- `UT Southwestern and University of North Carolina Center for Cell Signaling <https://cellularsignaltransduction.org>`_, NIH NIGMS RM1GM145399.
+- The `Center for Metastatic Tumor Imaging <https://www.metastasis-imaging.org>`_, NIH NCI U54CA268072.
+- President’s Research Council, UT Southwestern Medical Center.
+- Simmons Comprehensive Cancer Center Translational Seed Grant, UT Southwestern Medical Center.
+
 
