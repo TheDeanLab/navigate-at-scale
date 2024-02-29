@@ -11,11 +11,11 @@ class AutonomousRoboticSampleHandlingController:
         # print(self.buttons)
 
         # Initialize sub-controllers
-        # self.robot_arm_controller = RobotArmController(self.view, self.parent_controller)
+        self.robot_arm_controller = RobotArmController(self.view, self.parent_controller)
 
-        self.buttons["zero"].configure(command=self.zero_joints)
-        self.buttons["move"].configure(command=self.move_joints)
-        self.buttons["disconnect"].configure(command=self.disconnect)
+        # self.buttons["zero"].configure(command=self.zero_joints)
+        # self.buttons["move"].configure(command=self.move_joints)
+        # self.buttons["disconnect"].configure(command=self.disconnect)
 
     def zero_joints(self):
         self.parent_controller.execute(
