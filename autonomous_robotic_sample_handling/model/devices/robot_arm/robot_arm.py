@@ -113,6 +113,10 @@ class RobotArm:
 
         """
         self.robot.ActivateAndHome()
+        
+    def move_lin(self,a,b,c,d,e,f):
+        
+        self.robot.MoveLin(a,b,c,d,e,f)
 
     def load_robot_config(self, config):
         """ Import and apply robot configuration data and limits
