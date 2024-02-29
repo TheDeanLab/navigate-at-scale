@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 
 # Third party imports
-# import mecademicpy.robot as mdr
 # from tkinter import messagebox
 
 # Local application imports
@@ -11,6 +10,7 @@ from navigate.tools.common_functions import load_module_from_file
 from navigate.model.device_startup_functions import (
     device_not_found,
     DummyDeviceConnection,
+    auto_redial
 )
 
 DEVICE_TYPE_NAME = "robot_arm"  # Same as in configuraion.yaml, for example "stage", "filter_wheel", "remote_focus_device"...
@@ -32,20 +32,23 @@ def load_device(configuration, is_synthetic=False):
     object
         The device connection object
     """
-    # print("*** loading connection to robo arm!")
-    # if is_synthetic:
-    #     device_type = "synthetic"
-    # else:
-    #     device_type = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["type"]
-    # return DummyDeviceConnection()
-
     if is_synthetic:
-        print("*** Building Synthetic Connection")
+        robot_type = "SyntheticRobot"
+    else:
+        # Can be Meca500, SyntheticRobot, syntheticrobot, Synthetic, synthetic
+        robot_type = configuration["configuration"]["hardware"]["robot_arm"]["type"]
+
+    if robot_type == "Meca500":
+        #TODO: Consider auto_redial function.
+        robot_ip_address = configuration["configuration"]["hardware"]["robot_arm"]["ip_address"]
+        enable_synchronous_mode = configuration["configuration"]["hardware"]["robot_arm"]["enable_synchronous_mode"]
+        import mecademicpy.robot as mdr
+        robot = mdr.Robot()
+        robot.Connect(address=robot_ip_address, enable_synchronous_mode=enable_synchronous_mode)
+        return robot
+
+    elif robot_type.lower() == "syntheticrobot" or robot_type.lower() == "synthetic":
         return DummyDeviceConnection()
-    # else:
-    #     module = load_module_from_file("robot_arm", r"C:\Kushal\10-19 College\17 Fall 2023\Senior Design I\navigate-at-scale\autonomous_robotic_sample_handling\model\devices\robot_arm\robot_arm.py")
-    #     return module.connect_to_robot_arm(None)
-    pass
 
 def start_device(microscope_name, device_connection, configuration, is_synthetic=False):
     """ Start the Robot ARm
@@ -76,12 +79,14 @@ def start_device(microscope_name, device_connection, configuration, is_synthetic
             "robot_arm",
             os.path.join(Path(__file__).resolve().parent, "robot_arm.py"),
         )
+        print("loaded real module")
         return robot_arm.RobotArm(device_connection=device_connection)
     elif device_type == "synthetic":
         synthetic_device = load_module_from_file(
             "synthetic_device",
             os.path.join(Path(__file__).resolve().parent, "synthetic_device.py"),
         )
+        print("loaded synthetic module")
         return synthetic_device.SyntheticRobotArm(device_connection=device_connection)
     else:
         return device_not_found(microscope_name, device_type)
