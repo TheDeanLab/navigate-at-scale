@@ -14,9 +14,9 @@ def start_robot_arm(device: mdr.Robot, configuration):
     device.Disconnect()
 
 class RobotArm:
-    """A Robot Arm class"""
+    """A Robot Arm class for controlling the Meca500 robot arm"""
     def __init__(self, device_connection: mdr.Robot, *args):
-        """ Initialize the Custom Device
+        """ Initialize the RobotArm class
 
         Parameters
         ----------
@@ -25,6 +25,8 @@ class RobotArm:
         args : list
             The arguments for the device
         """
+
+        #: The connection to the Meca500 Robot Arm
         self.robot = device_connection
         self.robot.ActivateAndHome()
         print("*** is robot there?", self.robot)

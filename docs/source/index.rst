@@ -46,6 +46,7 @@ running high-throughput imaging experiments.
 ============
 **navigate-at-scale** was developed by the following individuals as part of their Senior
 Capstone project at the University of Texas Dallas.
+
 - Sai Bommisetty
 - Joy Camposagrado
 - James Harrigan
