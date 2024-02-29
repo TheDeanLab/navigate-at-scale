@@ -33,6 +33,15 @@ class RobotArm:
         self.robot.MoveJoints(0, 0, 0, 0, 0, 0)
         print('Robot has completed movement')
 
+    def move_joints(self):
+        print("Move robot arm to new position")
+        self.robot.MoveJoints(0, 0, 0, 0, 90, 0)
+        print('Robot has completed movement')
+
+    def disconnect(self):
+        print("Disconnecting robot")
+        self.robot.Disconnect()
+
     @property
     def commands(self):
         """Return commands dictionary
@@ -42,4 +51,7 @@ class RobotArm:
         commands : dict
             commands that the device supports
         """
-        return {"zero_joints": lambda *args: self.zero_joints(args[0])}
+        return {"zero_joints": lambda *args: self.zero_joints,
+                "move_joints": lambda *args: self.move_joints,
+                "disconnect": lambda *args: self.disconnect,
+                }
