@@ -4,6 +4,7 @@ from tkinter import ttk
 import logging
 from pathlib import Path
 
+from autonomous_robotic_sample_handling.view.frames.multiposition_frame import MultiPositionTab, MultipositionButtons
 
 class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
     """Plugin Frame: Just an example
