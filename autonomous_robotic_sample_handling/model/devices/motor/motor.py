@@ -14,15 +14,16 @@ clr.AddReference(ref_DeviceManagerCLI)
 clr.AddReference(ref_GenericMotorCLI)
 clr.AddReference(ref_StepperMotorCLI)
 
-from Thorlabs.MotionControl.DeviceManagerCLI import *
-from Thorlabs.MotionControl.GenericMotorCLI import *
+# from Thorlabs.MotionControl.DeviceManagerCLI import BuildDeviceList
+# from Thorlabs.MotionControl.GenericMotorCLI import *
 from Thorlabs.MotionControl.GenericMotorCLI import MotorDirection as MD
-from Thorlabs.MotionControl.Benchtop.StepperMotorCLI import *
+# from Thorlabs.MotionControl.Benchtop.StepperMotorCLI import BenchtopStepperMotor
 from System import Decimal
 
-class Motor():
+class Motor:
     def __init__(self, device_connection, *args):
         # DeviceManagerCLI.BuildDeviceList()
+        configuration = args[0]
         self.device = device_connection
         self.MotorDirection = MD
         self.timeoutVal = 60000

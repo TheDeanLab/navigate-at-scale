@@ -13,7 +13,7 @@ from navigate.model.device_startup_functions import (
     DummyDeviceConnection,
 )
 
-DEVICE_TYPE_NAME = "robot_arm"  # Same as in configuraion.yaml, for example "stage", "filter_wheel", "remote_focus_device"...
+DEVICE_TYPE_NAME = "motor"  # Same as in configuration.yaml, for example "stage", "filter_wheel", "remote_focus_device"...
 DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
 
 
@@ -41,7 +41,6 @@ def load_device(configuration, is_synthetic=False):
     if motor_type == "HDR50":
         # TODO: Consider auto_redial function.
         motor_serial_no = configuration["configuration"]["hardware"]["motor"]["serial_no"]
-        motor_channel = configuration["configuration"]["hardware"]["motor"]["channel"]
 
         import os, sys
         from pathlib import Path
@@ -58,10 +57,10 @@ def load_device(configuration, is_synthetic=False):
         clr.AddReference(ref_GenericMotorCLI)
         clr.AddReference(ref_StepperMotorCLI)
 
-        from Thorlabs.MotionControl.DeviceManagerCLI import *
-        from Thorlabs.MotionControl.GenericMotorCLI import *
-        from Thorlabs.MotionControl.GenericMotorCLI import MotorDirection as MD
-        from Thorlabs.MotionControl.Benchtop.StepperMotorCLI import *
+        from Thorlabs.MotionControl.DeviceManagerCLI import DeviceManagerCLI
+        # from Thorlabs.MotionControl.GenericMotorCLI import GenericMotorCLI
+        # from Thorlabs.MotionControl.GenericMotorCLI import MotorDirection as MD
+        from Thorlabs.MotionControl.Benchtop.StepperMotorCLI import BenchtopStepperMotor
         from System import Decimal
 
         DeviceManagerCLI.BuildDeviceList()
@@ -69,7 +68,7 @@ def load_device(configuration, is_synthetic=False):
         motor.Connect(motor_serial_no)
         return motor
 
-    elif motor_type.lower() == "syntheticrobot" or motor_type.lower() == "synthetic":
+    elif motor_type.lower() == "SyntheticMotor" or motor_type.lower() == "synthetic":
         return DummyDeviceConnection()
 
 def start_device(microscope_name, device_connection, configuration, is_synthetic=False):
@@ -101,12 +100,12 @@ def start_device(microscope_name, device_connection, configuration, is_synthetic
             "motor",
             os.path.join(Path(__file__).resolve().parent, "motor.py"),
         )
-        return motor.Motor(device_connection=device_connection, configuration=configuration)
+        return motor.Motor(device_connection, configuration)
     elif device_type == "synthetic":
         synthetic_device = load_module_from_file(
             "synthetic_device",
             os.path.join(Path(__file__).resolve().parent, "synthetic_device.py"),
         )
-        return synthetic_device.SyntheticRobotArm(device_connection=device_connection, configuration=configuration)
+        return synthetic_device.SyntheticRobotArm(device_connection, configuration)
     else:
         return device_not_found(microscope_name, device_type)

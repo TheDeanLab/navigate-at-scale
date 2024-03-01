@@ -11,9 +11,9 @@ class SyntheticRobotArm:
         """
         pass
 
-    def zero_joints(self):
+    def jog(self):
         """ Zero the joints of the synthetic device """
-        print("*** Synthetic robot receive command: zero joints")
+        print("*** Synthetic motor receive command: jog")
 
     def disconnect(self):
         """ Disconnects the Mecademic Robot object from the robot and system"""
@@ -45,22 +45,5 @@ class SyntheticRobotArm:
             commands that the device supports
         """
         return {
-            "zero_joints": lambda *args: print(
-                f"zero robot arm joints!"
-            ),
-            "disconnect": lambda *args: print(
-                f"zero robot arm joints!"
-            ),
-            "move_joints": lambda *args: print(
-                f"move robot arm joint 1 to {args[0]}!"
-            ),
-            "move_pose": lambda *args: print(
-                f"move robot arm to pose x to {args[0]}!"
-            ),
-            "delay": lambda *args: print(
-                f"delay robot actions by {args[0]} seconds!"
-            ),
-            "activate_and_home": lambda *args: print(
-                f"activate and home robot!"
-            ),
+            "jog": lambda *args: self.jog(),
         }
