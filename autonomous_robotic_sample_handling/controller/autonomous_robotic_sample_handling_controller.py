@@ -27,11 +27,11 @@ class AutonomousRoboticSampleHandlingController:
             self.view, self.parent_controller
         )
         self.multiposition_controller = MultipositionController(
-            parent_controller=self
+            self.view, self.parent_controller
         )
 
         self.motor_controller = MotorController(
-            parent_controller=self
+            self.view, self.parent_controller
         )
 
     def move_robot_arm_to_loading_zone(self):

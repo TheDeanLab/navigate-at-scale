@@ -1,7 +1,7 @@
 from autonomous_robotic_sample_handling.model.devices.motor.motor import *
 
 class MotorController:
-    def __init__(self, parent_controller=None):
+    def __init__(self, view, parent_controller=None):
         """ Initialize the Robot Arm Controller
 
         Parameters
@@ -9,21 +9,21 @@ class MotorController:
         parent_controller : object
             The parent (e.g., main) controller object
         """
-        super().__init__()
 
         # Initialize attributes
+        self.view = view
         self.parent_controller = parent_controller
-        self.view = self.parent_controller.view
 
         # Get the variables and buttons from the view
-        # self.variables = self.view.get_variables()
-        # self.buttons = self.view.buttons
-        # self.buttons["zero"].configure(command=self.zero_joints)
-        # self.buttons["disconnect"].configure(command=self.disconnect)
-        # self.buttons["move"].configure(command=lambda: self.move_joints(0, 0, 0, 0, 90, 0))
+        self.variables = self.view.get_variables()
+        self.buttons = self.view.buttons
 
-        # Manually set up a device connection to the robot arm and initialize the Model
-        self.motor = Motor()
+        self.buttons["import"].configure(command=self.test_connection)
+
+    def test_connection(self):
+        self.parent_controller.execute(
+            "jog"
+        )
 
     def home(self):
         # self.parent_controller.execute(

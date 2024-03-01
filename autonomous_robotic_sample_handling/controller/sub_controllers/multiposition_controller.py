@@ -4,9 +4,9 @@ import pandas as pd
 from pandastable import TableModel
 
 class MultipositionController:
-    def __init__(self, parent_controller=None):
+    def __init__(self, view, parent_controller=None):
         self.parent_controller = parent_controller
-        self.view = self.parent_controller.view
+        self.view = view
         self.table = self.view.multiposition.multipoint_list.pt
 
         self.table.loadCSV = self.load_positions
