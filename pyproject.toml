@@ -41,7 +41,7 @@ dependencies = [
     ]
 
 [project.scripts]
-navigate = "autonomous_robotic_sample_handling.main:main"
+navigate-at-scale = "autonomous_robotic_sample_handling.main:main"
 
 [project.optional-dependencies]
 dev = [
