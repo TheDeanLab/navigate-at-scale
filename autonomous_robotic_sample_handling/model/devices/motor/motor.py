@@ -21,12 +21,9 @@ from Thorlabs.MotionControl.Benchtop.StepperMotorCLI import *
 from System import Decimal
 
 class Motor():
-    def __init__(self):
-        
-        self.serial_no = "40405424"
-        DeviceManagerCLI.BuildDeviceList()
-        self.device = BenchtopStepperMotor.CreateBenchtopStepperMotor(self.serial_no)
-        self.device.Connect(self.serial_no)
+    def __init__(self, device_connection, *args):
+        # DeviceManagerCLI.BuildDeviceList()
+        self.device = device_connection
         self.MotorDirection = MD
         self.timeoutVal = 60000
 

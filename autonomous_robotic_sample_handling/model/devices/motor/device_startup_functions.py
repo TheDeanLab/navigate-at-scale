@@ -18,7 +18,7 @@ DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
 
 
 def load_device(configuration, is_synthetic=False):
-    """ Load the Robot Arm
+    """ Load the Stepper Motor
 
     Parameters
     ----------
@@ -32,20 +32,45 @@ def load_device(configuration, is_synthetic=False):
     object
         The device connection object
     """
-    # print("*** loading connection to robo arm!")
-    # if is_synthetic:
-    #     device_type = "synthetic"
-    # else:
-    #     device_type = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["type"]
-    # return DummyDeviceConnection()
-
     if is_synthetic:
-        print("*** Building Synthetic Connection")
-        return DummyDeviceConnection()
+        motor_type = "SyntheticMotor"
     else:
-        module = load_module_from_file("robot_arm", r"C:\Kushal\10-19 College\17 Fall 2023\Senior Design I\navigate-at-scale\autonomous_robotic_sample_handling\model\devices\robot_arm\robot_arm.py")
-        return module.connect_to_robot_arm(None)
-    pass
+        # Can be Meca500, SyntheticRobot, syntheticrobot, Synthetic, synthetic
+        motor_type = configuration["configuration"]["hardware"]["motor"]["type"]
+
+    if motor_type == "HDR50":
+        # TODO: Consider auto_redial function.
+        motor_serial_no = configuration["configuration"]["hardware"]["motor"]["serial_no"]
+        motor_channel = configuration["configuration"]["hardware"]["motor"]["channel"]
+
+        import os, sys
+        from pathlib import Path
+        import time
+        import clr
+
+        dll_dir = os.path.join(os.getcwd(), 'autonomous_robotic_sample_handling', 'API', '')
+
+        ref_DeviceManagerCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI")
+        ref_GenericMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.GenericMotorCLI")
+        ref_StepperMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.Benchtop.StepperMotorCLI")
+
+        clr.AddReference(ref_DeviceManagerCLI)
+        clr.AddReference(ref_GenericMotorCLI)
+        clr.AddReference(ref_StepperMotorCLI)
+
+        from Thorlabs.MotionControl.DeviceManagerCLI import *
+        from Thorlabs.MotionControl.GenericMotorCLI import *
+        from Thorlabs.MotionControl.GenericMotorCLI import MotorDirection as MD
+        from Thorlabs.MotionControl.Benchtop.StepperMotorCLI import *
+        from System import Decimal
+
+        DeviceManagerCLI.BuildDeviceList()
+        motor = BenchtopStepperMotor.CreateBenchtopStepperMotor(motor_serial_no)
+        motor.Connect(motor_serial_no)
+        return motor
+
+    elif motor_type.lower() == "syntheticrobot" or motor_type.lower() == "synthetic":
+        return DummyDeviceConnection()
 
 def start_device(microscope_name, device_connection, configuration, is_synthetic=False):
     """ Start the Robot ARm
@@ -69,19 +94,19 @@ def start_device(microscope_name, device_connection, configuration, is_synthetic
     if is_synthetic:
         device_type = "synthetic"
     else:
-        device_type = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["type"]
+        device_type = configuration["configuration"]["microscopes"][microscope_name]["motor"]["hardware"]["type"]
 
-    if device_type == "Meca500":
-        robot_arm = load_module_from_file(
-            "robot_arm",
+    if device_type == "HDR50":
+        motor = load_module_from_file(
+            "motor",
             os.path.join(Path(__file__).resolve().parent, "motor.py"),
         )
-        return robot_arm.RobotArm(device_connection=device_connection)
+        return motor.Motor(device_connection=device_connection, configuration=configuration)
     elif device_type == "synthetic":
         synthetic_device = load_module_from_file(
             "synthetic_device",
             os.path.join(Path(__file__).resolve().parent, "synthetic_device.py"),
         )
-        return synthetic_device.SyntheticRobotArm(device_connection=device_connection)
+        return synthetic_device.SyntheticRobotArm(device_connection=device_connection, configuration=configuration)
     else:
         return device_not_found(microscope_name, device_type)
