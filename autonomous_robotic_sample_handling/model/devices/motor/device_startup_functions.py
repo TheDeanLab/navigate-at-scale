@@ -100,12 +100,12 @@ def start_device(microscope_name, device_connection, configuration, is_synthetic
             "motor",
             os.path.join(Path(__file__).resolve().parent, "motor.py"),
         )
-        return motor.Motor(device_connection, configuration)
+        return motor.Motor(device_connection, configuration["configuration"]["microscopes"][microscope_name]["motor"])
     elif device_type == "synthetic":
         synthetic_device = load_module_from_file(
             "synthetic_device",
             os.path.join(Path(__file__).resolve().parent, "synthetic_device.py"),
         )
-        return synthetic_device.SyntheticRobotArm(device_connection, configuration)
+        return synthetic_device.SyntheticRobotArm(device_connection, configuration["configuration"]["microscopes"][microscope_name]["motor"])
     else:
         return device_not_found(microscope_name, device_type)

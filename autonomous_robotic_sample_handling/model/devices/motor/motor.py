@@ -23,10 +23,11 @@ from System import Decimal
 class Motor:
     def __init__(self, device_connection, *args):
         # DeviceManagerCLI.BuildDeviceList()
-        configuration = args[0]
+        motor_configuration = args[0]
         self.device = device_connection
         self.MotorDirection = MD
         self.timeoutVal = 60000
+        self.serial_no = motor_configuration['hardware']['serial_no']
 
         self.channel = self.device.GetChannel(1)
 
