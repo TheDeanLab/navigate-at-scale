@@ -37,7 +37,6 @@ Supported Motion Controller
 * 409,600 Microsteps per revolution of motor
 * Seamless operation with Thorlabs stages/motors
 
-
 Supported Parallel Grippers
 ---------------------------
 
@@ -47,4 +46,21 @@ Supported Parallel Grippers
 * Maximum admissible finger length of 32mm
 * Repeatability of 0.020mm
 
+Screws and Nuts
+---------------------------
 
+The sample queue tray utilizes: 
+
+* `Black-Oxide Alloy Steel Socket Head Screw <https://www.mcmaster.com/90044A125/>`_.
+* `Medium-Strength Steel Serrated Flange Locknut <https://www.mcmaster.com/99904A211/>`_.
+* `Alloy Steel Socket Head Screw <https://www.mcmaster.com/91290A150/>`_.
+* `Steel Hex Nut <https://www.mcmaster.com/90592A090/>`_.
+* `Dowel Pin <https://www.mcmaster.com/91595A009/>`_.
+* `Black-Oxide Alloy Steel Socket Head Screw <https://www.mcmaster.com/91864A024/>`_.
+
+Other Hardware
+---------------------------
+
+The headers of the vials utilizes `Neodymium Magnet <https://www.mcmaster.com/5862K103/>`_. 
+The adhesive used for the magnets is `Instant-Bond Adhesive <https://www.mcmaster.com/74765A33/>`_.
+The vials used are `Glass Vial, Clear, 0.75 FL oz/22 ml Capacity, 1-1/16" Diameter <https://www.mcmaster.com/4417T49/>`_.
