@@ -1,5 +1,3 @@
-from autonomous_robotic_sample_handling.model.devices.motor.motor import *
-
 class MotorController:
     def __init__(self, view, parent_controller=None):
         """ Initialize the Robot Arm Controller
