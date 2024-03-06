@@ -1,10 +1,22 @@
 # Standard Imports
-import os, sys
+import os
+
+from navigate.tools.file_functions import load_yaml_file
+from navigate.config.config import get_navigate_path
+
 from pathlib import Path
 import time
 import clr
 
-dll_dir = os.path.join(os.getcwd(), 'autonomous_robotic_sample_handling', 'API', '')
+plugins_config_path = os.path.join(
+        get_navigate_path(), "config", "plugins_config.yml"
+    )
+    
+plugins_config = load_yaml_file(plugins_config_path)
+plugin_path = plugins_config["Autonomous Robotic Sample Handling"]
+    
+
+dll_dir = os.path.join(plugin_path, 'API')
 
 ref_DeviceManagerCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI")
 ref_GenericMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.GenericMotorCLI")
@@ -55,6 +67,7 @@ class Motor:
         self.channel_config.DeviceSettingsName = 'HDR50'
         self.channel_config.UpdateCurrentConfiguration()
         self.channel.SetSettings(self.chan_settings, True, False)
+        self.home()
 
 
     def home(self):

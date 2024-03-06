@@ -8,6 +8,8 @@ from pathlib import Path
 
 # Local application imports
 from navigate.tools.common_functions import load_module_from_file
+from navigate.tools.file_functions import load_yaml_file
+from navigate.config.config import get_navigate_path
 from navigate.model.device_startup_functions import (
     device_not_found,
     DummyDeviceConnection,
@@ -32,6 +34,15 @@ def load_device(configuration, is_synthetic=False):
     object
         The device connection object
     """
+    
+    import os
+    plugins_config_path = os.path.join(
+        get_navigate_path(), "config", "plugins_config.yml"
+    )
+    
+    plugins_config = load_yaml_file(plugins_config_path)
+    plugin_path = plugins_config["Autonomous Robotic Sample Handling"]
+    
     if is_synthetic:
         motor_type = "SyntheticMotor"
     else:
@@ -42,27 +53,27 @@ def load_device(configuration, is_synthetic=False):
         # TODO: Consider auto_redial function.
         motor_serial_no = configuration["configuration"]["hardware"]["motor"]["serial_no"]
 
-        import os, sys
         from pathlib import Path
         import time
         import clr
 
-        dll_dir = os.path.join(os.getcwd(), 'autonomous_robotic_sample_handling', 'API', '')
+        print(plugin_path)
+        dll_dir = os.path.join(plugin_path, 'API')
 
-        ref_DeviceManagerCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI")
-        ref_GenericMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.GenericMotorCLI")
-        ref_StepperMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.Benchtop.StepperMotorCLI")
+        ref_DeviceManagerCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI.dll")
+        ref_GenericMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.GenericMotorCLI.dll")
+        ref_StepperMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.Benchtop.StepperMotorCLI.dll")
 
         clr.AddReference(ref_DeviceManagerCLI)
         clr.AddReference(ref_GenericMotorCLI)
         clr.AddReference(ref_StepperMotorCLI)
-
+        
         from Thorlabs.MotionControl.DeviceManagerCLI import DeviceManagerCLI
         # from Thorlabs.MotionControl.GenericMotorCLI import GenericMotorCLI
         # from Thorlabs.MotionControl.GenericMotorCLI import MotorDirection as MD
         from Thorlabs.MotionControl.Benchtop.StepperMotorCLI import BenchtopStepperMotor
         from System import Decimal
-
+        
         DeviceManagerCLI.BuildDeviceList()
         motor = BenchtopStepperMotor.CreateBenchtopStepperMotor(motor_serial_no)
         motor.Connect(motor_serial_no)
