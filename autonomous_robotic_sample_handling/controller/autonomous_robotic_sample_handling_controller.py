@@ -1,3 +1,5 @@
+from navigate.tools.file_functions import load_yaml_file
+
 from autonomous_robotic_sample_handling.controller.sub_controllers import (
     RobotArmController
 )
@@ -9,6 +11,7 @@ from autonomous_robotic_sample_handling.controller.sub_controllers.multiposition
 from autonomous_robotic_sample_handling.controller.sub_controllers.motor_controller import (
     MotorController
 )
+ 
 
 class AutonomousRoboticSampleHandlingController:
     def __init__(self, view, parent_controller=None):
@@ -33,6 +36,11 @@ class AutonomousRoboticSampleHandlingController:
         self.motor_controller = MotorController(
             self.view, self.parent_controller
         )
+    
+    def get_positions(self):
+        data = load_yaml_file('C:/Users/abhik/Documents/Senior Design/navigate-at-scale/autonomous_robotic_sample_handling/config/configuration.yaml')
+        robot_position = data['environment']['robot']['trf']
+        return robot_position
 
     def move_robot_arm_to_loading_zone(self):
         self.robot_arm_controller.move_joints(0, 0, 45, 0, -45, 0)
