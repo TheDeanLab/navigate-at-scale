@@ -13,6 +13,10 @@ class RobotArm:
             The arguments for the device
         """
         self.robot = device_connection
+        self.zero_joints()
+        self.robot.SetTrf(19,0,57,0,0,0)
+        # self.robot.SetAutoConf(1)
+        # self.robot.SetAutoConfTurn(1)
         self.robot.ActivateAndHome()
         print("*** is robot there?", self.robot)
 
@@ -26,6 +30,16 @@ class RobotArm:
         """
         print("Custom device is going to zero joints")
         self.robot.MoveJoints(0, 0, 0, 0, 0, 0)
+        print('Robot has completed movement')
+        
+    def move_lin(self,a,b,c,d,e,f):
+        """ Moves linearly to an orientation and position relative to the world reference frame
+
+        Returns
+        -------
+
+        """
+        self.robot.MoveLin(a,b,c,d,e,f)
         print('Robot has completed movement')
 
     def disconnect(self):
@@ -55,6 +69,39 @@ class RobotArm:
 
         """
         self.robot.MoveJoints(a, b, c, d, e, f)
+        
+    def move_lin_rel_trf(self, a, b, c, d, e, f):
+        """ Move joints relative to the tool reference frame
+
+        Parameters
+        ----------
+        a
+        b
+        c
+        d
+        e
+        f
+
+        Returns
+        -------
+
+        """
+        self.robot.MoveLinRelTrf(a, b, c, d, e, f)
+    
+    def delay(self,time):
+        
+        """ Move joints relative to the tool reference frame
+
+        Parameters
+        ----------
+        time
+
+        Returns
+        -------
+
+        """
+        self.robot.Delay(time)
+        
 
     def move_pose(self, a, b, c, d, e, f):
         """ Move the Robot Arm to a given Pose
@@ -131,6 +178,32 @@ class RobotArm:
         """
         self.robot.SetJointLimits()
         self.robot.SetTorqueLimits()
+        
+    def open_gripper(self):
+        """ Open gripper to maximum setting
+
+        Parameters
+        ----------
+        config
+
+        Returns
+        -------
+
+        """
+        self.robot.GripperOpen()
+        
+    def close_gripper(self):
+        """ Close gripper to maximum setting
+
+        Parameters
+        ----------
+        config
+
+        Returns
+        -------
+
+        """
+        self.robot.GripperClose()
 
     @property
     def commands(self):
@@ -142,6 +215,12 @@ class RobotArm:
             commands that the device supports
         """
         return {"zero_joints": lambda *args: self.zero_joints(),
-                "move_joints": lambda *args: self.move_joints(*args),
+                "move_joints": lambda *args: self.move_joints(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
+                # "move_joints": lambda *args: self.move_joints(args[0]),
                 "disconnect": lambda *args: self.disconnect(),
+                "move_lin_rel_trf": lambda *args: self.move_lin_rel_trf(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
+                "move_lin": lambda *args: self.move_lin(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
+                "open_gripper": lambda *args: self.open_gripper(),
+                "close_gripper": lambda *args: self.close_gripper(),
+                "delay": lambda *args: self.delay(args[0][0])
                 }

@@ -19,22 +19,48 @@ class RobotArmController:
         self.buttons["zero"].configure(command=self.zero_joints)
         self.buttons["move"].configure(command=self.move_joints)
         self.buttons["disconnect"].configure(command=self.disconnect)
+        self.buttons['opengripper'].configure(command=self.open_gripper)
+        self.buttons['closegripper'].configure(command=self.close_gripper)
 
     def zero_joints(self):
         self.parent_controller.execute(
             "zero_joints"
         )
 
-    def move_joints(self):
+    def move_joints(self, a, b, c, d, e, f):
         self.parent_controller.execute(
-            "move_joints"
+            "move_joints", a, b, c, d, e, f
+        )
+    
+    def move_lin(self, a, b, c, d, e, f):
+        self.parent_controller.execute(
+            "move_lin", a, b, c, d, e, f
+        )
+        
+    def open_gripper(self):
+        self.parent_controller.execute(
+            "open_gripper"
+        )
+        
+    def close_gripper(self):
+        self.parent_controller.execute(
+            "close_gripper"
         )
 
     def disconnect(self):
         self.parent_controller.execute(
             "disconnect"
         )
+        
+    def move_lin_rel_trf(self,a,b,c,d,e,f):
+        self.parent_controller.execute(
+            "move_lin_rel_trf", a, b, c, d, e, f
+        )
 
+    def delay(self,time):
+        self.parent_controller.execute(
+            "delay", time
+        )
     # def move_joints(self, a, b, c, d, e, f):
     #     self.robot_arm.move_joints(a, b, c, d, e, f)
     #     print("Robot has finished moving [move_joints]")

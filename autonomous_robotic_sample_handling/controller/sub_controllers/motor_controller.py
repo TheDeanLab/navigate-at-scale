@@ -17,6 +17,7 @@ class MotorController:
         self.buttons = self.view.buttons
 
         self.buttons["import"].configure(command=self.test_connection)
+        self.buttons["movetoloadingzone"].configure(command=self.MoveToLoadingZone)
 
     def test_connection(self):
         self.parent_controller.execute(
@@ -24,30 +25,38 @@ class MotorController:
         )
 
     def home(self):
-        # self.parent_controller.execute(
-        #     "home"
-        # )
-        self.motor.home()
-        print("Home Rotary Stage Motor")
+        self.parent_controller.execute(
+            "home"
+        )
+        print("Homing Rotary Stage Motor")
+    
+    def MoveTo(self, position):
+        self.parent_controller.execute(
+            "moveTo", position
+        )
+    
+    def MoveToLoadingZone(self, position = 263):
+        self.parent_controller.execute(
+            "moveTo", position
+        )
         
     def getPosition(self):
         
-        return self.motor.getPosition
+        return self.parent_controller.execute(
+            "position"
+        )
 
     def disconnect(self):
-        # self.parent_controller.execute(
-        #     "disconnect"
-        # )
-        self.motor.disconnect()
+        self.parent_controller.execute(
+            "disconnect"
+        )
         print("Stage has disconnected")
 
     def MoveJog(self,position):
         
-        # self.parent_controller.execute(
-        #     "MoveJog"
-        # )
-        
-        self.motor.MoveJog(position)
+        self.parent_controller.execute(
+            "moveJog", position
+        )
         print("Motor has finished Move Jog")
         
 
