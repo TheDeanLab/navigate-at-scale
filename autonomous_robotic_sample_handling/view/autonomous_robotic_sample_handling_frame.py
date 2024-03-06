@@ -138,7 +138,10 @@ class RobotInitialization(tk.Frame):
             "connect": ttk.Button(self, text="Connect Robot"),
             "disconnect": ttk.Button(self, text="Disconnect Robot"),
             "move": ttk.Button(self,text='Move Robot'),
-            "zero": ttk.Button(self, text="Zero Joints")
+            "zero": ttk.Button(self, text="Zero Joints"),
+            "opengripper": ttk.Button(self, text="Open Gripper"),
+            "closegripper": ttk.Button(self,text="Close Gripper"),
+            "movetoloadingzone": ttk.Button(self,text="Move Stage to Initial Loading Zone")
         }
         counter = 0
         for key, button in self.buttons.items():
@@ -152,6 +155,12 @@ class RobotInitialization(tk.Frame):
                 row, column = 1,1
             elif counter == 4:
                 row, column = 2, 0
+            elif counter == 5:
+                row, column = 2, 1
+            elif counter == 6:
+                row, column = 3, 0
+            elif counter == 7:
+                row, column = 3, 1
 
             button.grid(
                 row=row, column=column, sticky=tk.NSEW, padx=(4, 1), pady=(4, 6)

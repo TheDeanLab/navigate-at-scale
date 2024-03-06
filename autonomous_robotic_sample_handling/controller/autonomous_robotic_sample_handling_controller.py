@@ -20,7 +20,8 @@ class AutonomousRoboticSampleHandlingController:
 
         self.buttons['sample_carousel'].configure(command=self.move_robot_arm_to_loading_zone)
 
-        self.buttons['sample_microscope'].configure(command=self.mainLoop)
+        self.buttons['sample_microscope'].configure(command=self.cycle)
+      
 
         #Initialize sub-controllers
         self.robot_arm_controller = RobotArmController(
@@ -33,21 +34,69 @@ class AutonomousRoboticSampleHandlingController:
         self.motor_controller = MotorController(
             self.view, self.parent_controller
         )
+        
 
     def move_robot_arm_to_loading_zone(self):
-        self.robot_arm_controller.move_joints(0, 0, 45, 0, -45, 0)
-        self.robot_arm_controller.move_lin_rel_wrf(100, 0, -50, 0, 0, 0)
+        
+        #change inputs to refer to config file
+        self.robot_arm_controller.move_lin(275, -1.5, 141.5, 0, 90, 0)
         print("Moving robot arm to loading zone")
-
+        
+    def engageHeader(self):
+        
+        self.robot_arm_controller.open_gripper()
+        self.robot_arm_controller.move_lin_rel_trf(0,0,46,0,0,0)
+        self.robot_arm_controller.delay(1)
+        self.robot_arm_controller.close_gripper()
+    
+    def removeHeaderFromStage(self):
+        self.robot_arm_controller.move_lin_rel_trf(-40,0,0,0,0,0)
+    
+    def moveToMicroscope(self):
+        self.robot_arm_controller.move_lin(133,-250,190,90,0,-90)
+    
+    def engageMicroscope(self):
+        self.robot_arm_controller.move_lin_rel_trf(0,0,40,0,0,0)
+        self.robot_arm_controller.move_lin_rel_trf(-10,0,0,0,0,0)
+        self.robot_arm_controller.open_gripper()
+    
+    def disengageMicroscope(self):
+        self.robot_arm_controller.move_lin_rel_trf(0,0,-100,0,0,0)
+    
+    def removeHeaderFromMicroscope(self):
+        self.robot_arm_controller.move_lin_rel_trf(-10,0,40,0,0,0)
+        self.robot_arm_controller.close_gripper()
+        self.robot_arm_controller.delay(1)
+        self.robot_arm_controller.move_lin_rel_trf(0,-50,0,0,0,0)
+        self.robot_arm_controller.move_lin_rel_trf(0,0,-100,0,0,0)
+        
+    def returnHeaderToMicroscope(self):
+        self.robot_arm_controller.move_lin(275,-1.5,150.5,0,90,0)
+        self.robot_arm_controller.delay(.5)
+        self.robot_arm_controller.move_lin_rel_trf(0,0,37.8,0,0,0)
+        self.robot_arm_controller.delay(.5)
+        self.robot_arm_controller.move_lin_rel_trf(9,0,0,0,0,0)
+        
     def CycleStage(self):
         self.motor_controller.MoveJog("Forward")
+        print("Test motor cycle stage")
 
-    def mainLoop(self):
+    def cycle(self):
         print("cycling")
-        while True:
-            self.move_robot_arm_to_loading_zone()
-            self.CycleStage()
-
+        
+        self.motor_controller.MoveToLoadingZone()
+        
+        self.move_robot_arm_to_loading_zone()
+        self.engageHeader()
+        self.removeHeaderFromStage()
+        self.moveToMicroscope()
+        self.engageMicroscope()
+        self.disengageMicroscope()
+        
+        self.moveToMicroscope()
+        self.removeHeaderFromMicroscope()
+        self.returnHeaderToMicroscope()
+        
 
 
 
