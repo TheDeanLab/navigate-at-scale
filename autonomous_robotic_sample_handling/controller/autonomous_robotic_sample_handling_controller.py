@@ -113,8 +113,3 @@ class AutonomousRoboticSampleHandlingController:
         self.moveToMicroscope()
         self.removeHeaderFromMicroscope()
         self.returnHeaderToCarousel()
-        
-
-
-
-

@@ -5,6 +5,8 @@ class RobotArm:
     def __init__(self, device_connection: mdr.Robot, *args):
         """ Initialize the Custom Device
 
+        RobotArm(device_connection, arg1, arg2)
+
         Parameters
         ----------
         device_connection : mdr.Robot

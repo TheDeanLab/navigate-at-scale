@@ -159,6 +159,7 @@ class RobotInitialization(tk.Frame):
             elif counter == 1:
                 row, column = 0, 1
             elif counter == 2:
+                row, column = 0, 2
                 row, column = 1, 0
             elif counter == 3:
                 row, column = 1,1

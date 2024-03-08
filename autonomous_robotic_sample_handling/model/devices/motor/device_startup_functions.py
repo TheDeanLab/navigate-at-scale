@@ -1,10 +1,10 @@
 # Standard Imports
 import os
 from pathlib import Path
+import time
+import clr
 
 # Third party imports
-# import mecademicpy.robot as mdr
-# from tkinter import messagebox
 
 # Local application imports
 from navigate.tools.common_functions import load_module_from_file
@@ -53,26 +53,16 @@ def load_device(configuration, is_synthetic=False):
         # TODO: Consider auto_redial function.
         motor_serial_no = configuration["configuration"]["hardware"]["motor"]["serial_no"]
 
-        from pathlib import Path
-        import time
-        import clr
-
-        print(plugin_path)
         dll_dir = os.path.join(plugin_path, 'API')
 
         ref_DeviceManagerCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.DeviceManagerCLI.dll")
-        ref_GenericMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.GenericMotorCLI.dll")
         ref_StepperMotorCLI = os.path.join(dll_dir, "Thorlabs.MotionControl.Benchtop.StepperMotorCLI.dll")
 
         clr.AddReference(ref_DeviceManagerCLI)
-        clr.AddReference(ref_GenericMotorCLI)
         clr.AddReference(ref_StepperMotorCLI)
         
         from Thorlabs.MotionControl.DeviceManagerCLI import DeviceManagerCLI
-        # from Thorlabs.MotionControl.GenericMotorCLI import GenericMotorCLI
-        # from Thorlabs.MotionControl.GenericMotorCLI import MotorDirection as MD
         from Thorlabs.MotionControl.Benchtop.StepperMotorCLI import BenchtopStepperMotor
-        from System import Decimal
         
         DeviceManagerCLI.BuildDeviceList()
         motor = BenchtopStepperMotor.CreateBenchtopStepperMotor(motor_serial_no)
