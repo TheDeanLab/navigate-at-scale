@@ -37,6 +37,7 @@ class AutonomousRoboticSampleHandlingController:
         self.motor_controller = MotorController(
             self.view, self.parent_controller
         )
+
     
     def get_positions(self):
         data = load_yaml_file('C:/Users/abhik/Documents/Senior Design/navigate-at-scale/autonomous_robotic_sample_handling/config/configuration.yaml')
@@ -77,12 +78,21 @@ class AutonomousRoboticSampleHandlingController:
         self.robot_arm_controller.move_lin_rel_trf(0,-50,0,0,0,0)
         self.robot_arm_controller.move_lin_rel_trf(0,0,-100,0,0,0)
         
-    def returnHeaderToMicroscope(self):
-        self.robot_arm_controller.move_lin(275,-1.5,150.5,0,90,0)
+    def returnHeaderToCarousel(self):
+        #TODO: var_height = 10 is for the chamfered header, var_height = 0 is 0 for regular [cleanup later]
+        var_height = 10
+        input = self.buttons["height"].get(1.0, "end-1c")
+        non_empty_text = input == ""
+        if not non_empty_text:
+            var_height = float(input)
+        
+        self.robot_arm_controller.move_lin(275,-1.5,150+var_height,0,90,0)
         self.robot_arm_controller.delay(.5)
         self.robot_arm_controller.move_lin_rel_trf(0,0,37.8,0,0,0)
         self.robot_arm_controller.delay(.5)
-        self.robot_arm_controller.move_lin_rel_trf(9,0,0,0,0,0)
+        self.robot_arm_controller.move_lin_rel_trf(9+var_height,0,0,0,0,0)
+        self.robot_arm_controller.open_gripper()
+        self.robot_arm_controller.move_lin_rel_trf(0,0,-40,0,0,0)
         
     def CycleStage(self):
         self.motor_controller.MoveJog("Forward")
@@ -102,7 +112,7 @@ class AutonomousRoboticSampleHandlingController:
         
         self.moveToMicroscope()
         self.removeHeaderFromMicroscope()
-        self.returnHeaderToMicroscope()
+        self.returnHeaderToCarousel()
         
 
 

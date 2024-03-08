@@ -5,6 +5,8 @@ import logging
 from pathlib import Path
 
 from autonomous_robotic_sample_handling.view.frames.multiposition_frame import MultiPositionTab, MultipositionButtons
+from autonomous_robotic_sample_handling.view.frames.in_house_tools import InHouseTools
+from navigate.view.custom_widgets.validation import ValidatedSpinbox, ValidatedCombobox
 
 class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
     """Plugin Frame: Just an example
@@ -74,6 +76,13 @@ class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
         self.MultipositionButtons.grid(
             row=10, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
         )
+
+        # In-House Tools
+        self.InHouseTools = InHouseTools(self)
+        self.InHouseTools.grid(
+            row=7, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
+        )
+        self.buttons.update(InHouseTools.get_buttons(self.InHouseTools))
 
     # Getters
     def get_variables(self):
@@ -195,7 +204,7 @@ class MoveSequence(tk.Frame):
     -------
     """
     def __init__(self, settings_tab, *args, **kwargs):
-        text_label = 'Quick Commands'
+        text_label = 'Move Sequence'
         ttk.Labelframe.__init__(self, settings_tab, text=text_label, *args, **kwargs)
 
         # Formatting

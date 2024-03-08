@@ -35,9 +35,13 @@ class MotorController:
             "moveTo", position
         )
     
-    def MoveToLoadingZone(self, position = 263):
+    def MoveToLoadingZone(self, position = 302.3):
+        text_input = self.buttons["input"].get(1.0, "end-1c")
+        non_empty_text = text_input == ""
+        if not non_empty_text:
+            position = text_input
         self.parent_controller.execute(
-            "moveTo", position
+            "moveTo", float(position)
         )
         
     def getPosition(self):

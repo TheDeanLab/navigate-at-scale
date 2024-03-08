@@ -45,6 +45,8 @@ def load_device(configuration, is_synthetic=False):
         import mecademicpy.robot as mdr
         robot = mdr.Robot()
         robot.Connect(address=robot_ip_address, enable_synchronous_mode=enable_synchronous_mode)
+        robot.SetTorqueLimits(30.0,30.0,30.0,30.0,30.0,30.0)
+        robot.SetTorqueLimitsCfg(4)
         return robot
 
     elif robot_type.lower() == "syntheticrobot" or robot_type.lower() == "synthetic":
