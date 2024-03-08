@@ -9,45 +9,203 @@ class RobotArm:
 
         Parameters
         ----------
-        device_connection : object
-            The device connection object
+        device_connection : mdr.Robot
+            The device connection object, representing the Meca500 Robot Arm using mecademicpy
         args : list
             The arguments for the device
         """
         self.robot = device_connection
+        self.zero_joints()
+        self.robot.SetTrf(19,0,57,0,0,0)
+        # self.robot.SetAutoConf(1)
+        # self.robot.SetAutoConfTurn(1)
+        self.robot.ActivateAndHome()
+        print("*** is robot there?", self.robot)
 
-    def MovetoZero(self):
-        """Move the custom device"""
+
+    def zero_joints(self):
+        """ Zero all the joints
+
+        Returns
+        -------
+
+        """
         print("Custom device is going to zero joints")
         self.robot.MoveJoints(0, 0, 0, 0, 0, 0)
         print('Robot has completed movement')
+        
+    def move_lin(self,a,b,c,d,e,f):
+        """ Moves linearly to an orientation and position relative to the world reference frame
 
-    def Disconnect(self):
-        """Disconnect the robot"""
+        Returns
+        -------
+
+        """
+        self.robot.MoveLin(a,b,c,d,e,f)
+        print('Robot has completed movement')
+
+    def disconnect(self):
+        """ Disconnect the robot
+
+        Returns
+        -------
+
+        """
         self.robot.Disconnect()
         print("Robot has disconnected")
 
-    def MoveJoints(self, a, b, c, d, e, f):
-        """Move Robot Joints"""
-        self.robot.MoveJoints(a,b,c,d,e,f)
+    def move_joints(self, a, b, c, d, e, f):
+        """ Move Joints
 
-    def MovePose(self, a, b, c, d, e, f):
-        """Move Robot Linearly"""
-        self.robot.MovePose(a,b,c,d,e,f)
+        Parameters
+        ----------
+        a
+        b
+        c
+        d
+        e
+        f
 
-    def Delay(self, wait):
-        """Makes the Robot wait"""
+        Returns
+        -------
+
+        """
+        self.robot.MoveJoints(a, b, c, d, e, f)
+        
+    def move_lin_rel_trf(self, a, b, c, d, e, f):
+        """ Move joints relative to the tool reference frame
+
+        Parameters
+        ----------
+        a
+        b
+        c
+        d
+        e
+        f
+
+        Returns
+        -------
+
+        """
+        self.robot.MoveLinRelTrf(a, b, c, d, e, f)
+    
+    def delay(self,time):
+        
+        """ Move joints relative to the tool reference frame
+
+        Parameters
+        ----------
+        time
+
+        Returns
+        -------
+
+        """
+        self.robot.Delay(time)
+        
+
+    def move_pose(self, a, b, c, d, e, f):
+        """ Move the Robot Arm to a given Pose
+
+        Parameters
+        ----------
+        a
+        b
+        c
+        d
+        e
+        f
+
+        Returns
+        -------
+
+        """
+        self.robot.MovePose(a, b, c, d, e, f)
+
+    def move_lin_rel_wrf(self, x, y, z, alpha, beta, gamma):
+        """ Move Robot Linearly with respect to the World Reference Frame
+
+        Parameters
+        ----------
+        x
+        y
+        z
+        alpha
+        beta
+        gamma
+
+        Returns
+        -------
+
+        """
+        self.robot.MoveLinRelWrf(x, y, z, alpha, beta, gamma)
+
+    def delay(self, wait):
+        """ Delay the robot operation
+
+        Parameters
+        ----------
+        wait : int
+            time in seconds to delay robot operation
+        Returns
+        -------
+
+        """
         self.robot.Delay(wait)
 
-    def ActivateAndHome(self):
-        """Activates and Homes the Robot"""
-        self.robot.ActivateAndHome()
+    def activate_and_home(self):
+        """ Activates and Homes the Robot
 
-    def LoadRobotConfig(self):
-        """Imports limits defined in the yaml file. Needs to be called before ActivateAndHome"""
+        Returns
+        -------
+
+        """
+        self.robot.ActivateAndHome()
+        
+    def move_lin(self,a,b,c,d,e,f):
+        
+        self.robot.MoveLin(a,b,c,d,e,f)
+
+    def load_robot_config(self, config):
+        """ Import and apply robot configuration data and limits
+
+        Parameters
+        ----------
+        config
+
+        Returns
+        -------
+
+        """
         self.robot.SetJointLimits()
         self.robot.SetTorqueLimits()
-    
+        
+    def open_gripper(self):
+        """ Open gripper to maximum setting
+
+        Parameters
+        ----------
+        config
+
+        Returns
+        -------
+
+        """
+        self.robot.GripperOpen()
+        
+    def close_gripper(self):
+        """ Close gripper to maximum setting
+
+        Parameters
+        ----------
+        config
+
+        Returns
+        -------
+
+        """
+        self.robot.GripperClose()
 
     @property
     def commands(self):
@@ -58,4 +216,13 @@ class RobotArm:
         commands : dict
             commands that the device supports
         """
-        return {"move_robot_arm": lambda *args: self.move(args[0])}
+        return {"zero_joints": lambda *args: self.zero_joints(),
+                "move_joints": lambda *args: self.move_joints(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
+                # "move_joints": lambda *args: self.move_joints(args[0]),
+                "disconnect": lambda *args: self.disconnect(),
+                "move_lin_rel_trf": lambda *args: self.move_lin_rel_trf(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
+                "move_lin": lambda *args: self.move_lin(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
+                "open_gripper": lambda *args: self.open_gripper(),
+                "close_gripper": lambda *args: self.close_gripper(),
+                "delay": lambda *args: self.delay(args[0][0])
+                }

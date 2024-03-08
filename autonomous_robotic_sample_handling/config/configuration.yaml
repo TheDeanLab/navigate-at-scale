@@ -1,0 +1,10 @@
+#Info necessary for each hardware
+environment:
+#microscope is the center of the environement
+  robot:
+    #robot base is the reference
+    position: [{'x':}]
+    trf: [19,0,57,0,0,0]
+  motor: 
+    position: [{'x':}]
+

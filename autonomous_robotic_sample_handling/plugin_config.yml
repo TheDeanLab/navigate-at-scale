@@ -12,11 +12,3 @@ acquisition_modes:
 #   hardware:
 #     type: PluginDevice
 ###################################################################
-robot_arm:
-  hardware:
-    type: Meca500
-    ip_address: 192.168.0.100
-
-motor:
-  hardware:
-    type: Meca500
