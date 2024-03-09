@@ -15,11 +15,13 @@ class RobotArm:
             The arguments for the device
         """
         self.robot = device_connection
+        self.robot.ActivateAndHome()
         self.zero_joints()
         self.robot.SetTrf(19,0,57,0,0,0)
+        self.robot.SetTorqueLimits(30.0,30.0,30.0,30.0,30.0,30.0)
+        self.robot.SetTorqueLimitsCfg(4)
         # self.robot.SetAutoConf(1)
         # self.robot.SetAutoConfTurn(1)
-        self.robot.ActivateAndHome()
         print("*** is robot there?", self.robot)
 
 
