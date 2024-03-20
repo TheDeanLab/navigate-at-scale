@@ -67,6 +67,17 @@ class RobotArm:
         """
         self.robot.StartProgram(program_name)
 
+    def reset_error(self):
+        """ Reset robot error
+
+        Returns
+        -------
+
+        """
+        self.robot.ResetError()
+        #TODO: Add functionality to return to standby position
+        # (avoid obstacles and work zone, zero_joints, etc.)
+
     def zero_joints(self):
         """ Zero all the joints
 
@@ -271,5 +282,6 @@ class RobotArm:
                 "pause_motion": lambda *args: self.pause_robot_motion(),
                 "resume_motion": lambda *args: self.resume_robot_motion(),
                 "reset_motion": lambda *args: self.reset_robot_motion(),
-                "start_program": lambda *args: self.start_program(args[0][0])
+                "start_program": lambda *args: self.start_program(args[0][0]),
+                "reset_error": lambda *args: self.reset_error()
                 }
