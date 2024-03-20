@@ -11,6 +11,18 @@ class SyntheticRobotArm:
         """
         pass
 
+    def pause_robot_motion(self):
+        """ Pause robot motion for synthetic device """
+        print("*** Synthetic robot receive command: pause robot motion")
+
+    def resume_robot_motion(self):
+        """ Resume robot motion for synthetic device """
+        print("*** Synthetic robot receive command: resume robot motion")
+
+    def reset_robot_motion(self):
+        """ Reset robot motion for synthetic device """
+        print("*** Synthetic robot receive command: reset robot motion")
+
     def zero_joints(self):
         """ Zero the joints of the synthetic device """
         print("*** Synthetic robot receive command: zero joints")
@@ -63,4 +75,7 @@ class SyntheticRobotArm:
             "activate_and_home": lambda *args: print(
                 f"activate and home robot!"
             ),
+            "pause_motion": lambda *args: self.pause_robot_motion(),
+            "resume_motion": lambda *args: self.resume_robot_motion(),
+            "reset_motion": lambda *args: self.reset_robot_motion(),
         }

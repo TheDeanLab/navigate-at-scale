@@ -11,6 +11,10 @@ from autonomous_robotic_sample_handling.controller.sub_controllers.multiposition
 from autonomous_robotic_sample_handling.controller.sub_controllers.motor_controller import (
     MotorController
 )
+
+from autonomous_robotic_sample_handling.controller.sub_controllers.pause_play_controller import (
+    PausePlayController
+)
  
 
 class AutonomousRoboticSampleHandlingController:
@@ -33,9 +37,11 @@ class AutonomousRoboticSampleHandlingController:
         self.multiposition_controller = MultipositionController(
             self.view, self.parent_controller
         )
-
         self.motor_controller = MotorController(
             self.view, self.parent_controller
+        )
+        self.pause_play_controller = PausePlayController(
+            self.view.pause_play, self.parent_controller
         )
 
     

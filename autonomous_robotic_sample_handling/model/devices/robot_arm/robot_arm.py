@@ -24,6 +24,35 @@ class RobotArm:
         # self.robot.SetAutoConf(1)
         # self.robot.SetAutoConfTurn(1)
 
+    def pause_robot_motion(self):
+        """ Pause robot motion
+
+        Returns
+        -------
+
+        """
+        print("Pause robot motion")
+        self.robot.PauseMotion()
+
+    def resume_robot_motion(self):
+        """ Resume robot motion
+
+        Returns
+        -------
+
+        """
+        print("Resume robot motion")
+        self.robot.ResumeMotion()
+
+    def reset_robot_motion(self):
+        """ Reset robot operations
+
+        Returns
+        -------
+
+        """
+        self.robot.ClearMotion()
+
     def zero_joints(self):
         """ Zero all the joints
 
@@ -224,5 +253,8 @@ class RobotArm:
                 "move_lin": lambda *args: self.move_lin(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
                 "open_gripper": lambda *args: self.open_gripper(),
                 "close_gripper": lambda *args: self.close_gripper(),
-                "delay": lambda *args: self.delay(args[0][0])
+                "delay": lambda *args: self.delay(args[0][0]),
+                "pause_motion": lambda *args: self.pause_robot_motion(),
+                "resume_motion": lambda *args: self.resume_robot_motion(),
+                "reset_motion": lambda *args: self.reset_robot_motion(),
                 }
