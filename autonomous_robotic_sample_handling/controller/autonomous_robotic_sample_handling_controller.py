@@ -1,6 +1,6 @@
 from navigate.tools.file_functions import load_yaml_file
 
-from autonomous_robotic_sample_handling.controller.sub_controllers import (
+from autonomous_robotic_sample_handling.controller.sub_controllers.robot_arm_controller import (
     RobotArmController
 )
 

@@ -15,13 +15,14 @@ class RobotArm:
             The arguments for the device
         """
         self.robot = device_connection
+        #TODO: Split Activation() and Home(), as configuration may need to be done before homing and after activation
+        self.robot.ActivateAndHome()
         self.zero_joints()
         self.robot.SetTrf(19,0,57,0,0,0)
+        self.robot.SetTorqueLimits(30.0,30.0,30.0,30.0,30.0,30.0)
+        self.robot.SetTorqueLimitsCfg(4)
         # self.robot.SetAutoConf(1)
         # self.robot.SetAutoConfTurn(1)
-        self.robot.ActivateAndHome()
-        print("*** is robot there?", self.robot)
-
 
     def zero_joints(self):
         """ Zero all the joints
@@ -30,9 +31,8 @@ class RobotArm:
         -------
 
         """
-        print("Custom device is going to zero joints")
         self.robot.MoveJoints(0, 0, 0, 0, 0, 0)
-        print('Robot has completed movement')
+        print('Robot has zeroed joints')
         
     def move_lin(self,a,b,c,d,e,f):
         """ Moves linearly to an orientation and position relative to the world reference frame
