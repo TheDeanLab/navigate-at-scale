@@ -28,6 +28,7 @@ class AutonomousRoboticSampleHandlingController:
         self.buttons['sample_carousel'].configure(command=self.move_robot_arm_to_loading_zone)
 
         self.buttons['sample_microscope'].configure(command=self.cycle)
+        self.buttons['offline_program'].configure(command=self.start_offline_program)
       
 
         #Initialize sub-controllers
@@ -45,6 +46,11 @@ class AutonomousRoboticSampleHandlingController:
         )
 
     
+    def start_offline_program(self):
+        self.parent_controller.execute(
+            "start_program", "vertical_oscillation"
+        )
+
     def get_positions(self):
         data = load_yaml_file('C:/Users/abhik/Documents/Senior Design/navigate-at-scale/autonomous_robotic_sample_handling/config/configuration.yaml')
         robot_position = data['environment']['robot']['trf']

@@ -23,6 +23,20 @@ class SyntheticRobotArm:
         """ Reset robot motion for synthetic device """
         print("*** Synthetic robot receive command: reset robot motion")
 
+    def start_program(self, program_name):
+        """ Start offline robot program
+
+        Parameters
+        ----------
+        program_name : str
+            String containing the offline program name
+
+        Returns
+        -------
+
+        """
+        print(f"*** Synthtic robot receive command: Start {program_name} program")
+
     def zero_joints(self):
         """ Zero the joints of the synthetic device """
         print("*** Synthetic robot receive command: zero joints")
@@ -78,4 +92,5 @@ class SyntheticRobotArm:
             "pause_motion": lambda *args: self.pause_robot_motion(),
             "resume_motion": lambda *args: self.resume_robot_motion(),
             "reset_motion": lambda *args: self.reset_robot_motion(),
+            "start_program": lambda *args: self.start_program(args[0][0])
         }

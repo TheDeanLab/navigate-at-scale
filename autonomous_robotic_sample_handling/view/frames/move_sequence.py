@@ -36,7 +36,7 @@ class MoveSequence(tk.Frame):
 
         # Initializing Button
         self.buttons = {
-            "stop": ttk.Button(self, text="STOP"),
+            "offline_program": ttk.Button(self, text="Start program"),
             "sample_carousel": ttk.Button(self, text="Sample to carousel"),
             "sample_microscope": ttk.Button(self, text="Sample to microscope"),
         }

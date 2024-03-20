@@ -53,6 +53,20 @@ class RobotArm:
         """
         self.robot.ClearMotion()
 
+    def start_program(self, program_name):
+        """ Start offline robot program
+
+        Parameters
+        ----------
+        program_name : str
+            String containing the offline program name
+
+        Returns
+        -------
+
+        """
+        self.robot.StartProgram(program_name)
+
     def zero_joints(self):
         """ Zero all the joints
 
@@ -257,4 +271,5 @@ class RobotArm:
                 "pause_motion": lambda *args: self.pause_robot_motion(),
                 "resume_motion": lambda *args: self.resume_robot_motion(),
                 "reset_motion": lambda *args: self.reset_robot_motion(),
+                "start_program": lambda *args: self.start_program(args[0][0])
                 }
