@@ -15,7 +15,10 @@ from autonomous_robotic_sample_handling.controller.sub_controllers.motor_control
 from autonomous_robotic_sample_handling.controller.sub_controllers.pause_play_controller import (
     PausePlayController
 )
- 
+
+from autonomous_robotic_sample_handling.controller.sub_controllers.automation_controller import (
+    AutomationController
+)
 
 class AutonomousRoboticSampleHandlingController:
     def __init__(self, view, parent_controller=None):
@@ -25,9 +28,9 @@ class AutonomousRoboticSampleHandlingController:
         self.variables = self.view.get_variables()
         self.buttons = self.view.buttons
 
-        self.buttons['sample_carousel'].configure(command=self.move_robot_arm_to_loading_zone)
+        self.buttons['sample_carousel'].configure(command=self.automated_sample_handling)
 
-        self.buttons['sample_microscope'].configure(command=self.cycle)
+        self.buttons['sample_microscope'].configure(command=self.sample_iteration)
         self.buttons['offline_program'].configure(command=self.start_offline_program)
       
 
@@ -43,6 +46,9 @@ class AutonomousRoboticSampleHandlingController:
         )
         self.pause_play_controller = PausePlayController(
             self.view.pause_play, self.parent_controller
+        )
+        self.automation_controller = AutomationController(
+            self.view.move_sequence, self.parent_controller
         )
 
     
@@ -110,7 +116,7 @@ class AutonomousRoboticSampleHandlingController:
         self.motor_controller.MoveJog("Forward")
         print("Test motor cycle stage")
 
-    def cycle(self):
+    def sample_iteration(self):
         print("cycling")
         
         self.motor_controller.MoveToLoadingZone()
@@ -125,3 +131,13 @@ class AutonomousRoboticSampleHandlingController:
         self.moveToMicroscope()
         self.removeHeaderFromMicroscope()
         self.returnHeaderToCarousel()
+
+        #TODO: Add function to rotate motor to next loading zone
+
+    def automated_sample_handling(self):
+        num_samples = self.automation_controller.get_num_samples()
+        print(f"Processing {num_samples} samples")
+        for i in range(num_samples):
+            # self.sample_iteration()
+            print(f"Finished processing sample {i}")
+

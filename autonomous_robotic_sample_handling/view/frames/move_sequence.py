@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 
+from navigate.view.custom_widgets.LabelInputWidgetFactory import LabelInput
+from navigate.view.custom_widgets.validation import ValidatedSpinbox, ValidatedEntry
+
 
 class MoveSequence(tk.Frame):
     """MoveSequence
@@ -54,5 +57,30 @@ class MoveSequence(tk.Frame):
             )
             counter += 1
 
+        self.inputs = {
+            "num_samples": LabelInput(
+                parent=self,
+                label="Number of samples",
+                input_class=ValidatedSpinbox,
+                input_var=tk.StringVar(),
+                input_args={"from_": 1, "to": 24, "increment": 1, "width": 5},
+            )
+        }
+        self.inputs['num_samples'].grid(row=1, column=0, padx=(4, 1), pady=(4, 6))
+
     def get_buttons(self):
         return self.buttons
+
+    def get_widgets(self):
+        """Get Widgets.
+
+        This function returns the dictionary that holds the widgets.
+
+        The key is the widget name, value is the LabelInput class that has all the data.
+
+        Parameters
+        ----------
+        self.inputs : dict
+            Dictionary of all the widgets in the frame.
+        """
+        return self.inputs
