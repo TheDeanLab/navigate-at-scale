@@ -40,8 +40,8 @@ class MoveSequence(tk.Frame):
         # Initializing Button
         self.buttons = {
             "offline_program": ttk.Button(self, text="Start program"),
-            "sample_carousel": ttk.Button(self, text="Sample to carousel"),
-            "sample_microscope": ttk.Button(self, text="Sample to microscope"),
+            "automation_sequence": ttk.Button(self, text="Start automation sequence"),
+            "process_sample": ttk.Button(self, text="Process a sample"),
         }
         counter = 0
         for key, button in self.buttons.items():

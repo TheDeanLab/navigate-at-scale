@@ -28,9 +28,8 @@ class AutonomousRoboticSampleHandlingController:
         self.variables = self.view.get_variables()
         self.buttons = self.view.buttons
 
-        self.buttons['sample_carousel'].configure(command=self.automated_sample_handling)
-
-        self.buttons['sample_microscope'].configure(command=self.sample_iteration)
+        self.buttons['automation_sequence'].configure(command=self.automated_sample_handling)
+        self.buttons['process_sample'].configure(command=self.sample_iteration)
         self.buttons['offline_program'].configure(command=self.start_offline_program)
       
 
@@ -137,7 +136,8 @@ class AutonomousRoboticSampleHandlingController:
     def automated_sample_handling(self):
         num_samples = self.automation_controller.get_num_samples()
         print(f"Processing {num_samples} samples")
-        for i in range(num_samples):
+        for i in range(1, num_samples + 1):
             # self.sample_iteration()
+            #TODO: Configure to use official sample iteration sequence once complete
             print(f"Finished processing sample {i}")
 
