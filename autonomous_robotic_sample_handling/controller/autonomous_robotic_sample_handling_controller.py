@@ -11,7 +11,10 @@ from autonomous_robotic_sample_handling.controller.sub_controllers.multiposition
 from autonomous_robotic_sample_handling.controller.sub_controllers.motor_controller import (
     MotorController
 )
- 
+
+from autonomous_robotic_sample_handling.controller.sub_controllers.move_sequence_controller import (
+    MoveSequenceController 
+)
 
 class AutonomousRoboticSampleHandlingController:
     def __init__(self, view, parent_controller=None):
@@ -24,7 +27,6 @@ class AutonomousRoboticSampleHandlingController:
         self.buttons['sample_carousel'].configure(command=self.move_robot_arm_to_loading_zone)
 
         self.buttons['sample_microscope'].configure(command=self.cycle)
-      
 
         #Initialize sub-controllers
         self.robot_arm_controller = RobotArmController(
@@ -36,6 +38,10 @@ class AutonomousRoboticSampleHandlingController:
 
         self.motor_controller = MotorController(
             self.view, self.parent_controller
+        )
+
+        self.move_sequence_controller = MoveSequenceController(
+            self.view.move_sequence, self.parent_controller
         )
 
     
