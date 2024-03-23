@@ -1,4 +1,5 @@
 from navigate.tools.file_functions import load_yaml_file
+import time
 
 from autonomous_robotic_sample_handling.controller.sub_controllers.robot_arm_controller import (
     RobotArmController
@@ -131,7 +132,7 @@ class AutonomousRoboticSampleHandlingController:
         self.removeHeaderFromMicroscope()
         self.returnHeaderToCarousel()
 
-        #TODO: Add function to rotate motor to next loading zone
+        # TODO: Add function to rotate motor to next loading zone
 
     def automated_sample_handling(self):
         self.automation_controller.reset_automation_variables()
@@ -139,7 +140,9 @@ class AutonomousRoboticSampleHandlingController:
         print(f"Processing {num_samples} samples")
         for i in range(1, num_samples + 1):
             # self.sample_iteration()
-            #TODO: Configure to use official sample iteration sequence once complete
+            # TODO: Configure to use official sample iteration sequence once complete
+            print(f"processing sample {i}")
+            time.sleep(2)
             print(f"Finished processing sample {i}")
             self.automation_controller.update_progress_bar(i)
 

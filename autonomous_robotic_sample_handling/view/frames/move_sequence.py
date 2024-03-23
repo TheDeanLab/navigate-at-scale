@@ -62,8 +62,18 @@ class MoveSequence(tk.Frame):
             "current_sample_id": tk.IntVar(
                 self,
                 0
-            )
+            ),
+            "progress_bar_style": ttk.Style(),
+            # TODO: Consider benefits of specifying a number_of_samples variable for the num_samples LabelInput
         }
+
+        # Define styles for widgets
+        self.variables['progress_bar_style'].layout('text.Horizontal.TProgressbar',
+                                                    [('Horizontal.Progressbar.trough',
+                                                      {'children': [('Horizontal.Progressbar.pbar',
+                                                                     {'side': 'left', 'sticky': 'ns'})],
+                                                       'sticky': 'nswe'}),
+                                                     ('Horizontal.Progressbar.label', {'sticky': ''})])
 
         # Initialize Widgets
         self.inputs = {
@@ -80,7 +90,8 @@ class MoveSequence(tk.Frame):
                 mode="determinate",
                 length=200,
                 variable=self.variables['current_sample_id'],
-                maximum=24
+                maximum=24,
+                style='text.Horizontal.TProgressbar'
             )
         }
         self.inputs['num_samples'].grid(row=1, column=0, padx=(4, 1), pady=(4, 6))
