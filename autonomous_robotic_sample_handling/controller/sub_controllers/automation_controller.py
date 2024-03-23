@@ -8,6 +8,7 @@ class AutomationController:
 
         self.widgets = self.view.get_widgets()
         self.buttons = self.view.buttons
+        self.variables = self.view.variables
 
         # #################################
         # ##### Example Widget Events #####
@@ -27,4 +28,10 @@ class AutomationController:
         )
 
     def get_num_samples(self):
-        return int(self.widgets['num_samples'].get())
+        return self.widgets['num_samples'].get()
+
+    def reset_automation_variables(self):
+        self.variables['current_sample_id'].set(0)
+
+    def update_progress_bar(self, current_sample_id):
+        self.variables['current_sample_id'].set(current_sample_id)

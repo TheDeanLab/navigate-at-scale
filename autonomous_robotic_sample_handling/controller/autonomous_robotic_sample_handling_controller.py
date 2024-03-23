@@ -134,10 +134,12 @@ class AutonomousRoboticSampleHandlingController:
         #TODO: Add function to rotate motor to next loading zone
 
     def automated_sample_handling(self):
+        self.automation_controller.reset_automation_variables()
         num_samples = self.automation_controller.get_num_samples()
         print(f"Processing {num_samples} samples")
         for i in range(1, num_samples + 1):
             # self.sample_iteration()
             #TODO: Configure to use official sample iteration sequence once complete
             print(f"Finished processing sample {i}")
+            self.automation_controller.update_progress_bar(i)
 
