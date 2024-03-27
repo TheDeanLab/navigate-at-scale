@@ -1,4 +1,4 @@
-#Info necessary for each hardware
+ #Info necessary for each hardware
 environment:
 #microscope is the center of the environement
   robot:
@@ -6,7 +6,14 @@ environment:
     position: [0,0,0]
     robot_base_plate_height: 9.77
   motor: 
-    units: 19
+    units: 20
+  microscope:
+    x: 168.8
+    y: 181.85
+    z: 219.5
+    R1: -90
+    R2: 0
+    R3: 90
   components:
     vial_height_from_carousel: 86.06
     carousel_height_from_table: 60.45
@@ -15,8 +22,10 @@ environment:
     trf_to_gripper_edge: 59
     trf_to_gripper_bottom: 22.14
     MEPG_thickness: 18.14
-    tolerance_up: 8
-    tolerance_forward: 8
+    sample_height: 25
+    shear_distance: 50
+    tolerance_up: 1
+    tolerance_forward: 12
     
 
 

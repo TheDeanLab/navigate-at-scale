@@ -18,9 +18,9 @@ class RobotArm:
         #TODO: Split Activation() and Home(), as configuration may need to be done before homing and after activation
         self.robot.ActivateAndHome()
         self.zero_joints()
-        self.robot.SetTrf(19,0,57,0,0,0)
-        self.robot.SetTorqueLimits(30.0,30.0,30.0,30.0,30.0,30.0)
-        self.robot.SetTorqueLimitsCfg(4)
+        #self.robot.SetTrf(0,0,0,0,0,0)
+        self.robot.SetTorqueLimitsCfg(4, 0)
+        self.robot.SetTorqueLimits(30.0,60.0,30.0,30.0,30.0,30.0)
         # self.robot.SetAutoConf(1)
         # self.robot.SetAutoConfTurn(1)
 
@@ -271,6 +271,7 @@ class RobotArm:
             commands that the device supports
         """
         return {"zero_joints": lambda *args: self.zero_joints(),
+                "move_pose": lambda *args: self.move_pose(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
                 "move_joints": lambda *args: self.move_joints(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
                 # "move_joints": lambda *args: self.move_joints(args[0]),
                 "disconnect": lambda *args: self.disconnect(),

@@ -31,8 +31,8 @@ class AutonomousRoboticSampleHandlingController:
         self.buttons = self.view.buttons
 
         self.buttons['automation_sequence'].configure(command=self.automated_sample_handling)
-        self.buttons['process_sample'].configure(command=self.move_robot_arm_to_loading_zone)
-        self.buttons['offline_program'].configure(command=self.start_offline_program)
+        self.buttons['process_sample'].configure(command=self.moveToMicroscope)
+        self.buttons['offline_program'].configure(command=self.sample_iteration)
         
         self.data = self.load_config_data()
         self.motor_position = self.get_motor_position(self.data)
@@ -69,7 +69,15 @@ class AutonomousRoboticSampleHandlingController:
         self.parent_controller.execute(
             "start_program", "vertical_oscillation"
         )
-
+    def get_microscope_position(self, data):
+        x = data["environment"]["microscope"]["x"] 
+        y = data["environment"]["microscope"]["y"]
+        z = data["environment"]["microscope"]["z"]
+        Rx = data["environment"]["microscope"]["R1"]
+        Ry = data["environment"]["microscope"]["R2"]
+        Rz = data["environment"]["microscope"]["R3"]
+        return [x, y, z, Rx, Ry, Rz]
+        
     def get_motor_position(self, data):
         motor_position = data["environment"]["motor"]["units"]
         motor_to_robot_mm = motor_position*25.4
@@ -83,57 +91,105 @@ class AutonomousRoboticSampleHandlingController:
             "trf_gripper_edge": data["environment"]["components"]["trf_to_gripper_edge"],
             "trf_gripper_bottom": data["environment"]["components"]["trf_to_gripper_bottom"],
             "MEPG_thickness": data["environment"]["components"]["MEPG_thickness"],
+            "sample_height": data["environment"]['components']['sample_height'],
+            "shear_distance": data["environment"]['components']['shear_distance'],
             "tolerance_up": data["environment"]["components"]["tolerance_up"],
             "tolerance_forward": data["environment"]["components"]["tolerance_forward"],
         }
-        print(data_points["robot_base"],data_points["wrf_to_trf"][2],data_points["carousel_height"],data_points["vial_height"])
-        print(motor_to_robot_mm, data_points["vial_attack"], data_points["wrf_to_trf"][0], data_points['tolerance_forward'], data_points['trf_gripper_edge'])
-        motor_position_x = data_points["robot_base"] + data_points["wrf_to_trf"][2] - data_points["carousel_height"] - data_points["vial_height"] - data_points['trf_gripper_bottom'] -data_points['tolerance_up']
+        motor_position_x = data_points["robot_base"] + data_points["wrf_to_trf"][2] - data_points["carousel_height"] - data_points["vial_height"] - data_points['trf_gripper_bottom'] + data_points['tolerance_up']
         motor_position_z = motor_to_robot_mm - data_points["vial_attack"] - data_points["wrf_to_trf"][0] - data_points['tolerance_forward'] - data_points["MEPG_thickness"]
-        print(motor_to_robot_mm - data_points["vial_attack"] - data_points["wrf_to_trf"][0] - data_points['tolerance_forward'] - data_points['trf_gripper_edge'])
+
+        loading_zone_x = motor_to_robot_mm - data_points['vial_attack'] - data_points['tolerance_forward'] - data_points['MEPG_thickness']
+        loading_zone_z = data_points['carousel_height'] + data_points['vial_height'] + data_points['trf_gripper_bottom'] - data_points['robot_base'] + data_points["tolerance_up"]
+        
         self.key_positions = {
             "motor_position": [motor_position_x, 0, motor_position_z, 0, 0, 0],
-            "engage_header_distance": data_points['trf_gripper_edge'] - data_points['MEPG_thickness']
+            "loading_zone": [loading_zone_x, 0, loading_zone_z, 0, 90, 0],
+            "engage_header_distance": data_points['trf_gripper_edge'] - data_points['MEPG_thickness'],
+            "shear_distance": data_points['shear_distance'],
+            "sample_height": data_points['sample_height'],
+            "microscope": self.get_microscope_position(data)
         }
-        print(self.key_positions)
 
     def move_robot_arm_to_loading_zone(self):
         #TODO: change inputs to refer to config file
+        """
         goal_pos = self.key_positions['motor_position']
         x, y, z, Rx, Ry, Rz = goal_pos
         z = z - self.key_positions['engage_header_distance']
         self.robot_arm_controller.move_lin_rel_trf(x, y, z, Rx, Ry, Rz)
+        """
+        loading_zone = self.key_positions['loading_zone']
+        x, y, z, Rx, Ry, Rz = loading_zone
+        engage_header_distance = self.key_positions['engage_header_distance']
+        self.robot_arm_controller.move_pose(x - engage_header_distance, y, z, Rx, Ry, Rz)
         print("Moving robot arm to loading zone")
+        self.engageHeader()
+        self.removeHeaderFromStage()
         
     def engageHeader(self):
-        
         self.robot_arm_controller.open_gripper()
-        self.robot_arm_controller.move_lin_rel_trf(0,0,46,0,0,0)
+        engage_header_distance = self.key_positions["engage_header_distance"]
+        self.robot_arm_controller.move_lin_rel_trf(0,0,engage_header_distance,0,0,0)
         self.robot_arm_controller.delay(1)
         self.robot_arm_controller.close_gripper()
     
     def removeHeaderFromStage(self):
-        self.robot_arm_controller.move_lin_rel_trf(-40,0,0,0,0,0)
+        sample_height = - self.key_positions['sample_height']
+        self.robot_arm_controller.move_lin_rel_trf(sample_height,0,0,0,0,0)
     
     def moveToMicroscope(self):
-        self.robot_arm_controller.move_lin(133,-250,190,90,0,-90)
+        microscope = self.key_positions['microscope']
+        x, y, z, Rx, Ry, Rz = microscope
+        microscope_tolerance = 10
+        engage_header_distance = self.key_positions['engage_header_distance']
+        self.robot_arm_controller.move_pose(x, y - engage_header_distance, z - microscope_tolerance, Rx, Ry, Rz)
+        
+        self.engageMicroscope(microscope_tolerance=microscope_tolerance, engage_header_distance=engage_header_distance)
+        self.disengageMicroscope(engage_header_distance=engage_header_distance)
+        self.removeHeaderFromMicroscope(engage_header_distance=engage_header_distance)
+        self.random_robot_pose()
+        # self.robot_arm_controller.move_lin(133,-250,190,90,0,-90)
     
-    def engageMicroscope(self):
-        self.robot_arm_controller.move_lin_rel_trf(0,0,40,0,0,0)
-        self.robot_arm_controller.move_lin_rel_trf(-10,0,0,0,0,0)
+    def engageMicroscope(self, microscope_tolerance, engage_header_distance):
+        
+        self.robot_arm_controller.move_lin_rel_trf(0,0,engage_header_distance,0,0,0)
+        self.robot_arm_controller.move_lin_rel_trf(-microscope_tolerance,0,0,0,0,0)
         self.robot_arm_controller.open_gripper()
     
-    def disengageMicroscope(self):
-        self.robot_arm_controller.move_lin_rel_trf(0,0,-100,0,0,0)
+    def disengageMicroscope(self, engage_header_distance):
+        self.robot_arm_controller.move_lin_rel_trf(0,0,-engage_header_distance*2,0,0,0)
     
-    def removeHeaderFromMicroscope(self):
-        self.robot_arm_controller.move_lin_rel_trf(-10,0,40,0,0,0)
+    def removeHeaderFromMicroscope(self, engage_header_distance):
+        shear_distance = self.key_positions['shear_distance']
+        z_tolerance = 50
+        self.robot_arm_controller.move_lin_rel_trf(0,0,engage_header_distance*2,0,0,0)
         self.robot_arm_controller.close_gripper()
         self.robot_arm_controller.delay(1)
-        self.robot_arm_controller.move_lin_rel_trf(0,-50,0,0,0,0)
-        self.robot_arm_controller.move_lin_rel_trf(0,0,-100,0,0,0)
+        self.robot_arm_controller.move_lin_rel_trf(0,-shear_distance,0,0,0,0)
+        self.robot_arm_controller.move_lin_rel_trf(0,0,-z_tolerance,0,0,0)
         
+    def random_robot_pose(self):
+        self.robot_arm_controller.move_pose(200, 0, 250, 0, 90, 0)
+    
     def returnHeaderToCarousel(self):
+        loading_zone = self.key_positions["loading_zone"]
+        x, y, z, Rx, Ry, Rz = loading_zone
+        sample_height = self.key_positions['sample_height']
+        engage_header_distance = self.key_positions['engage_header_distance']
+
+        # Move sample above loading zone
+        self.robot_arm_controller.move_pose(x, y, z + sample_height, Rx, Ry, Rz)
+
+        # Place sample within vial
+        self.robot_arm_controller.move_lin_rel_trf(sample_height, 0, 0, 0, 0, 0)
+        self.robot_arm_controller.open_gripper()
+        self.robot_arm_controller.delay(1)
+
+        # Disengage robot arm from loading zone
+        self.robot_arm_controller.move_lin_rel_trf(0, 0, -engage_header_distance, 0, 0, 0)
+
+        """
         #TODO: var_height = 10 is for the chamfered header, var_height = 0 is 0 for regular [cleanup later]
         var_height = 10
         input = self.buttons["height"].get(1.0, "end-1c")
@@ -148,14 +204,18 @@ class AutonomousRoboticSampleHandlingController:
         self.robot_arm_controller.move_lin_rel_trf(9+var_height,0,0,0,0,0)
         self.robot_arm_controller.open_gripper()
         self.robot_arm_controller.move_lin_rel_trf(0,0,-40,0,0,0)
+        """
         
     def CycleStage(self):
         self.motor_controller.MoveJog("Forward")
         print("Test motor cycle stage")
 
     def sample_iteration(self):
-        print("cycling")
+        self.move_robot_arm_to_loading_zone()
+        self.moveToMicroscope()
+        self.returnHeaderToCarousel()
         
+        """
         self.motor_controller.MoveToLoadingZone()
         
         self.move_robot_arm_to_loading_zone()
@@ -168,14 +228,19 @@ class AutonomousRoboticSampleHandlingController:
         self.moveToMicroscope()
         self.removeHeaderFromMicroscope()
         self.returnHeaderToCarousel()
+        """
 
         #TODO: Add function to rotate motor to next loading zone
 
     def automated_sample_handling(self):
         num_samples = self.automation_controller.get_num_samples()
+        og_position = 8.75 + 60
+        dtheta = 15
         print(f"Processing {num_samples} samples")
         for i in range(1, num_samples + 1):
-            # self.sample_iteration()
+            self.motor_controller.MoveTo(og_position)
+            self.sample_iteration()
             #TODO: Configure to use official sample iteration sequence once complete
             print(f"Finished processing sample {i}")
+            og_position = og_position + dtheta
 
