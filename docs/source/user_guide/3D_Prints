@@ -1,0 +1,31 @@
+3D Prints
+===============================
+
+The autonomous robotic sample handling system utilized custom 3D printed components.
+
+Sample tray
+--------------------------------
+
+
+
+Custom vials
+--------------------------------
+
+The custom vials are designed to maintain the orientation of the sample within the sample tray.
+They are printed using PLA filiment. 
+
+.. image:: user_guide/images/Custom Made Vial.png
+         :alt: Opening **navigate**.
+
+
+Vial headers
+--------------------------------
+
+The vial headers are used to hold the stem for the sample clamp.
+
+
+Grippers
+---------------------------------
+
+The grippers designed for the Meca500 Robot Arm are printed using ONYX 3D printing.
+
