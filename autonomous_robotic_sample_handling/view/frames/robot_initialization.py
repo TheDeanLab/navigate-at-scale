@@ -44,7 +44,8 @@ class RobotInitialization(tk.Frame):
             "zero": ttk.Button(self, text="Zero Joints"),
             "opengripper": ttk.Button(self, text="Open Gripper"),
             "closegripper": ttk.Button(self, text="Close Gripper"),
-            "movetoloadingzone": ttk.Button(self, text="Move Stage to Initial Loading Zone")
+            "movetoloadingzone": ttk.Button(self, text="Move Stage to Initial Loading Zone"),
+            "in_house": ttk.Button(self, text="In House Tools"),
         }
         counter = 0
         for key, button in self.buttons.items():
@@ -65,6 +66,8 @@ class RobotInitialization(tk.Frame):
                 row, column = 3, 0
             elif counter == 7:
                 row, column = 3, 1
+            elif counter == 8:
+                row, column = 4, 0
 
             button.grid(
                 row=row, column=column, sticky=tk.NSEW, padx=(4, 1), pady=(4, 6)

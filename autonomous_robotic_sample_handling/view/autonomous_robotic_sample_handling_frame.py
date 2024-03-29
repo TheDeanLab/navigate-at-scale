@@ -7,7 +7,7 @@ from autonomous_robotic_sample_handling.view.frames.robot_initialization import 
 from autonomous_robotic_sample_handling.view.frames.move_sequence import MoveSequence
 from autonomous_robotic_sample_handling.view.frames.pause_play import PausePlay
 from autonomous_robotic_sample_handling.view.frames.multiposition_frame import MultiPositionTab, MultipositionButtons
-from autonomous_robotic_sample_handling.view.frames.in_house_tools import InHouseTools
+from autonomous_robotic_sample_handling.view.popups.inhouse_tools_popup import InHouseToolsPopup
 from navigate.view.custom_widgets.validation import ValidatedSpinbox, ValidatedCombobox
 
 
@@ -81,11 +81,8 @@ class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
         )
 
         # In-House Tools
-        self.InHouseTools = InHouseTools(self)
-        self.InHouseTools.grid(
-            row=7, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
-        )
-        self.buttons.update(InHouseTools.get_buttons(self.InHouseTools))
+        self.InHouseTools = InHouseToolsPopup(self)
+        self.buttons.update(InHouseToolsPopup.get_buttons(self.InHouseTools))
 
     # Getters
     def get_variables(self):
