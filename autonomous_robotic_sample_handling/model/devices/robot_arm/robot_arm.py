@@ -16,7 +16,9 @@ class RobotArm:
         """
         self.robot = device_connection
         #TODO: Split Activation() and Home(), as configuration may need to be done before homing and after activation
-        self.robot.ActivateAndHome()
+        self.robot.ActivateRobot()
+        self.robot.SetWorkspaceLimits()
+        self.robot.Home()
         self.zero_joints()
         #self.robot.SetTrf(0,0,0,0,0,0)
         self.robot.SetTorqueLimitsCfg(4, 0)
