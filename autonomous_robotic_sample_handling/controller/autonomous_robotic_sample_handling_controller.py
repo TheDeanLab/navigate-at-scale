@@ -36,6 +36,7 @@ class AutonomousRoboticSampleHandlingController:
         self.buttons['process_sample'].configure(command=self.moveToMicroscope)
         self.buttons['offline_program'].configure(command=self.sample_iteration)
         self.buttons['in_house'].configure(command=self.launch_inhouse_tools)
+        self.buttons["home"].configure(command=self.home_activate_robot_motor)
         
         self.data = self.load_config_data()
         self.motor_position = self.get_motor_position(self.data)
@@ -56,6 +57,11 @@ class AutonomousRoboticSampleHandlingController:
         self.automation_controller = AutomationController(
             self.view.move_sequence, self.parent_controller
         )
+
+    def home_activate_robot_motor(self):
+        self.robot_arm_controller.deactivate()
+        self.robot_arm_controller.home()
+        self.motor_controller.home()
 
     def load_config_data(self):
         import os

@@ -40,7 +40,7 @@ class RobotInitialization(tk.Frame):
             "import": ttk.Button(self, text="Load Positions from Disk"),
             "connect": ttk.Button(self, text="Connect Robot"),
             "disconnect": ttk.Button(self, text="Disconnect Robot"),
-            "move": ttk.Button(self, text='Move Robot'),
+            "home": ttk.Button(self, text='Home Robot and Motor'),
             "zero": ttk.Button(self, text="Zero Joints"),
             "opengripper": ttk.Button(self, text="Open Gripper"),
             "closegripper": ttk.Button(self, text="Close Gripper"),

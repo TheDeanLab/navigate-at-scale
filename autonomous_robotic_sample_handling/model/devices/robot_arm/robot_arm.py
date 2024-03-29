@@ -216,6 +216,12 @@ class RobotArm:
 
         """
         self.robot.ActivateAndHome()
+
+    def deactivate(self):
+        """
+        Deactivates the robot
+        """
+        self.robot.DeactivateRobot()
         
     def move_lin(self,a,b,c,d,e,f):
         
@@ -260,6 +266,7 @@ class RobotArm:
 
         """
         self.robot.GripperClose()
+        self.robot.Home
 
     @property
     def commands(self):
@@ -275,6 +282,8 @@ class RobotArm:
                 "move_joints": lambda *args: self.move_joints(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
                 # "move_joints": lambda *args: self.move_joints(args[0]),
                 "disconnect": lambda *args: self.disconnect(),
+                "activate_and_home": lambda *args: self.activate_and_home,
+                "deactivate": lambda *args: self.deactivate,
                 "move_lin_rel_trf": lambda *args: self.move_lin_rel_trf(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
                 "move_lin": lambda *args: self.move_lin(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
                 "open_gripper": lambda *args: self.open_gripper(),
