@@ -19,7 +19,9 @@ class MoveSequenceController:
             # self.buttons[button].bind("<Button-1>", lambda event: self.handle_click(event, button))
 
     def handle_click(self, event, buttons):
-        # print("Button pressed twice")
+        print(self.buttons[buttons]['state'])
+        print(self.buttons[buttons]['state'] == "normal")
+        if self.buttons[buttons]['state']=="normal" or self.buttons[buttons]['state'] == "active":
+            print(buttons)
         self.buttons[buttons].configure(state=DISABLED)
-        self.view.after(500, lambda *args: self.buttons[buttons].configure(state=ACTIVE))
-        print(buttons)
+        self.view.after(1000, lambda *args: self.buttons[buttons].configure(state=ACTIVE))
