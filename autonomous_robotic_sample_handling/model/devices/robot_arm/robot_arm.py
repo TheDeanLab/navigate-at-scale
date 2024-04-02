@@ -1,4 +1,6 @@
 import mecademicpy.robot as mdr
+from navigate.config.config import get_navigate_path
+import os
 
 class RobotArm:
     """A Robot Arm class"""
@@ -17,12 +19,34 @@ class RobotArm:
         self.robot = device_connection
         #TODO: Split Activation() and Home(), as configuration may need to be done before homing and after activation
         self.robot.ActivateAndHome()
+
+        # Logging setup
+        # file_name = ("robot_log")
+        monitoringInterval = 1
+        file_path = os.path.join(
+                            get_navigate_path(),"robot_logs")
+        self.start_logging(
+            monitoringInterval=monitoringInterval,
+            file_path=file_path,
+        )
+
         self.zero_joints()
         self.robot.SetTrf(19,0,57,0,0,0)
         self.robot.SetTorqueLimits(30.0,30.0,30.0,30.0,30.0,30.0)
         self.robot.SetTorqueLimitsCfg(4)
         # self.robot.SetAutoConf(1)
         # self.robot.SetAutoConfTurn(1)
+
+    def start_logging (self,
+                     monitoringInterval: float,
+                     file_name: str = None,
+                     file_path: str = None,
+                     fields: list = None,
+                     record_time: bool = True):
+        self.robot.StartLogging(monitoringInterval, file_name, file_path, fields ,record_time)
+        
+    def stop_logging(self):
+        self.robot.EndLogging()
 
     def pause_robot_motion(self):
         """ Pause robot motion
@@ -283,5 +307,7 @@ class RobotArm:
                 "resume_motion": lambda *args: self.resume_robot_motion(),
                 "reset_motion": lambda *args: self.reset_robot_motion(),
                 "start_program": lambda *args: self.start_program(args[0][0]),
-                "reset_error": lambda *args: self.reset_error()
+                "reset_error": lambda *args: self.reset_error(),
+                "start_logging":lambda *args: self.start_logging(),
+                "stop_logging": lambda *args: self.stop_logging()
                 }

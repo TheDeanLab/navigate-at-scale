@@ -21,7 +21,13 @@ class RobotArmController:
         self.buttons["disconnect"].configure(command=self.disconnect)
         self.buttons['opengripper'].configure(command=self.open_gripper)
         self.buttons['closegripper'].configure(command=self.close_gripper)
+        self.buttons['stoplog'].configure(command=self.end_logging)
 
+    def end_logging(self):
+        self.parent_controller.execute(
+            "stop_logging"
+        )
+    
     def zero_joints(self):
         self.parent_controller.execute(
             "zero_joints"

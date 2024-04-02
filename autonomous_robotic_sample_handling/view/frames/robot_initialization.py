@@ -37,7 +37,7 @@ class RobotInitialization(tk.Frame):
 
         # Initializing Button
         self.buttons = {
-            "import": ttk.Button(self, text="Load Positions from Disk"),
+            "stoplog": ttk.Button(self, text="End Logging"),
             "connect": ttk.Button(self, text="Connect Robot"),
             "disconnect": ttk.Button(self, text="Disconnect Robot"),
             "move": ttk.Button(self, text='Move Robot'),
