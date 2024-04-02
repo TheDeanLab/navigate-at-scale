@@ -27,6 +27,11 @@ class RobotArmController:
             "zero_joints"
         )
 
+    def move_pose(self, a, b, c, d, e, f):
+        self.parent_controller.execute(
+            "move_pose", a, b, c, d, e, f
+        )
+
     def move_joints(self, a, b, c, d, e, f):
         self.parent_controller.execute(
             "move_joints", a, b, c, d, e, f
