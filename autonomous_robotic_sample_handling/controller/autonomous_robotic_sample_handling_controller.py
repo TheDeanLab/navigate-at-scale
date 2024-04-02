@@ -65,10 +65,11 @@ class AutonomousRoboticSampleHandlingController:
         data = load_yaml_file(local_config_path)
         return data
     
-    def start_offline_program(self):
+    def start_offline_program(self, program_name="Vertical_Oscillation"):
         self.parent_controller.execute(
-            "start_program", "vertical_oscillation"
+            "start_program", program_name
         )
+
     def get_microscope_position(self, data):
         x = data["environment"]["microscope"]["x"] 
         y = data["environment"]["microscope"]["y"]
@@ -154,6 +155,7 @@ class AutonomousRoboticSampleHandlingController:
     def removeHeaderFromStage(self):
         sample_height = - self.key_positions['sample_height']
         self.robot_arm_controller.move_lin_rel_trf(sample_height,0,0,0,0,0)
+        self.start_offline_program("Vertical_Oscillation")
     
     def moveToMicroscope(self):
         microscope = self.key_positions['microscope']
