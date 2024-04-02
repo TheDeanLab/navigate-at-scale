@@ -19,8 +19,9 @@ class RobotArm:
         self.robot.ActivateAndHome()
         self.zero_joints()
         #self.robot.SetTrf(0,0,0,0,0,0)
+        self.robot.SetJointVelLimit(30)
         self.robot.SetTorqueLimitsCfg(4, 0)
-        self.robot.SetTorqueLimits(30.0,60.0,30.0,30.0,30.0,30.0)
+        self.robot.SetTorqueLimits(40.0,60.0,40.0,40.0,40.0,40.0)
         # self.robot.SetAutoConf(1)
         # self.robot.SetAutoConfTurn(1)
 

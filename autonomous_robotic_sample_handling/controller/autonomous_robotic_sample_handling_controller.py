@@ -143,7 +143,7 @@ class AutonomousRoboticSampleHandlingController:
         x, y, z, Rx, Ry, Rz = microscope
         microscope_tolerance = 10
         engage_header_distance = self.key_positions['engage_header_distance']
-        self.robot_arm_controller.move_pose(x, y - engage_header_distance, z - microscope_tolerance, Rx, Ry, Rz)
+        self.robot_arm_controller.move_lin(x, y - engage_header_distance, z - microscope_tolerance, Rx, Ry, Rz)
         
         self.engageMicroscope(microscope_tolerance=microscope_tolerance, engage_header_distance=engage_header_distance)
         self.disengageMicroscope(engage_header_distance=engage_header_distance)
@@ -166,11 +166,11 @@ class AutonomousRoboticSampleHandlingController:
         self.robot_arm_controller.move_lin_rel_trf(0,0,engage_header_distance*2,0,0,0)
         self.robot_arm_controller.close_gripper()
         self.robot_arm_controller.delay(1)
-        self.robot_arm_controller.move_lin_rel_trf(0,-shear_distance,0,0,0,0)
+        self.robot_arm_controller.move_lin_rel_trf(0,-shear_distance*0.75,0,0,0,0)
         self.robot_arm_controller.move_lin_rel_trf(0,0,-z_tolerance,0,0,0)
         
     def random_robot_pose(self):
-        self.robot_arm_controller.move_pose(200, 0, 250, 0, 90, 0)
+        self.robot_arm_controller.move_lin(200, 0, 250, 0, 90, 0)
     
     def returnHeaderToCarousel(self):
         loading_zone = self.key_positions["loading_zone"]
@@ -179,7 +179,7 @@ class AutonomousRoboticSampleHandlingController:
         engage_header_distance = self.key_positions['engage_header_distance']
 
         # Move sample above loading zone
-        self.robot_arm_controller.move_pose(x, y, z + sample_height, Rx, Ry, Rz)
+        self.robot_arm_controller.move_lin(x, y, z + sample_height, Rx, Ry, Rz)
 
         # Place sample within vial
         self.robot_arm_controller.move_lin_rel_trf(sample_height, 0, 0, 0, 0, 0)

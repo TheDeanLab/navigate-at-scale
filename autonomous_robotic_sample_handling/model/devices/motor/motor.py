@@ -71,7 +71,7 @@ class Motor:
         self.channel_config.DeviceSettingsName = 'HDR50'
         self.channel_config.UpdateCurrentConfiguration()
         self.channel.SetSettings(self.chan_settings, True, False)
-        #self.home()
+        self.home()
 
 
     def home(self):

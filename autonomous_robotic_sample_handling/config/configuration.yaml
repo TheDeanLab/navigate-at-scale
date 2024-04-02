@@ -8,9 +8,9 @@ environment:
   motor: 
     units: 20
   microscope:
-    x: 168.8
-    y: 181.85
-    z: 219.5
+    x: 163.8
+    y: 182.5
+    z: 218.5
     R1: -90
     R2: 0
     R3: 90
