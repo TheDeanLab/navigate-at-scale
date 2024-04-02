@@ -77,6 +77,16 @@ class AutonomousRoboticSampleHandlingController:
         Ry = data["environment"]["microscope"]["R2"]
         Rz = data["environment"]["microscope"]["R3"]
         return [x, y, z, Rx, Ry, Rz]
+
+    def get_loading_zone_position(self, data):
+        x = data["environment"]["loading_zone"]["pose"]["x"]
+        y = data["environment"]["loading_zone"]["pose"]["y"]
+        z = data["environment"]["loading_zone"]["pose"]["z"]
+        Rx = data["environment"]["loading_zone"]["pose"]["Rx"]
+        Ry = data["environment"]["loading_zone"]["pose"]["Ry"]
+        Rz = data["environment"]["loading_zone"]["pose"]["Rz"]
+        flag = data["environment"]["loading_zone"]["flag"]
+        return [x, y, z, Rx, Ry, Rz] if flag else None
         
     def get_motor_position(self, data):
         motor_position = data["environment"]["motor"]["units"]
@@ -101,6 +111,7 @@ class AutonomousRoboticSampleHandlingController:
 
         loading_zone_x = motor_to_robot_mm - data_points['vial_attack'] - data_points['tolerance_forward'] - data_points['MEPG_thickness']
         loading_zone_z = data_points['carousel_height'] + data_points['vial_height'] + data_points['trf_gripper_bottom'] - data_points['robot_base'] + data_points["tolerance_up"]
+        loading_zone = self.get_loading_zone_position(data)
         
         self.key_positions = {
             "motor_position": [motor_position_x, 0, motor_position_z, 0, 0, 0],
@@ -108,7 +119,8 @@ class AutonomousRoboticSampleHandlingController:
             "engage_header_distance": data_points['trf_gripper_edge'] - data_points['MEPG_thickness'],
             "shear_distance": data_points['shear_distance'],
             "sample_height": data_points['sample_height'],
-            "microscope": self.get_microscope_position(data)
+            "microscope": self.get_microscope_position(data),
+            "loading_zone_manual": loading_zone,
         }
 
     def move_robot_arm_to_loading_zone(self):
@@ -119,10 +131,15 @@ class AutonomousRoboticSampleHandlingController:
         z = z - self.key_positions['engage_header_distance']
         self.robot_arm_controller.move_lin_rel_trf(x, y, z, Rx, Ry, Rz)
         """
-        loading_zone = self.key_positions['loading_zone']
-        x, y, z, Rx, Ry, Rz = loading_zone
+        loading_zone_manual = self.key_positions['loading_zone_manual']
         engage_header_distance = self.key_positions['engage_header_distance']
-        self.robot_arm_controller.move_pose(x - engage_header_distance, y, z, Rx, Ry, Rz)
+        if loading_zone_manual is None:
+            loading_zone = self.key_positions['loading_zone']
+            x, y, z, Rx, Ry, Rz = loading_zone
+            self.robot_arm_controller.move_lin(x - engage_header_distance, y, z, Rx, Ry, Rz)
+        else:
+            x, y, z, Rx, Ry, Rz = loading_zone_manual
+            self.robot_arm_controller.move_lin(x - engage_header_distance, y, z, Rx, Ry, Rz)
         print("Moving robot arm to loading zone")
         self.engageHeader()
         self.removeHeaderFromStage()
