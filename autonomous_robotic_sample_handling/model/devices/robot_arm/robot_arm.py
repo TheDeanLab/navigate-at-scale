@@ -1,7 +1,7 @@
 import mecademicpy.robot as mdr
 
 class RobotArm:
-    """A Robot Arm class"""
+    """Robot Arm class"""
     def __init__(self, device_connection: mdr.Robot, *args):
         """ Initialize the Custom Device
 
@@ -14,6 +14,8 @@ class RobotArm:
         args : list
             The arguments for the device
         """
+
+        #: object: The device connection object
         self.robot = device_connection
         #TODO: Split Activation() and Home(), as configuration may need to be done before homing and after activation
         self.robot.ActivateAndHome()
@@ -26,32 +28,17 @@ class RobotArm:
         # self.robot.SetAutoConfTurn(1)
 
     def pause_robot_motion(self):
-        """ Pause robot motion
-
-        Returns
-        -------
-
-        """
+        """ Pause robot motion."""
         print("Pause robot motion")
         self.robot.PauseMotion()
 
     def resume_robot_motion(self):
-        """ Resume robot motion
-
-        Returns
-        -------
-
-        """
+        """ Resume robot motion."""
         print("Resume robot motion")
         self.robot.ResumeMotion()
 
     def reset_robot_motion(self):
-        """ Reset robot operations
-
-        Returns
-        -------
-
-        """
+        """ Reset robot operations."""
         self.robot.ClearMotion()
 
     def start_program(self, program_name):
@@ -61,57 +48,47 @@ class RobotArm:
         ----------
         program_name : str
             String containing the offline program name
-
-        Returns
-        -------
-
         """
         self.robot.StartProgram(program_name)
 
     def reset_error(self):
-        """ Reset robot error
-
-        Returns
-        -------
-
-        """
+        """ Reset robot error."""
         self.robot.ResetError()
         #TODO: Add functionality to return to standby position
         # (avoid obstacles and work zone, zero_joints, etc.)
 
     def zero_joints(self):
-        """ Zero all the joints
-
-        Returns
-        -------
-
-        """
+        """ Zero all the joints."""
         self.robot.MoveJoints(0, 0, 0, 0, 0, 0)
         print('Robot has zeroed joints')
         
-    def move_lin(self,a,b,c,d,e,f):
+    def move_lin(self, a, b, c, d, e, f):
         """ Moves linearly to an orientation and position relative to the world reference frame
 
-        Returns
-        -------
+        #TODO: Give meaningful names. a,b,c,d,e,f are not descriptive
 
+        Parameters
+        ----------
+        a
+        b
+        c
+        d
+        e
+        f
         """
-        self.robot.MoveLin(a,b,c,d,e,f)
+        self.robot.MoveLin(a, b, c, d, e, f)
         print('Robot has completed movement')
 
     def disconnect(self):
-        """ Disconnect the robot
-
-        Returns
-        -------
-
-        """
+        """ Disconnect the robot."""
         self.robot.Disconnect()
         print("Robot has disconnected")
 
     def move_joints(self, a, b, c, d, e, f):
         """ Move Joints
 
+        TODO: Give meaningful names. a,b,c,d,e,f are not descriptive
+
         Parameters
         ----------
         a
@@ -120,15 +97,13 @@ class RobotArm:
         d
         e
         f
-
-        Returns
-        -------
-
         """
         self.robot.MoveJoints(a, b, c, d, e, f)
         
     def move_lin_rel_trf(self, a, b, c, d, e, f):
-        """ Move joints relative to the tool reference frame
+        """ Move joints relative to the tool reference frame.
+
+        TODO: Give meaningful names. a,b,c,d,e,f are not descriptive
 
         Parameters
         ----------
@@ -138,24 +113,15 @@ class RobotArm:
         d
         e
         f
-
-        Returns
-        -------
-
         """
         self.robot.MoveLinRelTrf(a, b, c, d, e, f)
     
-    def delay(self,time):
-        
+    def delay(self, time):
         """ Move joints relative to the tool reference frame
 
         Parameters
         ----------
         time
-
-        Returns
-        -------
-
         """
         self.robot.Delay(time)
         
@@ -163,6 +129,8 @@ class RobotArm:
     def move_pose(self, a, b, c, d, e, f):
         """ Move the Robot Arm to a given Pose
 
+        TODO: Give meaningful names. a,b,c,d,e,f are not descriptive
+
         Parameters
         ----------
         a
@@ -171,10 +139,6 @@ class RobotArm:
         d
         e
         f
-
-        Returns
-        -------
-
         """
         self.robot.MovePose(a, b, c, d, e, f)
 
@@ -189,10 +153,6 @@ class RobotArm:
         alpha
         beta
         gamma
-
-        Returns
-        -------
-
         """
         self.robot.MoveLinRelWrf(x, y, z, alpha, beta, gamma)
 
@@ -203,22 +163,27 @@ class RobotArm:
         ----------
         wait : int
             time in seconds to delay robot operation
-        Returns
-        -------
-
         """
         self.robot.Delay(wait)
 
     def activate_and_home(self):
-        """ Activates and Homes the Robot
-
-        Returns
-        -------
-
-        """
+        """ Activates and Homes the Robot. """
         self.robot.ActivateAndHome()
         
     def move_lin(self,a,b,c,d,e,f):
+        """ Move the robot linearly to the specified position.
+
+        TODO: Give meaningful names. a,b,c,d,e,f are not descriptive
+
+        Parameters
+        ----------
+        a
+        b
+        c
+        d
+        e
+        f
+        """
         
         self.robot.MoveLin(a,b,c,d,e,f)
 
@@ -228,38 +193,16 @@ class RobotArm:
         Parameters
         ----------
         config
-
-        Returns
-        -------
-
         """
         self.robot.SetJointLimits()
         self.robot.SetTorqueLimits()
         
     def open_gripper(self):
-        """ Open gripper to maximum setting
-
-        Parameters
-        ----------
-        config
-
-        Returns
-        -------
-
-        """
+        """ Open gripper to maximum setting.  """
         self.robot.GripperOpen()
         
     def close_gripper(self):
-        """ Close gripper to maximum setting
-
-        Parameters
-        ----------
-        config
-
-        Returns
-        -------
-
-        """
+        """ Close gripper to maximum setting. """
         self.robot.GripperClose()
 
     @property

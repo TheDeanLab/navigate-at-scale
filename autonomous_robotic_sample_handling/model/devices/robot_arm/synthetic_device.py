@@ -1,4 +1,5 @@
 class SyntheticRobotArm:
+    """ A synthetic robot arm for testing purposes """
     def __init__(self, device_connection, *args):
         """ Initialize the Synthetic Device
 

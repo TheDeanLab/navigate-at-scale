@@ -72,6 +72,7 @@ def load_device(configuration, is_synthetic=False):
     elif motor_type.lower() == "SyntheticMotor" or motor_type.lower() == "synthetic":
         return DummyDeviceConnection()
 
+
 def start_device(microscope_name, device_connection, configuration, is_synthetic=False):
     """ Start the Robot ARm
 
