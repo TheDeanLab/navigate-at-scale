@@ -181,5 +181,5 @@ class Motor:
             "disconnect": lambda *args: self.disconnect(),
             "moveJog": lambda *args: self.MoveJog(args[0]),
             "position": lambda *args: self.getPosition(),
-            "moveTo": lambda *args: self.MoveTo(args[0][0])
+            "moveTo": lambda *args: self.MoveTo(args[0])
         }

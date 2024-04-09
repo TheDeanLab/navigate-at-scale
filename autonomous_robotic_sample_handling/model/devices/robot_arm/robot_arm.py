@@ -215,18 +215,18 @@ class RobotArm:
             commands that the device supports
         """
         return {"zero_joints": lambda *args: self.zero_joints(),
-                "move_pose": lambda *args: self.move_pose(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
-                "move_joints": lambda *args: self.move_joints(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
+                "move_pose": lambda *args: self.move_pose(args[0], args[1], args[2], args[3], args[4], args[5]),
+                "move_joints": lambda *args: self.move_joints(args[0], args[1], args[2], args[3], args[4], args[5]),
                 # "move_joints": lambda *args: self.move_joints(args[0]),
                 "disconnect": lambda *args: self.disconnect(),
-                "move_lin_rel_trf": lambda *args: self.move_lin_rel_trf(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
-                "move_lin": lambda *args: self.move_lin(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
+                "move_lin_rel_trf": lambda *args: self.move_lin_rel_trf(args[0], args[1], args[2], args[3], args[4], args[5]),
+                "move_lin": lambda *args: self.move_lin(args[0], args[1], args[2], args[3], args[4], args[5]),
                 "open_gripper": lambda *args: self.open_gripper(),
                 "close_gripper": lambda *args: self.close_gripper(),
-                "delay": lambda *args: self.delay(args[0][0]),
+                "delay": lambda *args: self.delay(args[0]),
                 "pause_motion": lambda *args: self.pause_robot_motion(),
                 "resume_motion": lambda *args: self.resume_robot_motion(),
                 "reset_motion": lambda *args: self.reset_robot_motion(),
-                "start_program": lambda *args: self.start_program(args[0][0]),
+                "start_program": lambda *args: self.start_program(args[0]),
                 "reset_error": lambda *args: self.reset_error()
                 }
