@@ -17,6 +17,14 @@ DEVICE_TYPE_NAME = "robot_arm"  # Same as in configuraion.yaml, for example "sta
 DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
 
 
+def build_robot_arm_connection(configuration, mdr):
+    # TODO: Set up import statement to occur within initial load_device. Avoid re-importing package
+    robot_ip_address = configuration["configuration"]["hardware"]["robot_arm"]["ip_address"]
+    enable_synchronous_mode = configuration["configuration"]["hardware"]["robot_arm"]["enable_synchronous_mode"]
+    robot = mdr.Robot()
+    robot.Connect(address=robot_ip_address, enable_synchronous_mode=enable_synchronous_mode)
+    return robot
+
 def load_device(configuration, is_synthetic=False):
     """ Load the Robot Arm
 
@@ -39,13 +47,10 @@ def load_device(configuration, is_synthetic=False):
         robot_type = configuration["configuration"]["hardware"]["robot_arm"]["type"]
 
     if robot_type == "Meca500":
-        #TODO: Consider auto_redial function.
-        robot_ip_address = configuration["configuration"]["hardware"]["robot_arm"]["ip_address"]
-        enable_synchronous_mode = configuration["configuration"]["hardware"]["robot_arm"]["enable_synchronous_mode"]
         import mecademicpy.robot as mdr
-        robot = mdr.Robot()
-        robot.Connect(address=robot_ip_address, enable_synchronous_mode=enable_synchronous_mode)
-        return robot
+        return auto_redial(
+            build_robot_arm_connection, (configuration, mdr, ), exception=Exception
+        )
 
     elif robot_type.lower() == "syntheticrobot" or robot_type.lower() == "synthetic":
         return DummyDeviceConnection()
