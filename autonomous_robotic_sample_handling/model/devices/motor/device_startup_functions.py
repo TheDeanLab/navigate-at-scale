@@ -13,10 +13,16 @@ from navigate.config.config import get_navigate_path
 from navigate.model.device_startup_functions import (
     device_not_found,
     DummyDeviceConnection,
+    auto_redial,
 )
 
 DEVICE_TYPE_NAME = "motor"  # Same as in configuration.yaml, for example "stage", "filter_wheel", "remote_focus_device"...
 DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
+
+
+def build_motor_connection(configuration, motor, motor_serial_no):
+    motor.Connect(motor_serial_no)
+    return motor
 
 
 def load_device(configuration, is_synthetic=False):
@@ -66,8 +72,10 @@ def load_device(configuration, is_synthetic=False):
         
         DeviceManagerCLI.BuildDeviceList()
         motor = BenchtopStepperMotor.CreateBenchtopStepperMotor(motor_serial_no)
-        motor.Connect(motor_serial_no)
-        return motor
+
+        return auto_redial(
+            build_motor_connection, (configuration, motor, motor_serial_no, ), exception=Exception
+        )
 
     elif motor_type.lower() == "SyntheticMotor" or motor_type.lower() == "synthetic":
         return DummyDeviceConnection()
