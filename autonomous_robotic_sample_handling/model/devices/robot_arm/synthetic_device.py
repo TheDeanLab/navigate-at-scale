@@ -1,5 +1,5 @@
 class SyntheticRobotArm:
-    """ A synthetic robot arm for testing purposes """
+    """ A synthetic robot arm class """
     def __init__(self, device_connection, *args):
         """ Initialize the Synthetic Device
 
@@ -11,18 +11,6 @@ class SyntheticRobotArm:
             The arguments for the device
         """
         pass
-
-    def pause_robot_motion(self):
-        """ Pause robot motion for synthetic device """
-        print("*** Synthetic robot receive command: pause robot motion")
-
-    def resume_robot_motion(self):
-        """ Resume robot motion for synthetic device """
-        print("*** Synthetic robot receive command: resume robot motion")
-
-    def reset_robot_motion(self):
-        """ Reset robot motion for synthetic device """
-        print("*** Synthetic robot receive command: reset robot motion")
 
     def start_program(self, program_name):
         """ Start offline robot program
@@ -38,16 +26,22 @@ class SyntheticRobotArm:
         """
         print(f"*** Synthetic robot receive command: Start {program_name} program")
 
-    def reset_error(self):
-        """ Reset robot error for synthetic device """
-        print("*** Synthetic device received command: reset error")
-
     def zero_joints(self):
-        """ Zero the joints of the synthetic device """
+        """ Zero the joints of the synthetic device
+
+        Returns
+        -------
+
+        """
         print("*** Synthetic robot receive command: zero joints")
 
     def disconnect(self):
-        """ Disconnects the Mecademic Robot object from the robot and system"""
+        """ Disconnects the Mecademic Robot object from the robot and system
+
+        Returns
+        -------
+
+        """
         print("*** Synthetic robot receive command: disconnect")
 
     def move_joints(self, a, b, c, d, e, f):
@@ -59,12 +53,63 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: disconnect")
 
     def delay(self, wait):
-        """ Makes the Robot wait """
-        print("*** Synthetic robot receive command: disconnect")
+        """ Delays robot operation by a specified time
+
+        Parameters
+        ----------
+        wait : float
+            time in seconds to delay the robot
+
+        Returns
+        -------
+
+        """
+        print(f"*** Synthetic robot receive command: delay by {wait} seconds")
 
     def activate_and_home(self):
-        """ Activates and Homes the Robot """
-        print("*** Synthetic robot receive command: disconnect")
+        """ Activates and Homes the Robot
+
+        Returns
+        -------
+
+        """
+        print("*** Synthetic robot receive command: activate and home")
+
+    def pause_robot_motion(self):
+        """ Pause robot motion for synthetic device
+
+        Returns
+        -------
+
+        """
+        print("*** Synthetic robot receive command: pause robot motion")
+
+    def resume_robot_motion(self):
+        """ Resume robot motion for synthetic device
+
+        Returns
+        -------
+
+        """
+        print("*** Synthetic robot receive command: resume robot motion")
+
+    def reset_robot_motion(self):
+        """ Reset robot motion for synthetic device
+
+        Returns
+        -------
+
+        """
+        print("*** Synthetic robot receive command: reset robot motion")
+
+    def reset_error(self):
+        """ Reset robot error for synthetic device
+
+        Returns
+        -------
+
+        """
+        print("*** Synthetic device received command: reset error")
 
     @property
     def commands(self):

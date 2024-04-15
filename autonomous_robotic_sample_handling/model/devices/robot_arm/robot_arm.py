@@ -1,7 +1,7 @@
 import mecademicpy.robot as mdr
 
 class RobotArm:
-    """Robot Arm class"""
+    """ Robot Arm class """
     def __init__(self, device_connection: mdr.Robot, *args):
         """ Initialize the Custom Device
 
@@ -17,15 +17,14 @@ class RobotArm:
 
         #: object: The device connection object
         self.robot = device_connection
-        #TODO: Split Activation() and Home(), as configuration may need to be done before homing and after activation
+        # TODO: Split Activation() and Home(), as configuration may need to be done before homing and after activation
         self.robot.ActivateAndHome()
         self.zero_joints()
         #self.robot.SetTrf(0,0,0,0,0,0)
         self.robot.SetJointVelLimit(30)
         self.robot.SetTorqueLimitsCfg(4, 0)
         self.robot.SetTorqueLimits(40.0,60.0,40.0,40.0,40.0,40.0)
-        # self.robot.SetAutoConf(1)
-        # self.robot.SetAutoConfTurn(1)
+
 
     def pause_robot_motion(self):
         """ Pause robot motion."""
@@ -54,7 +53,7 @@ class RobotArm:
     def reset_error(self):
         """ Reset robot error."""
         self.robot.ResetError()
-        #TODO: Add functionality to return to standby position
+        # TODO: Add functionality to return to standby position
         # (avoid obstacles and work zone, zero_joints, etc.)
 
     def zero_joints(self):
