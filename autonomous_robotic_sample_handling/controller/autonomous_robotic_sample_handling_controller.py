@@ -174,21 +174,32 @@ class AutonomousRoboticSampleHandlingController:
 
     def remove_header_from_microscope(self, engage_header_distance):
         shear_distance = self.key_positions['shear_distance']
-        z_tolerance = 50
+        z_tolerance = 150
         self.robot_arm_controller.move_lin_rel_trf(0, 0, engage_header_distance * 2, 0, 0, 0)
         self.robot_arm_controller.close_gripper()
         self.robot_arm_controller.delay(1)
-        self.robot_arm_controller.move_lin_rel_trf(0, -shear_distance * 0.75, 0, 0, 0, 0)
+        self.robot_arm_controller.move_lin_rel_trf(0, shear_distance, 0, 0, 0, 0)
         self.robot_arm_controller.move_lin_rel_trf(0, 0, -z_tolerance, 0, 0, 0)
+        self.robot_arm_controller.zero_joints()
+        self.robot_arm_controller.delay(1)
+        self.robot_arm_controller.open_gripper()
+        self.robot_arm_controller.delay(1)
+        self.robot_arm_controller.close_gripper()
+        self.robot_arm_controller.delay(1)
 
     def return_header_to_carousel(self):
-        loading_zone = self.key_positions["loading_zone"]
-        x, y, z, Rx, Ry, Rz = loading_zone
+        loading_zone_manual = self.key_positions["loading_zone_manual"]
         sample_height = self.key_positions['sample_height']
         engage_header_distance = self.key_positions['engage_header_distance']
 
         # Move sample above loading zone
-        self.robot_arm_controller.move_lin(x, y, z + sample_height, Rx, Ry, Rz)
+        if loading_zone_manual is None:
+            loading_zone = self.key_positions['loading_zone']
+            x, y, z, Rx, Ry, Rz = loading_zone
+            self.robot_arm_controller.move_lin(x, y, z + sample_height, Rx, Ry, Rz)
+        else:
+            x, y, z, Rx, Ry, Rz = loading_zone_manual
+            self.robot_arm_controller.move_lin(x, y, z + sample_height, Rx, Ry, Rz)
 
         # Place sample within vial
         self.robot_arm_controller.move_lin_rel_trf(sample_height, 0, 0, 0, 0, 0)
@@ -206,7 +217,7 @@ class AutonomousRoboticSampleHandlingController:
     def automated_sample_handling(self):
         self.automation_controller.reset_automation_variables()
         num_samples = self.automation_controller.get_num_samples()
-        og_position = 8.75 + 60
+        og_position = 8.75+60 #og_position is broken offset by 60 to a new position
         dtheta = 15
         for i in range(1, num_samples + 1):
             self.motor_controller.MoveTo(og_position)
@@ -214,4 +225,6 @@ class AutonomousRoboticSampleHandlingController:
             print(f"Finished processing sample {i}")
             og_position = og_position + dtheta
             self.automation_controller.update_progress_bar(i)
+        
+        self.robot_arm_controller.move_lin_rel_trf(0,0,-50,0,0,0) #zerojoints dont rly work no mo
 

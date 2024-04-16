@@ -8,18 +8,18 @@ environment:
   motor: 
     units: 20
   microscope:
-    x: 163.8
-    y: 182.5
-    z: 218.5
+    x: 136.3
+    y: 239.6
+    z: 267
     R1: -90
     R2: 0
     R3: 90
   loading_zone:
-    flag: False
+    flag: True
     pose:
-      x: 284.71
-      y: 0
-      z: 159.88
+      x: 234.41
+      y: -175.15
+      z: 158.8
       Rx: 0
       Ry: 90
       Rz: 0
@@ -31,7 +31,7 @@ environment:
     trf_to_gripper_edge: 59
     trf_to_gripper_bottom: 22.14
     MEPG_thickness: 18.14
-    sample_height: 25
+    sample_height: 70
     shear_distance: 50
     tolerance_up: 1
     tolerance_forward: 12
