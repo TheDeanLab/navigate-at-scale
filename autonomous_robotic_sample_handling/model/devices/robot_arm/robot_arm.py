@@ -19,7 +19,9 @@ class RobotArm:
         self.robot = device_connection  # Establish the robot arm object with the device connection
 
         # TODO: Split Activation() and Home(), as configuration may need to be done before homing and after activation
-        self.robot.ActivateAndHome()
+        self.robot.ActivateRobot()
+        self.robot.SetWorkspaceLimits()
+        self.robot.Home()
         self.robot.SetGripperForce(40)
         self.zero_joints()  # Zero robot arm joints on start
 
@@ -194,9 +196,13 @@ class RobotArm:
 
         """
         self.robot.ActivateAndHome()
+        
+    def move_lin(self,a,b,c,d,e,f):
+        
+        self.robot.MoveLin(a,b,c,d,e,f)
 
-    def load_robot_config(self, config=None):
-        """ Apply robot operation limits from configuration data
+    def load_robot_config(self, config):
+        """ Import and apply robot configuration data and limits
 
         Parameters
         ----------
@@ -230,6 +236,7 @@ class RobotArm:
 
         """
         self.robot.GripperClose()
+        self.robot.Home
 
     def pause_robot_motion(self):
         """ Pause motion of the robot arm
@@ -275,13 +282,8 @@ class RobotArm:
         """
         return {"start_program": lambda *args: self.start_program(args[0]),
                 "disconnect": lambda *args: self.disconnect(),
-                "zero_joints": lambda *args: self.zero_joints(),
-                "move_joints": lambda *args: self.move_joints(args[0], args[1], args[2], args[3], args[4], args[5]),
-                "move_lin": lambda *args: self.move_lin(args[0], args[1], args[2], args[3], args[4], args[5]),
-                "move_lin_rel_trf": lambda *args: self.move_lin_rel_trf(args[0], args[1], args[2], args[3], args[4], args[5]),
-                "move_lin_rel_wrf": lambda *args: self.move_lin_rel_wrf(args[0], args[1], args[2], args[3], args[4], args[5]),
-                "move_pose": lambda *args: self.move_pose(args[0], args[1], args[2], args[3], args[4], args[5]),
-                "delay": lambda *args: self.delay(args[0]),
+                "move_lin_rel_trf": lambda *args: self.move_lin_rel_trf(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
+                "move_lin": lambda *args: self.move_lin(args[0][0], args[0][1], args[0][2], args[0][3], args[0][4], args[0][5]),
                 "open_gripper": lambda *args: self.open_gripper(),
                 "close_gripper": lambda *args: self.close_gripper(),
                 "pause_motion": lambda *args: self.pause_robot_motion(),

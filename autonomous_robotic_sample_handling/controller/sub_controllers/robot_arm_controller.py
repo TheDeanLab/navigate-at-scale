@@ -17,10 +17,19 @@ class RobotArmController:
         self.buttons = self.view.buttons
 
         self.buttons["zero"].configure(command=self.zero_joints)
-        self.buttons["move"].configure(command=self.move_joints)
         self.buttons["disconnect"].configure(command=self.disconnect)
         self.buttons['opengripper'].configure(command=self.open_gripper)
         self.buttons['closegripper'].configure(command=self.close_gripper)
+
+    def home(self):
+        self.parent_controller.execute(
+            "activate_and_home"
+        )
+        
+    def deactivate(self):
+        self.parent_controller.execute(
+            "deactivate"
+        )
 
     def zero_joints(self):
         self.parent_controller.execute(
