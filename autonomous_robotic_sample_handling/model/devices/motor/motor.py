@@ -95,6 +95,9 @@ class Motor:
         self.channel_config.DeviceSettingsName = 'HDR50'
         self.channel_config.UpdateCurrentConfiguration()
         self.channel.SetSettings(self.chan_settings, True, False)
+        
+        self.setHomingVelocity(20)
+        
         self.home()
 
     def home(self):
@@ -119,6 +122,9 @@ class Motor:
             self.channel.MoveJog(self.MotorDirection.Forward,self.timeoutVal)
         else:
             self.channel.MoveJog(self.MotorDirection.Backward,self.timeoutVal)
+            
+    def setHomingVelocity(self, velocity):
+        self.channel.SetHomingVelocity(Decimal(velocity))
 
     def MoveTo(self, Position):
         """Move the motor to the specified position.
@@ -181,5 +187,6 @@ class Motor:
             "disconnect": lambda *args: self.disconnect(),
             "moveJog": lambda *args: self.MoveJog(args[0]),
             "position": lambda *args: self.getPosition(),
-            "moveTo": lambda *args: self.MoveTo(args[0])
+            "moveTo": lambda *args: self.MoveTo(args[0]),
+            "setHomingVelocity": lambda *args: self.setHomingVelocity(args[0])
         }

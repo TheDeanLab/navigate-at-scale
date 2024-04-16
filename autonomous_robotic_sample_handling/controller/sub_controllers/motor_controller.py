@@ -29,6 +29,11 @@ class MotorController:
             "home"
         )
         print("Homing Rotary Stage Motor")
+        
+    def setHomingVelocity(self):
+        self.parent_controller.execute(
+            "setHomingVelocity"
+        )
     
     def MoveTo(self, position):
         self.parent_controller.execute(
