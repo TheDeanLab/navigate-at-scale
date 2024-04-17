@@ -13,18 +13,15 @@ from autonomous_robotic_sample_handling.controller.sub_controllers.motor_control
     MotorController
 )
 
-from autonomous_robotic_sample_handling.controller.sub_controllers.pause_play_controller import (
-    PausePlayController
-)
-
 from autonomous_robotic_sample_handling.controller.sub_controllers.automation_controller import (
     AutomationController
 )
 
-<<<<<<< HEAD
-=======
+from autonomous_robotic_sample_handling.controller.sub_controllers.inhouse_tools_popup_controller import (
+    InHouseToolsPopupController
+)
+
 from autonomous_robotic_sample_handling.view.popups.inhouse_tools_popup import InHouseToolsPopup
->>>>>>> popupGUI
 
 class AutonomousRoboticSampleHandlingController:
     def __init__(self, view, parent_controller=None):
@@ -35,19 +32,11 @@ class AutonomousRoboticSampleHandlingController:
         self.buttons = self.view.buttons
 
         self.buttons['automation_sequence'].configure(command=self.automated_sample_handling)
-<<<<<<< HEAD
         self.buttons['process_sample'].configure(command=self.sample_iteration)
         self.buttons['offline_program'].configure(command=self.start_offline_program)
-=======
-        self.buttons['process_sample'].configure(command=self.moveToMicroscope)
-        self.buttons['offline_program'].configure(command=self.sample_iteration)
         self.buttons['in_house'].configure(command=self.launch_inhouse_tools)
         self.buttons["home"].configure(command=self.home_activate_robot_motor)
         
-        self.data = self.load_config_data()
-        self.motor_position = self.get_motor_position(self.data)
->>>>>>> popupGUI
-
         self.data = self.load_config_data()
         self.prepare_config_data(self.data)
 
@@ -60,9 +49,6 @@ class AutonomousRoboticSampleHandlingController:
         )
         self.motor_controller = MotorController(
             self.view, self.parent_controller
-        )
-        self.pause_play_controller = PausePlayController(
-            self.view.pause_play, self.parent_controller
         )
         self.automation_controller = AutomationController(
             self.view.move_sequence, self.parent_controller
@@ -228,8 +214,6 @@ class AutonomousRoboticSampleHandlingController:
         # Disengage robot arm from loading zone
         self.robot_arm_controller.move_lin_rel_trf(0, 0, -engage_header_distance, 0, 0, 0)
 
-<<<<<<< HEAD
-=======
         """
         #TODO: var_height = 10 is for the chamfered header, var_height = 0 is 0 for regular [cleanup later]
         var_height = 10
@@ -252,23 +236,22 @@ class AutonomousRoboticSampleHandlingController:
         print("Test motor cycle stage")
 
     def launch_inhouse_tools(self):
-        """Launches tiling wizard popup.
+        """Launches inhouse tools popup.
 
         Will only launch when button in GUI is pressed, and will not duplicate.
         Pressing button again brings popup to top
 
         Examples
         --------
-        >>> self.launch_tiling_wizard()
+        >>> self.launch_inhouse_tools()
         """
 
-        if hasattr(self, "tiling_wizard_controller"):
-            self.tiling_wizard_controller.showup()
+        if hasattr(self, "inhouse_tools_popup_controller"):
+            self.inhouse_tools_popup_controller.showup()
             return
         inhouse_tools = InHouseToolsPopup(self.view)
-        #self.tiling_wizard_controller = TilingWizardController(tiling_wizard, self)
+        self.inhouse_tools_popup_controller = InHouseToolsPopupController(inhouse_tools, self)
 
->>>>>>> popupGUI
     def sample_iteration(self):
         self.move_robot_arm_to_loading_zone()
         self.move_to_microscope()

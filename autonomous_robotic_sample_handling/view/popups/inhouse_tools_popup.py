@@ -1,7 +1,6 @@
 # Standard Library Imports
 import logging
 import tkinter as tk
-from tkinter import ttk
 
 # Third Party Imports
 
@@ -53,14 +52,8 @@ class InHouseToolsPopup(tk.Frame):
             top=False,
             transient=False,
         )
-        # Storing the content frame of the popup, this will be the parent of
-        # the widgets
+        # Storing the content frame of the popup, this will be the parent of the widgets
         content_frame = self.popup.get_frame()
-        content_frame.columnconfigure(0, pad=5)
-        content_frame.columnconfigure(1, pad=5)
-        content_frame.rowconfigure(0, pad=5)
-        content_frame.rowconfigure(1, pad=5)
-        content_frame.rowconfigure(2, pad=5)
 
         # Formatting
         tk.Grid.columnconfigure(content_frame, "all", weight=1)
@@ -70,26 +63,38 @@ class InHouseToolsPopup(tk.Frame):
         self.buttons = {
             "input": tk.Text(content_frame, height=1, width=5),
             "height": tk.Text(content_frame, height=1, width=5),
+            "connect": tk.Button(content_frame, text="Connect Robot"),
+            "disconnect": tk.Button(content_frame, text="Disconnect Robot"),
+            "home": tk.Button(content_frame, text='Home Robot and Motor'),
+            "zero": tk.Button(content_frame, text="Zero Joints"),
+            "opengripper": tk.Button(content_frame, text="Open Gripper"),
+            "closegripper": tk.Button(content_frame, text="Close Gripper"),
+            "movetoloadingzone": tk.Button(content_frame, text="Move Stage to Initial Loading Zone"),
         }
 
-        # Label
-        self.labels = {
-            "input": tk.Label(content_frame, text="Move motor"),
-            "height": tk.Label(content_frame, text="Change robot height at drop")
-        }
         counter = 0
         for key, button in self.buttons.items():
-            label = self.labels[key]
             if counter == 0:
                 row, column = 0, 0
             elif counter == 1:
                 row, column = 0, 1
+            elif counter == 3:
+                row, column = 0, 2
+            elif counter == 4:
+                row, column = 1, 0 
+            elif counter == 5:
+                row, column = 1, 1
+            elif counter == 6:
+                row, column = 1, 2
+            elif counter == 7:
+                row, column = 2, 0
+            elif counter == 8:
+                row, column = 2, 1
+            elif counter == 9:
+                row, column = 2, 2
 
-            label.grid(
-                row=row, column=column, sticky=tk.NSEW, padx=(4, 1), pady=(4, 6)
-            )
             button.grid(
-                row=row+1, column=column, sticky=tk.NSEW, padx=(4, 1), pady=(4, 6)
+                row=row, column=column, sticky=tk.NSEW, padx=(4, 1), pady=(4, 6)
             )
             counter += 1
 

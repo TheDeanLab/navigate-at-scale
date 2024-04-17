@@ -38,40 +38,26 @@ import tkinter as tk
 # Third Party Imports
 
 # Local Imports
-from navigate.tools.multipos_table_tools import (
-    sign,
-    compute_tiles_from_bounding_box,
-    calc_num_tiles,
-    update_table,
-)
 from navigate.controller.sub_controllers.gui_controller import GUIController
-from navigate.tools.common_functions import combine_funcs
 
 # Logger Setup
 p = __name__.split(".")[1]
 logger = logging.getLogger(p)
 
 
-class TilingWizardController(GUIController):
-    """Tiling Wizard Controller
+class InHouseToolsPopupController(GUIController):
+    """InHouseTools Popup Controller
 
-    Controller for tiling wizard parameters.
-    Gathers the FOV from the camera settings tab and will
-    update when user changes this value.
-    Set start/end position buttons will grab the stage
-    values for the respective axis when pressed and display in popup
-    Number of images we need to acquire with our desired
-    percent overlap is calculated and then displayed in third column
+    Controller for in house tools
     """
 
     def __init__(self, view, parent_controller):
-        """Initialize Tiling Wizard Controller
+        """Initialize InHouseTools Popup Controller
 
         Parameters
         ----------
         view : object
-            GUI element containing widgets and variables to control.
-            Likely tk.Toplevel-derived. In this case tiling_wizard_popup.py
+
         parent_controller : channels_tab_controller
             The controller that creates the popup/this controller.
 
@@ -79,7 +65,7 @@ class TilingWizardController(GUIController):
         super().__init__(view, parent_controller)
 
     def showup(self):
-        """Show the tiling wizard
+        """Show the in house popup
 
         Brings popup window to front of screen
 

@@ -3,11 +3,9 @@ import tkinter as tk
 from tkinter import ttk
 # import logging
 
-from autonomous_robotic_sample_handling.view.frames.robot_initialization import RobotInitialization
+#from autonomous_robotic_sample_handling.view.frames.robot_initialization import RobotInitialization
 from autonomous_robotic_sample_handling.view.frames.move_sequence import MoveSequence
-from autonomous_robotic_sample_handling.view.frames.pause_play import PausePlay
 from autonomous_robotic_sample_handling.view.frames.multiposition_frame import MultiPositionTab, MultipositionButtons
-from autonomous_robotic_sample_handling.view.popups.inhouse_tools_popup import InHouseToolsPopup
 from navigate.view.custom_widgets.validation import ValidatedSpinbox, ValidatedCombobox
 
 
@@ -41,48 +39,34 @@ class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
         self.buttons = {}
         self.variables = {}
 
-        # #################################
-        # ######## Example Widgets ########
-        # ##### add your widgets here #####
-        # #################################
-
         tk.Grid.columnconfigure(self, "all", weight=1)
         tk.Grid.rowconfigure(self, "all", weight=1)
 
-        # Robot Initialization Buttons
-        self.robot_init = RobotInitialization(self)
-        self.robot_init.grid(
-            row=0, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
-        )
-        self.buttons.update(RobotInitialization.get_buttons(self.robot_init))
+        # # Robot Initialization Buttons
+        # self.robot_init = RobotInitialization(self)
+        # self.robot_init.grid(
+        #     row=0, column=0, columnspan=1, sticky=tk.NSEW, padx=10, pady=10
+        # )
+        # self.buttons.update(RobotInitialization.get_buttons(self.robot_init))
 
-        # Quick Command Buttons
+        # Move Sequence Buttons
         self.move_sequence = MoveSequence(self)
         self.move_sequence.grid(
-            row=5, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
+            row=0, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
         )
         self.buttons.update(MoveSequence.get_buttons(self.move_sequence))
 
-        # Pause and Play Buttons
-        self.pause_play = PausePlay(self)
-        self.pause_play.grid(
-            row=0, column=3, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
-        )
-        self.buttons.update(PausePlay.get_buttons(self.pause_play))
-
-        self.multiposition = MultiPositionTab(self)
-        self.multiposition.grid(
-            row=15, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
-        )
-        # multiposition table Buttons
+        # Multiposition Table Buttons
         self.MultipositionButtons = MultipositionButtons(self)
         self.MultipositionButtons.grid(
-            row=10, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
+            row=1, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
         )
 
-        # In-House Tools
-        self.InHouseTools = InHouseToolsPopup(self)
-        self.buttons.update(InHouseToolsPopup.get_buttons(self.InHouseTools))
+        #Multiposition Table
+        self.multiposition = MultiPositionTab(self)
+        self.multiposition.grid(
+            row=2, column=0, columnspan=2, sticky=tk.NSEW, padx=10, pady=10
+        )
 
     # Getters
     def get_variables(self):
