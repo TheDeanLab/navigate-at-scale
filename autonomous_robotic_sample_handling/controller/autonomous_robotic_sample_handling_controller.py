@@ -128,7 +128,6 @@ class AutonomousRoboticSampleHandlingController:
         }
 
     def move_robot_arm_to_loading_zone(self):
-        print(self.key_positions['loading_zone_manual'])
         loading_zone_manual = self.key_positions['loading_zone_manual']
         engage_header_distance = self.key_positions['engage_header_distance']
         if loading_zone_manual is None:
@@ -152,6 +151,7 @@ class AutonomousRoboticSampleHandlingController:
         sample_height = - self.key_positions['sample_height']
         self.robot_arm_controller.move_lin_rel_trf(sample_height, 0, 0, 0, 0, 0)
         self.start_offline_program("Vertical_Oscillation")
+        self.robot_arm_controller.zero_joints()
 
     def move_to_microscope(self):
         microscope = self.key_positions['microscope']
@@ -180,15 +180,23 @@ class AutonomousRoboticSampleHandlingController:
         self.robot_arm_controller.delay(1)
         self.robot_arm_controller.move_lin_rel_trf(0, -shear_distance * 0.75, 0, 0, 0, 0)
         self.robot_arm_controller.move_lin_rel_trf(0, 0, -z_tolerance, 0, 0, 0)
+        self.robot_arm_controller.zero_joints()
 
     def return_header_to_carousel(self):
-        loading_zone = self.key_positions["loading_zone"]
-        x, y, z, Rx, Ry, Rz = loading_zone
+        loading_zone_manual = self.key_positions['loading_zone_manual']
         sample_height = self.key_positions['sample_height']
         engage_header_distance = self.key_positions['engage_header_distance']
+        if loading_zone_manual is None:
+            loading_zone = self.key_positions['loading_zone']
+            x, y, z, Rx, Ry, Rz = loading_zone
+            self.robot_arm_controller.move_lin(x, y, z + sample_height, Rx, Ry, Rz)
+        else:
+            x, y, z, Rx, Ry, Rz = loading_zone_manual
+            self.robot_arm_controller.move_lin(x, y, z + sample_height, Rx, Ry, Rz)
 
         # Move sample above loading zone
-        self.robot_arm_controller.move_lin(x, y, z + sample_height, Rx, Ry, Rz)
+        # self.robot_arm_controller.move_lin(x, y, z + sample_height, Rx, Ry, Rz)
+        self.robot_arm_controller.delay(1)
 
         # Place sample within vial
         self.robot_arm_controller.move_lin_rel_trf(sample_height, 0, 0, 0, 0, 0)
@@ -214,4 +222,3 @@ class AutonomousRoboticSampleHandlingController:
             print(f"Finished processing sample {i}")
             og_position = og_position + dtheta
             self.automation_controller.update_progress_bar(i)
-

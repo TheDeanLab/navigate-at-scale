@@ -25,7 +25,10 @@ class RobotArm:
         #self.robot.SetTrf(0,0,0,0,0,0)
 
         # Apply configuration parameters and limits for the robot arm
-        self.load_robot_config()
+        # self.load_robot_config()
+        self.robot.SetJointVelLimit(30)
+        self.robot.SetTorqueLimitsCfg(4, 0)
+        self.robot.SetTorqueLimits(40.0, 60.0, 40.0, 40.0, 40.0, 40.0)
 
     def start_program(self, program_name):
         """ Start offline robot program
