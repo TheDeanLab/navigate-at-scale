@@ -2,6 +2,7 @@ from navigate.tools.decorators import FeatureList
 from navigate.model.features.feature_related_functions import (
     ExampleFeature,
     SelectSample,
+    PrepareLoadingZone,
     AcquireSample,
     AttachToMicroscope,
     RemoveFromMicroscope,
@@ -19,6 +20,12 @@ def example_feature():
 def select_sample():
     return [
         {"name": SelectSample},
+    ]
+
+@FeatureList
+def prepare_loading_zone():
+    return [
+        {"name": PrepareLoadingZone},
     ]
 
 @FeatureList

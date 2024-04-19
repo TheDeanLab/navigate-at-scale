@@ -2,7 +2,7 @@ class AcquireSample:
     def __init__(self, model, *args):
         self.model = model
         self.robot_arm = self.model.active_microscope.plugin_devices["robot_arm"]
-        self.robot_arm.activate_and_home()
+        self.robot_arm.zero_joints()
 
         self.config_table = {
             "signal": {
@@ -26,11 +26,25 @@ class AcquireSample:
 
     def pre_func_signal(self):
         """Prepare device thread to run this feature"""
+        self.engage_header_distance = 4
+        self.sample_height = 10
         pass
 
     def in_func_signal(self):
         """set devices before snaping an image"""
-        pass
+        # Prepare and grip sample header
+        self.robot_arm.open_gripper()
+        self.robot_arm.move_lin_rel_trf(0, 0, self.engage_header_distance, 0, 0, 0)
+        self.robot_arm.delay(1)
+        self.robot_arm.closer_gripper()
+
+        # Remove header from the carousel
+        self.robot_arm.move_lin_rel_trf(self.sample_height, 0, 0, 0, 0, 0)
+        self.robot_arm.start_program("Vertical_Oscillation")
+
+        # Return robot arm to 'standard' position : Zero Joints
+        self.robot_arm.zero_joints()
+        return True
 
     def end_func_signal(self):
         """decide if this feature ends after snaping an image"""

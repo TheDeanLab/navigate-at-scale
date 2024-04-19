@@ -2,7 +2,6 @@ class AttachToMicroscope:
     def __init__(self, model, *args):
         self.model = model
         self.robot_arm = self.model.active_microscope.plugin_devices["robot_arm"]
-        self.robot_arm.activate_and_home()
 
         self.config_table = {
             "signal": {
@@ -26,10 +25,26 @@ class AttachToMicroscope:
 
     def pre_func_signal(self):
         """Prepare device thread to run this feature"""
+        self.microscope = [10, 10, 10, 0, 90, 0]
+        self.microscope_tolerance = 10
+        self.engage_header_distance = 10
         pass
 
     def in_func_signal(self):
         """set devices before snaping an image"""
+        x, y, z, Rx, Ry, Rz = self.microscope
+
+        # Position robot arm in front of the microscope
+        self.robot_arm.move_lin(x, y - self.engage_header_distance, z - self.microscope_tolerance, Rx, Ry, Rz)
+
+        # Engage microscope
+        self.robot_arm.move_lin_rel_trf(0, 0, self.engage_header_distance, 0, 0, 0)
+        self.robot_arm.move_lin_rel_trf(-self.microscope_tolerance, 0, 0, 0, 0, 0)
+        self.robot_arm.open_gripper()
+
+        # Disengage microscope
+        self.robot_arm.move_lin_rel_trf(0, 0, -self.engage_header_distance * 2, 0, 0, 0)
+
         pass
 
     def end_func_signal(self):

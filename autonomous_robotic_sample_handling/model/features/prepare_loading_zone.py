@@ -1,8 +1,7 @@
-class ExampleFeature:
+class PrepareLoadingZone:
     def __init__(self, model, *args):
         self.model = model
         self.robot_arm = self.model.active_microscope.plugin_devices["robot_arm"]
-        self.robot_arm.activate_and_home()
 
         self.config_table = {
             "signal": {
