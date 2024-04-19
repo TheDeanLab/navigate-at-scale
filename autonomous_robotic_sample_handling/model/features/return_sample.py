@@ -1,6 +1,7 @@
-class ExampleFeature:
+class ReturnSample:
     def __init__(self, model, *args):
         self.model = model
+        self.configuration = self.model.configuration["plugin_config"]
         self.robot_arm = self.model.active_microscope.plugin_devices["robot_arm"]
         self.robot_arm.activate_and_home()
 
@@ -23,6 +24,7 @@ class ExampleFeature:
                 "need_response": True,  # True or False
             },
         }
+        
 
     def pre_func_signal(self):
         """Prepare device thread to run this feature"""
