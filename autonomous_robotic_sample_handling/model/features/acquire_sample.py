@@ -2,7 +2,7 @@ class AcquireSample:
     def __init__(self, model, *args):
         self.model = model
         self.robot_arm = self.model.active_microscope.plugin_devices["robot_arm"]
-        self.robot_arm.zero_joints()
+        print("Acquire Sample")
 
         self.config_table = {
             "signal": {

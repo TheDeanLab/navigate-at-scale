@@ -2,6 +2,7 @@ class AttachToMicroscope:
     def __init__(self, model, *args):
         self.model = model
         self.robot_arm = self.model.active_microscope.plugin_devices["robot_arm"]
+        print("Attach to Microscope")
 
         self.config_table = {
             "signal": {

@@ -8,16 +8,16 @@ environment:
   motor: 
     units: 20
   microscope:
-    x: 163.8
-    y: 182.5
-    z: 218.5
-    R1: -90
+    x: 165.75
+    y: -181.957
+    z: 219.75
+    R1: 90
     R2: 0
-    R3: 90
+    R3: -90
   loading_zone:
-    flag: False
+    flag: True
     pose:
-      x: 284.71
+      x: 258.0
       y: 0
       z: 159.88
       Rx: 0

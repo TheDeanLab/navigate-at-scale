@@ -2,6 +2,7 @@ class RemoveFromMicroscope:
     def __init__(self, model, *args):
         self.model = model
         self.robot_arm = self.model.active_microscope.plugin_devices["robot_arm"]
+        print("Remove from microscope")
 
         self.config_table = {
             "signal": {

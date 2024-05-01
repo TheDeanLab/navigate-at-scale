@@ -214,7 +214,7 @@ class AutonomousRoboticSampleHandlingController:
     def automated_sample_handling(self):
         self.automation_controller.reset_automation_variables()
         num_samples = self.automation_controller.get_num_samples()
-        og_position = 8.75 + 60
+        og_position = 15.8
         dtheta = 15
         for i in range(1, num_samples + 1):
             self.motor_controller.MoveTo(og_position)
