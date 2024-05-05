@@ -158,8 +158,7 @@ class AutonomousRoboticSampleHandlingController:
         x, y, z, Rx, Ry, Rz = microscope
         microscope_tolerance = 10
         engage_header_distance = self.key_positions['engage_header_distance']
-        self.robot_arm_controller.move_lin(x, y - engage_header_distance, z - microscope_tolerance, Rx, Ry, Rz)
-
+        self.robot_arm_controller.move_lin(x, y + engage_header_distance, z - microscope_tolerance, Rx, Ry, Rz)
         self.engage_microscope(microscope_tolerance=microscope_tolerance, engage_header_distance=engage_header_distance)
         self.disengage_microscope(engage_header_distance=engage_header_distance)
         self.remove_header_from_microscope(engage_header_distance=engage_header_distance)
@@ -214,7 +213,7 @@ class AutonomousRoboticSampleHandlingController:
     def automated_sample_handling(self):
         self.automation_controller.reset_automation_variables()
         num_samples = self.automation_controller.get_num_samples()
-        og_position = 8.75 + 60
+        og_position = 9.15
         dtheta = 15
         for i in range(1, num_samples + 1):
             self.motor_controller.MoveTo(og_position)
