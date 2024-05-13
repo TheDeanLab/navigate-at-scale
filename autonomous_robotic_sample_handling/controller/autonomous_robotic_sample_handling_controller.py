@@ -55,6 +55,12 @@ class AutonomousRoboticSampleHandlingController:
         )
 
     def load_config_data(self):
+        """
+
+        Returns
+        -------
+
+        """
         import os
         plugins_config_path = os.path.join(
             get_navigate_path(), "config", "plugins_config.yml"
@@ -66,11 +72,31 @@ class AutonomousRoboticSampleHandlingController:
         return data
 
     def start_offline_program(self, program_name="Vertical_Oscillation"):
+        """
+
+        Parameters
+        ----------
+        program_name
+
+        Returns
+        -------
+
+        """
         self.parent_controller.execute(
             "start_program", program_name
         )
 
     def get_microscope_position(self, data):
+        """
+
+        Parameters
+        ----------
+        data
+
+        Returns
+        -------
+
+        """
         x = data["environment"]["microscope"]["x"]
         y = data["environment"]["microscope"]["y"]
         z = data["environment"]["microscope"]["z"]
@@ -80,6 +106,16 @@ class AutonomousRoboticSampleHandlingController:
         return [x, y, z, Rx, Ry, Rz]
 
     def get_loading_zone_position(self, data):
+        """
+
+        Parameters
+        ----------
+        data
+
+        Returns
+        -------
+
+        """
         x = data["environment"]["loading_zone"]["pose"]["x"]
         y = data["environment"]["loading_zone"]["pose"]["y"]
         z = data["environment"]["loading_zone"]["pose"]["z"]
@@ -90,6 +126,16 @@ class AutonomousRoboticSampleHandlingController:
         return [x, y, z, Rx, Ry, Rz] if flag else None
 
     def prepare_config_data(self, data):
+        """
+
+        Parameters
+        ----------
+        data
+
+        Returns
+        -------
+
+        """
         motor_position = data["environment"]["motor"]["units"]
         motor_to_robot_mm = motor_position * 25.4
         # for standard TRF, z is forwards, x is down
@@ -128,6 +174,12 @@ class AutonomousRoboticSampleHandlingController:
         }
 
     def move_robot_arm_to_loading_zone(self):
+        """
+
+        Returns
+        -------
+
+        """
         loading_zone_manual = self.key_positions['loading_zone_manual']
         engage_header_distance = self.key_positions['engage_header_distance']
         if loading_zone_manual is None:
@@ -141,6 +193,12 @@ class AutonomousRoboticSampleHandlingController:
         self.remove_header_from_stage()
 
     def engage_header(self):
+        """
+
+        Returns
+        -------
+
+        """
         self.robot_arm_controller.open_gripper()
         engage_header_distance = self.key_positions["engage_header_distance"]
         self.robot_arm_controller.move_lin_rel_trf(0, 0, engage_header_distance, 0, 0, 0)
@@ -148,12 +206,24 @@ class AutonomousRoboticSampleHandlingController:
         self.robot_arm_controller.close_gripper()
 
     def remove_header_from_stage(self):
+        """
+
+        Returns
+        -------
+
+        """
         sample_height = - self.key_positions['sample_height']
         self.robot_arm_controller.move_lin_rel_trf(sample_height, 0, 0, 0, 0, 0)
         self.start_offline_program("Vertical_Oscillation")
         self.robot_arm_controller.zero_joints()
 
     def move_to_microscope(self):
+        """
+
+        Returns
+        -------
+
+        """
         microscope = self.key_positions['microscope']
         x, y, z, Rx, Ry, Rz = microscope
         microscope_tolerance = 10
@@ -164,14 +234,45 @@ class AutonomousRoboticSampleHandlingController:
         self.remove_header_from_microscope(engage_header_distance=engage_header_distance)
 
     def engage_microscope(self, microscope_tolerance, engage_header_distance):
+        """
+
+        Parameters
+        ----------
+        microscope_tolerance
+        engage_header_distance
+
+        Returns
+        -------
+
+        """
         self.robot_arm_controller.move_lin_rel_trf(0, 0, engage_header_distance, 0, 0, 0)
         self.robot_arm_controller.move_lin_rel_trf(-microscope_tolerance, 0, 0, 0, 0, 0)
         self.robot_arm_controller.open_gripper()
 
     def disengage_microscope(self, engage_header_distance):
+        """
+
+        Parameters
+        ----------
+        engage_header_distance
+
+        Returns
+        -------
+
+        """
         self.robot_arm_controller.move_lin_rel_trf(0, 0, -engage_header_distance * 2, 0, 0, 0)
 
     def remove_header_from_microscope(self, engage_header_distance):
+        """
+
+        Parameters
+        ----------
+        engage_header_distance
+
+        Returns
+        -------
+
+        """
         shear_distance = self.key_positions['shear_distance']
         z_tolerance = 50
         self.robot_arm_controller.move_lin_rel_trf(0, 0, engage_header_distance * 2, 0, 0, 0)
@@ -182,6 +283,12 @@ class AutonomousRoboticSampleHandlingController:
         self.robot_arm_controller.zero_joints()
 
     def return_header_to_carousel(self):
+        """
+
+        Returns
+        -------
+
+        """
         loading_zone_manual = self.key_positions['loading_zone_manual']
         sample_height = self.key_positions['sample_height']
         engage_header_distance = self.key_positions['engage_header_distance']
@@ -206,11 +313,23 @@ class AutonomousRoboticSampleHandlingController:
         self.robot_arm_controller.move_lin_rel_trf(0, 0, -engage_header_distance, 0, 0, 0)
 
     def sample_iteration(self):
+        """
+
+        Returns
+        -------
+
+        """
         self.move_robot_arm_to_loading_zone()
         self.move_to_microscope()
         self.return_header_to_carousel()
 
     def automated_sample_handling(self):
+        """
+
+        Returns
+        -------
+
+        """
         self.automation_controller.reset_automation_variables()
         num_samples = self.automation_controller.get_num_samples()
         og_position = 9.15

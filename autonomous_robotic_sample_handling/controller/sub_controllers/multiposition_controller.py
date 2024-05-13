@@ -4,7 +4,16 @@ import pandas as pd
 from pandastable import TableModel
 
 class MultipositionController:
+    """"""
+
     def __init__(self, view, parent_controller=None):
+        """
+
+        Parameters
+        ----------
+        view
+        parent_controller
+        """
         self.parent_controller = parent_controller
         self.view = view
         self.table = self.view.multiposition.multipoint_list.pt

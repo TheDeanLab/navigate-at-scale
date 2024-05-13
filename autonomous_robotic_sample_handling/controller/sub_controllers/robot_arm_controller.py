@@ -23,6 +23,12 @@ class RobotArmController:
         self.buttons['closegripper'].configure(command=self.close_gripper)
 
     def zero_joints(self):
+        """
+
+        Returns
+        -------
+
+        """
         self.parent_controller.execute(
             "zero_joints"
         )
