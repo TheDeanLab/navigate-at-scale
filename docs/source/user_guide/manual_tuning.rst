@@ -38,7 +38,7 @@ loading zone.
    of the robot arm at the loading zone, which will be used in the configuration data file.
 
    a. Position the robot arm closely to the loading zone, avoiding any form of collision and
-      with teh correct orientation. This can be done either through manual control or through an
+      with the correct orientation. This can be done either through manual control or through an
       initial tuning script.
    b. Manually jog the robot arm slowly to the exact loading zone. Position the gripper
       fingertips exactly around the header plate, keeping the header plate in the midpoint of the

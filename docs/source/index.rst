@@ -38,6 +38,11 @@ running high-throughput imaging experiments.
    software_installation
    user_guide/hardware_configuration
    user_guide/gui_walkthrough
+   user_guide/autonomous_routines
+   user_guide/manual_tuning
+   user_guide/grippers
+   user_guide/vials_and_headers
+   user_guide/sample_tray
 
 
 .. toctree::
