@@ -4,6 +4,7 @@ from tkinter import ttk
 from navigate.view.custom_widgets.LabelInputWidgetFactory import LabelInput
 from navigate.view.custom_widgets.validation import ValidatedSpinbox, ValidatedEntry
 
+from autonomous_robotic_sample_handling.view.popups.inhouse_tools_popup import InHouseToolsPopup
 
 class MoveSequence(tk.Frame):
     """MoveSequence
@@ -42,6 +43,8 @@ class MoveSequence(tk.Frame):
             "offline_program": ttk.Button(self, text="Start program"),
             "automation_sequence": ttk.Button(self, text="Start automation sequence"),
             "process_sample": ttk.Button(self, text="Process a sample"),
+            "in_house": ttk.Button(self, text="In House Toools"),
+            "import": ttk.Button(self, text="Load Positions from Disk"),
         }
         counter = 0
         for key, button in self.buttons.items():
@@ -51,6 +54,10 @@ class MoveSequence(tk.Frame):
                 row, column = 0, 1
             elif counter == 2:
                 row, column = 0, 2
+            elif counter == 3:
+                row, column = 1, 1
+            elif counter == 4:
+                row, column = 1, 2
 
             button.grid(
                 row=row, column=column, sticky=tk.NSEW, padx=(4, 1), pady=(4, 6)
@@ -66,6 +73,9 @@ class MoveSequence(tk.Frame):
             "progress_bar_style": ttk.Style(),
             # TODO: Consider benefits of specifying a number_of_samples variable for the num_samples LabelInput
         }
+
+        self.InHouseTools = InHouseToolsPopup(self)
+        self.buttons.update(InHouseToolsPopup.get_buttons(self.InHouseTools))
 
         # Define styles for widgets
         self.variables['progress_bar_style'].layout('text.Horizontal.TProgressbar',

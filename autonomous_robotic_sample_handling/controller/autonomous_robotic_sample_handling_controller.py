@@ -13,13 +13,15 @@ from autonomous_robotic_sample_handling.controller.sub_controllers.motor_control
     MotorController
 )
 
-from autonomous_robotic_sample_handling.controller.sub_controllers.pause_play_controller import (
-    PausePlayController
-)
-
 from autonomous_robotic_sample_handling.controller.sub_controllers.automation_controller import (
     AutomationController
 )
+
+from autonomous_robotic_sample_handling.controller.sub_controllers.inhouse_tools_controller import (
+    InHouseToolsPopupController
+)
+
+from autonomous_robotic_sample_handling.view.popups.inhouse_tools_popup import InHouseToolsPopup
 
 
 class AutonomousRoboticSampleHandlingController:
@@ -33,6 +35,7 @@ class AutonomousRoboticSampleHandlingController:
         self.buttons['automation_sequence'].configure(command=self.automated_sample_handling)
         self.buttons['process_sample'].configure(command=self.sample_iteration)
         self.buttons['offline_program'].configure(command=self.start_offline_program)
+        self.buttons['in_house'].configure(command=self.launch_inhouse_tools)
 
         self.data = self.load_config_data()
         self.prepare_config_data(self.data)
@@ -47,12 +50,27 @@ class AutonomousRoboticSampleHandlingController:
         self.motor_controller = MotorController(
             self.view, self.parent_controller
         )
-        self.pause_play_controller = PausePlayController(
-            self.view.pause_play, self.parent_controller
-        )
         self.automation_controller = AutomationController(
             self.view.move_sequence, self.parent_controller
         )
+        self.inhouse_tools_popup_controller = None
+
+    def launch_inhouse_tools(self):
+        """Launches inhouse tools popup.
+
+               Will only launch when button in GUI is pressed, and will not duplicate.
+               Pressing button again brings popup to top
+
+               Examples
+               --------
+               >>> self.launch_inhouse_tools()
+               """
+
+        if hasattr(self, "inhouse_tools_popup_controller"):
+            self.inhouse_tools_popup_controller.showup()
+            return
+        inhouse_tools = InHouseToolsPopup(self.view)
+        self.inhouse_tools_popup_controller = InHouseToolsPopupController(inhouse_tools, self)
 
     def load_config_data(self):
         """
