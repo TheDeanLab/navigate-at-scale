@@ -189,6 +189,33 @@ class SyntheticRobotArm:
         """
         print("*** Synthetic robot receive command: Activate and Home")
 
+    def load_robot_config(self):
+        """ Loads robot configuration data
+
+        Returns
+        -------
+
+        """
+        print("*** Synthetic robot receive command: Load robot config")
+
+    def open_gripper(self):
+        """ Open the robot gripper
+
+        Returns
+        -------
+
+        """
+        print("*** Synthetic robot receive command: Open gripper")
+
+    def close_gripper(self):
+        """ Close the robot gripper
+
+        Returns
+        -------
+
+        """
+        print("*** Synthetic robot receive command: Close gripper")
+
     def pause_robot_motion(self):
         """ Pause robot motion for synthetic device
 
@@ -239,9 +266,17 @@ class SyntheticRobotArm:
             "disconnect": lambda *args: self.disconnect(),
             "zero_joints": lambda *args: self.zero_joints(),
             "move_joints": lambda *args: self.move_joints(args[0], args[1], args[2], args[3], args[4], args[5]),
+            "move_lin": lambda *args: self.move_joints(args[0], args[1], args[2], args[3],
+                                                          args[4], args[5]),
+            "move_lin_rel_trf": lambda *args: self.move_joints(args[0], args[1], args[2], args[3],
+                                                          args[4], args[5]),
+            "move_lin_rel_wrf": lambda *args: self.move_joints(args[0], args[1], args[2], args[3],
+                                                          args[4], args[5]),
             "move_pose": lambda *args: self.move_pose(args[0], args[1], args[2], args[3], args[4], args[5]),
             "delay": lambda *args: self.delay(args[0]),
             "activate_and_home": lambda *args: self.activate_and_home(),
+            "open_gripper": lambda *args: self.open_gripper(),
+            "close_gripper": lambda *args: self.close_gripper(),
             "pause_motion": lambda *args: self.pause_robot_motion(),
             "resume_motion": lambda *args: self.resume_robot_motion(),
             "reset_motion": lambda *args: self.reset_robot_motion(),
