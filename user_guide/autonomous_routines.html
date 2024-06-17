@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autonomously Generated Routines &mdash; navigate-at-scale  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Manual Tuning" href="manual_tuning.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="hardware_configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            navigate-at-scale
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Autonomously Generated Routines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-general-routine-procedure">The General Routine Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#routine-generation-approaches">Routine Generation Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#critical-data">Critical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#future-improvements">Future Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manual_tuning.html">Manual Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grippers.html">Grippers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vials_and_headers.html">Custom vials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vials_and_headers.html#vial-headers">Vial Headers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample_tray.html">Sample tray</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">navigate-at-scale</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Autonomously Generated Routines</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/user_guide/autonomous_routines.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="autonomously-generated-routines">
+<h1>Autonomously Generated Routines<a class="headerlink" href="#autonomously-generated-routines" title="Permalink to this heading"></a></h1>
+<p>The <em>navigate-at-scale</em> program is designed to autonomously generate routines for the required
+devices, specifically the robot arm and motor, in order to automate the sample handling process.
+These routine-generation procedures operate using critical data about the experiment setup, such
+as the loading zone and microscope position in the Cartesian space, design specifications such as
+vial height, and other such parameters. This allows for the application of this program to many
+reconfigurable environments. Consider if the robot arm or carousel subsystems must be
+repositioned or a new microscope or environment has been setup. Simply relocate the critical
+loading zones using the robot arm and update the configuration data accordingly. The <strong>navigate</strong>
+program can continue running as expected.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While the design-based solution is defined and discussed in this section, it has not been
+completed to function for all reconfigurable environments. As the precision of the routines would
+also be dependent on the precision of all measurements associated with the design approach, the
+manual tuning approach was selected as the primary focus of this project.</p>
+</div>
+<hr class="docutils" />
+<section id="the-general-routine-procedure">
+<h2>The General Routine Procedure<a class="headerlink" href="#the-general-routine-procedure" title="Permalink to this heading"></a></h2>
+<p>To generate routines for the robot arm and other devices, it was required to design a general
+routine that all routines would emulate, following some set of operating guidelines. These
+operating guidelines are built upon a set of conditions required for safe and efficient operation
+of the system. Combined with other operational parameters and environmental conditions,
+appropriate control routines can be developed for automated sample handling.</p>
+<p>The general routine can be described as follows:</p>
+<ol class="arabic simple">
+<li><p>The robot arm homes to the ‘zero joints’ position.</p></li>
+<li><p>The robot arm moves toward the loading zone of the carousel, positioning itself in front of
+the loading zone by a distance, <em>engage_header_distance</em>.</p>
+<ul class="simple">
+<li><p>This parameter, defined by the length of the gripper fingers plus the thickness of the
+gripper, represents a minimum distance the robot arm should maintain before moving forward
+to grip the header plate.</p></li>
+</ul>
+</li>
+<li><p>The robot arm moves forward (+z in the TRF) by the distance <em>engage_header_distance</em>.</p>
+<ul class="simple">
+<li><p>This sequence positions the gripper fingers exactly around the header plate, preparing for
+acquiring the sample.</p></li>
+<li><p>This sequence simply performs a linear motion. The alignment for orientation, height, and
+related positioning all occurs in the previous motion.</p></li>
+</ul>
+</li>
+<li><p>The robot arm grips the header plate.</p>
+<ul class="simple">
+<li><p>A strict range for the close_gripper() function has not been devised, as the sensory
+feedback of the gripper has been satisfactory in closing the gripper effectively around the
+target header plater while limiting flex in the gripper fingertips.</p></li>
+</ul>
+</li>
+<li><p>The robot arm lifts the header plate by a distance <em>sample_height</em>.</p>
+<ul class="simple">
+<li><p>The sample height is a data parameter specified in the configuration.yaml file which
+represents the height of the sample below the header plate. This variable specifies how
+high a selected sample must be lifted in order to prevent collisions with the sample for future
+operations. The sample_height variable is primarily influenced by the length of the threaded
+rod, the sample insert size, and any desired tolerances.</p></li>
+</ul>
+</li>
+<li><p>The robot arm performs a vertical oscillation maneuver.</p>
+<ul class="simple">
+<li><p>The vertical oscillation maneuver is a simple drip management technique in place to limit
+the amount of BABB that drips onto the operating environment space.</p></li>
+<li><p>This maneuver is currently performed using sub-routine commands from the robot’s offline
+program storage, rather than directly within the plugin software.</p></li>
+</ul>
+</li>
+<li><p>The robot arm returns to the ‘zero joints’ position.</p>
+<ul class="simple">
+<li><p>This is an intermediate step to reset all robot arm joints and positioning before proceeding
+operations.</p></li>
+</ul>
+</li>
+<li><p>The robot arm moves toward the microscope loading zone, positioning itself at a distance,
+<em>engage_header_distance</em>. The positioning of the robot arm is also lower in the WRF z
+dimension, by a distance <em>z_tolerance</em>.</p>
+<ul class="simple">
+<li><p>The robot positioning is lowered by an additional factor <em>z_tolerance</em> here to position the
+held header plate below the opposite magnet fixed to the microscope. It is desirable to
+attach the sample (via the header plate) from the bottom of the microscope fixture. This
+avoids disruption from the magnets and keeps the sample secure until attached to the
+microscope for imaging.</p></li>
+<li><p>The <em>z_tolerance</em> is a user-defined feature though it is dependent on the available
+operating space. A distance of 10 mm is currently assumed for this tolerance.</p></li>
+</ul>
+</li>
+<li><p>The robot moves forward and up, attaching the sample to the microscope.</p>
+<ul class="simple">
+<li><p>The robot arm moves forward and up by the <em>engage_header_distance</em> and <em>z_tolerance</em>
+distances respectively.</p></li>
+</ul>
+</li>
+<li><p>The robot arm retracts backward (w.r.t. to the TRF) by the <em>engage_header_distance</em>.</p>
+<ul class="simple">
+<li><p>The robot arm has now attached the sample and is waiting for the microscope to beign imaging
+the sample.</p></li>
+</ul>
+</li>
+<li><p>The robot arm moves forward (w.r.t. to the TRF) by the <em>engage_header_distance</em> and grips the
+sample.</p>
+<ul class="simple">
+<li><p>The microscope has now completed imaging the sample and the robot arm prepares to remove the
+sample from the microscope.</p></li>
+</ul>
+</li>
+<li><p>The robot arm shears the sample off the microscope.</p>
+<ul class="simple">
+<li><p>In order to remove the magnetically attached sample and header plate, a simple linear motion
+is performed, a clean shear. The force of the gripper and speed of the motion is sufficient
+to leave the microscope untouched adn smoothly remove the sample.</p></li>
+</ul>
+</li>
+<li><p>The robot arm returns to the ‘zero joints’ position</p>
+<ul class="simple">
+<li><p>This is an intermediate step to reset all robot arm joints and positioning before proceeding
+operations.</p></li>
+</ul>
+</li>
+<li><p>The robot arm moves toward the loading zone of the carousel, positioning itself on top of
+the loading zone by a distance, <em>sample_height</em>.</p>
+<ul class="simple">
+<li><p>The robot arm positions the sample and header plate straight above the loading zone, algined
+to lower it into place. The positioning of the header plate a distance of <em>sample_height</em>
+above the loading zone is to prevent the sample from colliding with the vials or carousel.</p></li>
+</ul>
+</li>
+<li><p>The robot arm opens the gripper, releasing the header plate.</p></li>
+<li><p>The robot arm retracts from the loading zone.</p></li>
+</ol>
+<p>Following the completion of a complete routine, the program either:</p>
+<ul class="simple">
+<li><p>terminates, if the last sample has been processed.</p></li>
+<li><dl class="simple">
+<dt>continues with the next sample in queue, should the queue be non-empty.</dt><dd><ul>
+<li><p>The motor rotates by 15 degree increments to the next sample’s loading zone.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="routine-generation-approaches">
+<h2>Routine Generation Approaches<a class="headerlink" href="#routine-generation-approaches" title="Permalink to this heading"></a></h2>
+<p>There are two primary approaches to generating autonomous routines for the <strong>navigate</strong>-based
+automated sample handling system:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Design-Based Approach</strong>:</dt><dd><p>The design-based approach is based on geometric calculations of measured data, in which a
+series of measurements related to the desired actions are collected and the corresponding
+sub-routines formed.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Manual-Tuning</strong>:</dt><dd><p>Alternatively, the critical locations for the experiment, such as the loading zone and the
+microscope staging area, can be identified by manually operating the robot arm using the
+Mecaportal software to the desired poses.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The design-based approach is currently incomplete, as it only operates with the carousel in
+directly in front of the robot. More detailed subroutines have not been built for the
+microscope staging area interactions either. As such, it is recommended to stick to the
+manual tuning approach for which extensive testing has been with for the system.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="critical-data">
+<h2>Critical Data<a class="headerlink" href="#critical-data" title="Permalink to this heading"></a></h2>
+<p>All data for the generation of control routines is held within the configuration.yaml file,
+located within the plugin under the <em>config</em> directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The configuration data for this experiment is retained within this plugin for the isolation of
+this data. <strong>navigate</strong> tools are utilized to locate and acquire this data during operation
+with the larger <strong>navigate</strong> ecosystem. It is considered best practice to directly host these
+configuration files within the <em>.navigate</em> directory for future applications.</p>
+</div>
+<p>There are three major categories of critical data collected in the first iteration of this
+program. These are discussed in more detail below:</p>
+<ul class="simple">
+<li><p>The most critical data refers to the robot arm poses for the loading zone and the microscope
+staging area. All routines are based off of these data points where the robot arm performs a
+series of actions around these locations.</p>
+<ul>
+<li><p>Currently, all locations are devised with reference to the robot arm’s center base as the
+origin, to reflect the origin of the robot within Mecaportal. As discussed in the guide to
+manual tuning, the location updated in the configuration.yaml refers to the robot arm’s
+end-effector pose when the robot arm is in the desired position. This is the simplest
+strategy as the MoveLin() commands that position the robot arm within the critical location
+zones all operate on the robot arm’s local world reference frame.</p></li>
+<li><p>A feature has been set up to assume a non-zero robot base, should it be of interest to
+define all critical locations with respect to a global origin of the table or such. In such
+a case, simply find the difference between the critical location and the robot base to find
+the required movement of the robot arm within its local reference.</p></li>
+<li><p>There exists a flag in the configuration.yaml to enforce whether the manually tuned loading
+zone data should be used, or if the design-based approach results should be prioritized. It
+is currently set to <strong>true</strong> and should remain as such unless the design-based approach is
+adjusted.</p></li>
+</ul>
+</li>
+<li><p>The second set of critical data refers to the physical measurements of the system components
+and the environment. Data such as the thickness of the gripper, the length of the
+gripper fingertips, and other such measurements are critical to devise routines that avoid
+collision of the robot arm with the environment or the damaging of any samples.</p>
+<ul>
+<li><p>Currently, design related component data is also included within this section. Data such as
+the vial height in the carousel or the carousel radius are required components for the
+design-based approach for routine generation. Note that such data is designed to simplify
+the required geometric calculations and not to focus on the component itself.</p></li>
+</ul>
+</li>
+<li><p>The final set of of critical data refers to the tunable parameters within this routine
+generation program. This data refers to variables such as the height of the sample, the
+distance to shear the sample, or the initial motor position for the loading zone. These
+values are subject to the user’s opinion or are dependent on the specific experiment setup.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="future-improvements">
+<h2>Future Improvements<a class="headerlink" href="#future-improvements" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>The autonomous routine generation program has been designed to be re-configurable for all
+environments. However some aspects of it require manual adjustment, something that would
+preferably be avoided. This specifically applies to modifications to parameters of the
+MoveLin() function calls within the autonomous script, as the remaining operations are based
+on the TRF and function irrespective of the robot arm orientation.</p>
+<ul>
+<li><p>Consider ‘Step 2’ where the robot arm positions itself in front of the loading zone. The
+robot arm sends a command <code class="docutils literal notranslate"><span class="pre">self.robot_arm_controller.move_lin(x</span> <span class="pre">-</span> <span class="pre">engage_header_distance,</span>
+<span class="pre">y,</span> <span class="pre">z,</span> <span class="pre">Rx,</span> <span class="pre">Ry,</span> <span class="pre">Rz)</span></code>. Here, the carousel is always assumed to be placed in front of the
+robot arm (where x &gt; 0 in the WRF) and for this reason, the <em>engage_header_distance</em> value
+must be subtracted from the <em>x</em> parameter to safely position the robot. Otherwise, the
+robot arm would crash into the carousel. This becomes more prominent with the positioning
+of the microscope, traditionally placed in the left or right planes of the robot arm (y &lt; 0
+or y &gt; 0 in the WRF) and both the shear direction must be adjusted to avoid selecting a
+position that would put the robot arm in error.
+Currently, this must be handled by the user directly, who would use their own understanding
+of the environment and orientation to determine a suitable direction and distance to shear the
+sample off the microscope staging area. An update to this system would utilize the relative
+orientation and pose of the robot arm and accordingly determine a suitable shear direction.
+An additional flag or parameter could override this if necessary.</p></li>
+</ul>
+</li>
+<li><p>Some parameters are currently hard-coded into the system and have not been updated after the
+testing phases. Update these in the prepare_config_data() and configuration setup. Determine
+suitable parameters of interest that could be of use for setting up experiments.</p></li>
+<li><p>The use of intermediate checkpoints have been used to return the robot arm to a safe position
+and limit the possibility of the robot entering an error state. Intermediate checkpoints can
+also be used to enforce specific motions or avoid obstacles. Suppose the microscope staging area
+is in a position only reachable by the robot arm in one particular pose. A set of
+intermediate checkpoints may need to be provided to ensure that the robot arm can effectively
+reach that desired end pose.</p>
+<ul>
+<li><p>This feature would require a set (or sets) of intermediate checkpoints that represent the
+sequence of poses that the robot arm must follow. The automation program would loop through
+this list, reaching each of these intermediate poses, before reaching the final pose.</p></li>
+<li><p>It must be noted that the method of reaching this intermediate poses may be abstracted
+further, as to provide a command name along with the corresponding data (‘move_joints’, [0,
+100, 0, 0, 0, 0]). This is simply to retain all data within the configuration.yaml file,
+though hard-coded sub-routines can be developed for such cases.</p></li>
+</ul>
+</li>
+<li><p>The generation of these routines is highly dependent on the configuration data and routines
+provided, given that the low-level robot arm commands, or the inverse kinematics, are
+directly handled by the mecademicpy API. Building an interface to more easily interact and
+program routines taking these into account will drastically improve the quality of the final
+routines.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hardware_configuration.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="manual_tuning.html" class="btn btn-neutral float-right" title="Manual Tuning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dean Lab, UT Southwestern Medical Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

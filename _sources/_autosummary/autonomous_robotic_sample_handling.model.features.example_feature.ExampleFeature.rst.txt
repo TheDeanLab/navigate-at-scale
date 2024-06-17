@@ -1,0 +1,33 @@
+autonomous\_robotic\_sample\_handling.model.features.example\_feature.ExampleFeature
+====================================================================================
+
+.. currentmodule:: autonomous_robotic_sample_handling.model.features.example_feature
+
+.. autoclass:: ExampleFeature
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ExampleFeature.__init__
+      ~ExampleFeature.cleanup_func_data
+      ~ExampleFeature.cleanup_func_signal
+      ~ExampleFeature.end_func_data
+      ~ExampleFeature.end_func_signal
+      ~ExampleFeature.in_func_data
+      ~ExampleFeature.in_func_signal
+      ~ExampleFeature.pre_func_data
+      ~ExampleFeature.pre_func_signal
+   
+   
+
+   
+   
+   

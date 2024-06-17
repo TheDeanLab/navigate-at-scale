@@ -1,0 +1,31 @@
+autonomous\_robotic\_sample\_handling.controller.sub\_controllers.robot\_arm\_controller
+========================================================================================
+
+.. automodule:: autonomous_robotic_sample_handling.controller.sub_controllers.robot_arm_controller
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom_class.rst
+   
+      RobotArmController
+   
+   
+
+   
+   
+   
+
+
+

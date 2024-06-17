@@ -1,0 +1,31 @@
+autonomous\_robotic\_sample\_handling.controller.sub\_controllers.motor\_controller
+===================================================================================
+
+.. automodule:: autonomous_robotic_sample_handling.controller.sub_controllers.motor_controller
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom_class.rst
+   
+      MotorController
+   
+   
+
+   
+   
+   
+
+
+

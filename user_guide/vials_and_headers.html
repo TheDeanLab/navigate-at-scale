@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom vials &mdash; navigate-at-scale  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sample tray" href="sample_tray.html" />
+    <link rel="prev" title="Grippers" href="grippers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            navigate-at-scale
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autonomous_routines.html">Autonomously Generated Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_tuning.html">Manual Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grippers.html">Grippers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Custom vials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#vial-headers">Vial Headers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample_tray.html">Sample tray</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">navigate-at-scale</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Custom vials</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/user_guide/vials_and_headers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="custom-vials">
+<h1>Custom vials<a class="headerlink" href="#custom-vials" title="Permalink to this heading"></a></h1>
+<p>The custom vials are designed to maintain the orientation of the sample within the sample tray.
+They are printed using PLA filament and glass vials with solution are then inserted into the holder.</p>
+<img alt="Opening **navigate**." src="user_guide/user_guide/images/custom_made_vial.png" />
+<p>The final vial sleeve design features a chamfered edge so it can only fit in the rotation stage in one orientation. While originally the vial sleeve was intended to hold the BABB solution itself, it has been finalized to hold a small glass vial inside of the sleeve. This decision mitigates the likelihood of any unforeseen chemical reaction between the polymer-based vial sleeve and solution and thus ensures that the design tolerances remain unchanged. Doing this also allows for compatibility with other vials used in the UTSW lab.</p>
+</section>
+<section id="vial-headers">
+<h1>Vial Headers<a class="headerlink" href="#vial-headers" title="Permalink to this heading"></a></h1>
+<p>The vial headers are used to hold the stem attached to the sample clamp. Beneath the component is hole for a threaded insert. This will allow for various stems for the sample to be attached.</p>
+<img alt="Opening **navigate**." src="user_guide/user_guide/images/header_larger_area.png" />
+<p>The header displays the alterations implemented including the chamfered edges and the increase in height. Both of these changes allow for better tolerancing with the vial sleeves and robot operations. These are printed using PLA filament and a threaded insert has been placed into the bottom of the header which allows Dr. Dean’s lab to customize the types of sample holders used for imaging. The two holes on the upper face of the header are used for the neodymium magnets purchased instead of the Thorlabs magnets. This decision is more cost effective with no compromise.</p>
+<p>For a more economical option in lieu of the specialty Thorlabs magnets, neodymium magnets were chosen and directly attached into the vial header. Each header piece is printed with 2-hole inserts onto the top, which closely match the diameter of the magnets purchased via McMaster. To ensure the magnets are properly attached to the top, one drop of adhesive is applied into the hole before magnet insertion. After this process, the magnets are permanently attached to the header. The magnet polarity has been confirmed with the Thorlabs microscope assembly attachment piece during installation. Gloves must be used to prevent adhesive from contacting the skin during the process.
+Threaded inserts are installed at the bottom of the header for the sample holding attachments created by UTSW. The bore at the bottom of the header is designed to have a smaller diameter than that of the insert to establish a secured bond between the insert and PLA. To lodge the threaded insert, first align the hardware with the hole and apply heat from a soldering iron directly to the insert. This will melt the plastic around it, leading the insert to be carefully pushed down until flush with the surface. Avoid any fumes created with a mask or fume hood.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="grippers.html" class="btn btn-neutral float-left" title="Grippers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sample_tray.html" class="btn btn-neutral float-right" title="Sample tray" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dean Lab, UT Southwestern Medical Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

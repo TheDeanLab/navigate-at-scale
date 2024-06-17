@@ -1,0 +1,38 @@
+autonomous\_robotic\_sample\_handling.controller.sub\_controllers
+=================================================================
+
+.. automodule:: autonomous_robotic_sample_handling.controller.sub_controllers
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   autonomous_robotic_sample_handling.controller.sub_controllers.ControlButtons
+   autonomous_robotic_sample_handling.controller.sub_controllers.automation_controller
+   autonomous_robotic_sample_handling.controller.sub_controllers.inhouse_tools_controller
+   autonomous_robotic_sample_handling.controller.sub_controllers.motor_controller
+   autonomous_robotic_sample_handling.controller.sub_controllers.multiposition_controller
+   autonomous_robotic_sample_handling.controller.sub_controllers.pause_play_controller
+   autonomous_robotic_sample_handling.controller.sub_controllers.robot_arm_controller
+

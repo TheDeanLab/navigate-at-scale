@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Tuning &mdash; navigate-at-scale  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Grippers" href="grippers.html" />
+    <link rel="prev" title="Autonomously Generated Routines" href="autonomous_routines.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            navigate-at-scale
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autonomous_routines.html">Autonomously Generated Routines</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Manual Tuning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#loading-zone-setup">Loading Zone Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tuning-with-mecaportal">Tuning with Mecaportal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-configuration-parameters">Additional Configuration Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="grippers.html">Grippers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vials_and_headers.html">Custom vials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vials_and_headers.html#vial-headers">Vial Headers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample_tray.html">Sample tray</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">navigate-at-scale</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Manual Tuning</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/user_guide/manual_tuning.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="manual-tuning">
+<h1>Manual Tuning<a class="headerlink" href="#manual-tuning" title="Permalink to this heading"></a></h1>
+<p>In this guide, we will discuss in detail how to manually tune the system for automatically
+generating the appropriate control routines. The desired loading zone will be selected and
+adjusted using the motor and the Kinesis software. The robot arm will then be adjusted using the
+Mecaportal software to identify the loading zone and microscope staging area locations relative
+to the robot arm base. Any additional configuration parameters can then be reviewed and adjsuted
+before commencing the operation.</p>
+<p>Note that this can be somewhat of an iterative process, to identify a pose for the robot arm and
+adjust the loading zone with the motor accordingly.</p>
+<hr class="docutils" />
+<section id="loading-zone-setup">
+<h2>Loading Zone Setup<a class="headerlink" href="#loading-zone-setup" title="Permalink to this heading"></a></h2>
+<p>To start, a clear loading zone must be defined before the robot arm can be used to locate said
+loading zone.</p>
+<ol class="arabic simple">
+<li><p>Connect to the motor for the carousel using the Kinesis software. This will be used to rotate
+the carousel in position to set up the loading zone appropriately.</p></li>
+<li><p>Select a vial slot to be the starting loading zone, typically that which
+corresponds to the first sample. This slot will be oriented to be closest to the robot arm.</p></li>
+<li><p>Rotate the carousel such that the loading zone (first vial slot, etc.) is positioned closest
+to the robot arm, with the edge of the vial parallel to the base of the robot arm.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The loading zone and microscope staging area are intentionally aligned with the robot arm
+reference frame axes. This is to simplify the calculation and positioning of orientation,
+both during the tuning process and with MoveLin() operations.</p>
+</div>
+<ol class="arabic" start="4">
+<li><p>Position the robot arm at the selected loading zone. Determine exactly the end-effector pose
+of the robot arm at the loading zone, which will be used in the configuration data file.</p>
+<ol class="loweralpha simple">
+<li><p>Position the robot arm closely to the loading zone, avoiding any form of collision and
+with the correct orientation. This can be done either through manual control or through an
+initial tuning script.</p></li>
+<li><p>Manually jog the robot arm slowly to the exact loading zone. Position the gripper
+fingertips exactly around the header plate, keeping the header plate in the midpoint of the
+gripper fingertips. We seek to ensure a steady and balanced grip. The more precise the
+tuning, the better the performance.</p></li>
+<li><p>It is also important to note how far the gripper fingertips extend past the back of the
+vial. This positioning must be repeated for the microscope staging area to ensure
+appropriate placement of the header plate and sample back within the vial.</p></li>
+</ol>
+<blockquote>
+<div><img alt="Gripper Fingertips Placement" src="user_guide/user_guide/images/gripper_fingertips_placement.png" />
+</div></blockquote>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When manually tuning, ensure that the operator is simply <em>jogging</em> the robot, defined by
+right-clicking the decrease/increase buttons for a given variable in Cartesian/Joint Jog.
+This ensures that each click corresponds to a small increment of no more than 1 mm, or a
+similarly set step size. This greatly reduces the risk of causing any collateral damage or
+collisions with the environment while tuning the system. A normal click,, or a left-click,
+moves the robot at a faster pace, particularly so when no velocity limits are active. It is
+highly recommended to use a mouse for this process, as to ensure a proper right-click (and no
+accidental left clicks).</p>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Repeat and re-iterate until the robot arm and the gripper fingertips are well adjusted for the
+loading zone, and vice-versa. Remove and re-insert both the vial and the header plate to view
+the positioning from multiple angles and ensure accuracy.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="tuning-with-mecaportal">
+<h2>Tuning with Mecaportal<a class="headerlink" href="#tuning-with-mecaportal" title="Permalink to this heading"></a></h2>
+<p>The loading zone and microscope staging are locations can be found by operating the robot arm
+with Mecaportal, keeping track of the end-effector pose. The process of utilizing this system is
+briefly discussed in the previous section.</p>
+<blockquote>
+<div><img alt="End-Effector Pose (Mecaportal)" src="user_guide/user_guide/images/mecaportal_end_effector_pose.png" />
+</div></blockquote>
+<p>The six Cartesian values represent the pose of the robot arm’s end-effector with respect to its
+reference frame, and it is this that needs to be added to the configuration data file. Manual
+tuning with the robot arm and Mecaportal can be done to find the critical locations alongside
+some guiding scripts. More on specific tuning considerations listed below:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is recommended to set up some simple scripts for the robot arm (offline programs) to
+assist with the tuning procedure. Zero the joints on the robot arm and then apply a MoveLin()
+command to position the robot arm closer to the tuning zone of the target. It is critical
+that the orientation is clearly defined and that the end-effector pose is not in collision
+with any element of the environment. The robot arm can be simply jogged and manually moved
+from this point on.</p>
+</div>
+<ul>
+<li><dl class="simple">
+<dt><strong>Loading zone</strong>:</dt><dd><p>The methods of tuning the loading zone has already been discussed above, as an iterative
+process of selecting and tuning the loading zone itself. Note that the orienation of the
+robot is approximately <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">90,</span> <span class="pre">0)</span></code> if the carousel is in front of the robot arm.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Microscope Staging Area</strong>:</dt><dd><p>The process of tuning for the microscope staging area is very similar to that of the loading
+zone. It is recommended to attach a sample to the staging area to help guide the positioning
+of the gripper fingertips. Note that the orientation of the robot arm may be <code class="docutils literal notranslate"><span class="pre">(90,</span> <span class="pre">0,</span> <span class="pre">-90)</span></code>
+or <code class="docutils literal notranslate"><span class="pre">(-90,</span> <span class="pre">0,</span> <span class="pre">90)</span></code>, based on whether the microscope is positioned to the left or right of
+the robot arm.</p>
+<dl>
+<dt>A couple of points of interest for gripper positioning with the microscope staging area:</dt><dd><p>Ensure that the positioning of the gripper fingertips matches that of the loading zone
+tuning. They should extend past the header plate by about the same amount so that the
+robot arm is gripping the header plate at about the same location, so that when it
+attempts to place the sample back at the loading zone, the header plate and sample are
+returned without damaging the sample.</p>
+<p>Position the fingertips to be slightly shifted away from the shear direction. When the
+robot arm performs the shearing maneuver, there is a possibility for the grip to slightly
+shift out of place, or the orientation. The inclusion of a thin silicon layer greatly
+mitigates this risk, as would a slight time delay for the close_gripper() operation, but
+this shift of the microscope staging area tuning yielded the best results. Note that the
+magnets are strong enough such that this does not affect the alignment of the sample.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="additional-configuration-parameters">
+<h2>Additional Configuration Parameters<a class="headerlink" href="#additional-configuration-parameters" title="Permalink to this heading"></a></h2>
+<p>At this point, the critical locations and data for the automation sequences have been collected
+and any additional parameters or tuning variables can be determined before starting the program.
+This typically refers to the <em>sample_height</em>, the <em>shear_distance</em>, or orientation adjustments
+for the microscope staging area commands.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="autonomous_routines.html" class="btn btn-neutral float-left" title="Autonomously Generated Routines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="grippers.html" class="btn btn-neutral float-right" title="Grippers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dean Lab, UT Southwestern Medical Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

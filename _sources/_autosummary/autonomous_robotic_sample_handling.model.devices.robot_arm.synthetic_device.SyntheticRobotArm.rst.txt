@@ -1,0 +1,48 @@
+autonomous\_robotic\_sample\_handling.model.devices.robot\_arm.synthetic\_device.SyntheticRobotArm
+==================================================================================================
+
+.. currentmodule:: autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device
+
+.. autoclass:: SyntheticRobotArm
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SyntheticRobotArm.__init__
+      ~SyntheticRobotArm.activate_and_home
+      ~SyntheticRobotArm.close_gripper
+      ~SyntheticRobotArm.delay
+      ~SyntheticRobotArm.disconnect
+      ~SyntheticRobotArm.load_robot_config
+      ~SyntheticRobotArm.move_joints
+      ~SyntheticRobotArm.move_lin
+      ~SyntheticRobotArm.move_lin_ref_trf
+      ~SyntheticRobotArm.move_lin_ref_wrf
+      ~SyntheticRobotArm.move_pose
+      ~SyntheticRobotArm.open_gripper
+      ~SyntheticRobotArm.pause_robot_motion
+      ~SyntheticRobotArm.reset_error
+      ~SyntheticRobotArm.reset_robot_motion
+      ~SyntheticRobotArm.resume_robot_motion
+      ~SyntheticRobotArm.start_program
+      ~SyntheticRobotArm.zero_joints
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SyntheticRobotArm.commands
+   
+   

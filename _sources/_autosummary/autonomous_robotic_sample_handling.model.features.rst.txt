@@ -1,0 +1,32 @@
+autonomous\_robotic\_sample\_handling.model.features
+====================================================
+
+.. automodule:: autonomous_robotic_sample_handling.model.features
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   autonomous_robotic_sample_handling.model.features.example_feature
+

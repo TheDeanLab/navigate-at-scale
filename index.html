@@ -44,7 +44,16 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Development</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/autonomous_routines.html">Autonomously Generated Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/manual_tuning.html">Manual Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/grippers.html">Grippers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/vials_and_headers.html">Custom vials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/vials_and_headers.html#vial-headers">Vial Headers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/sample_tray.html">Sample tray</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -80,6 +89,9 @@
 microscopy. It is designed to work with a Mecademic Meca500 robotic arm and a Thorlabs
 HDR50 rotation stage. The plugin provides a user-friendly interface for setting up and
 running high-throughput imaging experiments.</p>
+<blockquote>
+<div><img alt="Opening **navigate**." src="_images/cad_overview.png" />
+</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This project is under active development. See our <a class="reference external" href="https://github.com/TheDeanLab/navigate-at-scale">GitHub repository for updates</a>.</p>
@@ -92,36 +104,65 @@ and maximums, are more, there are inherent risks associated with the use of such
 automated systems. Despite these precautions, the complexity and nature of automated
 hardware can lead to unpredictable outcomes. Therefore, the Dean Lab and UT
 Southwestern expressly disclaim any responsibility for any damages, losses, or
-injuries that may arise from or be related to the use of <strong>navigate</strong>.
-Users should be aware of these risks and agree to utilize <strong>navigate</strong> at their own risk.</p>
+injuries that may arise from or be related to the use of <strong>navigate</strong> or <strong>navigate-at-scale</strong>.
+Users should be aware of these risks and agree to utilize <strong>navigate</strong> and <strong>navigate-at-scale</strong> at their own risk.</p>
 </div>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/autonomous_routines.html">Autonomously Generated Routines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/autonomous_routines.html#the-general-routine-procedure">The General Routine Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/autonomous_routines.html#routine-generation-approaches">Routine Generation Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/autonomous_routines.html#critical-data">Critical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/autonomous_routines.html#future-improvements">Future Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/manual_tuning.html">Manual Tuning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/manual_tuning.html#loading-zone-setup">Loading Zone Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/manual_tuning.html#tuning-with-mecaportal">Tuning with Mecaportal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/manual_tuning.html#additional-configuration-parameters">Additional Configuration Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/grippers.html">Grippers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/vials_and_headers.html">Custom vials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/vials_and_headers.html#vial-headers">Vial Headers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/sample_tray.html">Sample tray</a></li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/autonomous_robotic_sample_handling.controller.html">autonomous_robotic_sample_handling.controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/autonomous_robotic_sample_handling.model.html">autonomous_robotic_sample_handling.model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/autonomous_robotic_sample_handling.view.html">autonomous_robotic_sample_handling.view</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 </ul>
 </div>
 <section id="authors">
 <h2><strong>Authors</strong><a class="headerlink" href="#authors" title="Permalink to this heading"></a></h2>
 <p><strong>navigate-at-scale</strong> was developed by the following individuals as part of their Senior
-Capstone project at the University of Texas Dallas.
-- Sai Bommisetty
-- Joy Camposagrado
-- James Harrigan
-- Rayyan Sappayani
-- Abhijeet Kulkarni
-- Besher Nusair</p>
+Capstone project at the University of Texas Dallas.</p>
+<ul class="simple">
+<li><p>Sai Bommisetty</p></li>
+<li><p>Joy Camposagrado</p></li>
+<li><p>James Harrigan</p></li>
+<li><p>Rayyan Sappayani</p></li>
+<li><p>Abhijeet Kulkarni</p></li>
+<li><p>Besher Nusair</p></li>
+</ul>
 </section>
 <section id="funding">
 <h2><strong>Funding</strong><a class="headerlink" href="#funding" title="Permalink to this heading"></a></h2>
-<p><strong>navigate</strong> is supported by the
-<a class="reference external" href="https://cellularsignaltransduction.org">UT Southwestern and University of North Carolina Center for Cell Signaling</a>, a Biomedical Technology Development and Dissemination (BTDD)
-Center funded by the NIH National Institute of General Medical Science (RM1GM145399), and
-the <a class="reference external" href="https://www.metastasis-imaging.org">Center for Metastatic Tumor Imaging</a> program, a
-Cellular Cancer Biology Imaging Research (CCBIR) program funded by the NIH National Cancer Institute (U54CA268072).</p>
+<p><strong>navigate</strong> and <strong>navigate-at-scale</strong> is supported by:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cellularsignaltransduction.org">UT Southwestern and University of North Carolina Center for Cell Signaling</a>, NIH NIGMS RM1GM145399.</p></li>
+<li><p>The <a class="reference external" href="https://www.metastasis-imaging.org">Center for Metastatic Tumor Imaging</a>, NIH NCI U54CA268072.</p></li>
+<li><p>President’s Research Council, UT Southwestern Medical Center.</p></li>
+<li><p>Simmons Comprehensive Cancer Center Translational Seed Grant, UT Southwestern Medical Center.</p></li>
+</ul>
 </section>
 </section>
 

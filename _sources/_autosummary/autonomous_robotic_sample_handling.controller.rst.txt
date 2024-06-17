@@ -1,0 +1,33 @@
+﻿autonomous\_robotic\_sample\_handling.controller
+================================================
+
+.. automodule:: autonomous_robotic_sample_handling.controller
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   autonomous_robotic_sample_handling.controller.autonomous_robotic_sample_handling_controller
+   autonomous_robotic_sample_handling.controller.sub_controllers
+

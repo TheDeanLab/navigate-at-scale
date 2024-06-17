@@ -1,0 +1,33 @@
+autonomous\_robotic\_sample\_handling.model.devices
+===================================================
+
+.. automodule:: autonomous_robotic_sample_handling.model.devices
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   autonomous_robotic_sample_handling.model.devices.motor
+   autonomous_robotic_sample_handling.model.devices.robot_arm
+

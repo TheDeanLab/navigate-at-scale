@@ -1,0 +1,34 @@
+autonomous\_robotic\_sample\_handling.controller.sub\_controllers.robot\_arm\_controller.RobotArmController
+===========================================================================================================
+
+.. currentmodule:: autonomous_robotic_sample_handling.controller.sub_controllers.robot_arm_controller
+
+.. autoclass:: RobotArmController
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RobotArmController.__init__
+      ~RobotArmController.close_gripper
+      ~RobotArmController.delay
+      ~RobotArmController.disconnect
+      ~RobotArmController.move_joints
+      ~RobotArmController.move_lin
+      ~RobotArmController.move_lin_rel_trf
+      ~RobotArmController.move_pose
+      ~RobotArmController.open_gripper
+      ~RobotArmController.zero_joints
+   
+   
+
+   
+   
+   

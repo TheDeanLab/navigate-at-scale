@@ -1,0 +1,31 @@
+autonomous\_robotic\_sample\_handling.model.devices.robot\_arm.synthetic\_device
+================================================================================
+
+.. automodule:: autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom_class.rst
+   
+      SyntheticRobotArm
+   
+   
+
+   
+   
+   
+
+
+

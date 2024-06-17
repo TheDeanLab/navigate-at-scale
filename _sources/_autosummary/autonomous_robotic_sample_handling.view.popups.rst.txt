@@ -1,0 +1,32 @@
+autonomous\_robotic\_sample\_handling.view.popups
+=================================================
+
+.. automodule:: autonomous_robotic_sample_handling.view.popups
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   autonomous_robotic_sample_handling.view.popups.inhouse_tools_popup
+

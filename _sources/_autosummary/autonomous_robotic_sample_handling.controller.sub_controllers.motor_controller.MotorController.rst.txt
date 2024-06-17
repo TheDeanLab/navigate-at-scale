@@ -1,0 +1,33 @@
+autonomous\_robotic\_sample\_handling.controller.sub\_controllers.motor\_controller.MotorController
+===================================================================================================
+
+.. currentmodule:: autonomous_robotic_sample_handling.controller.sub_controllers.motor_controller
+
+.. autoclass:: MotorController
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MotorController.MoveJog
+      ~MotorController.MoveTo
+      ~MotorController.MoveToLoadingZone
+      ~MotorController.__init__
+      ~MotorController.disconnect
+      ~MotorController.getPosition
+      ~MotorController.home
+      ~MotorController.setHomingVelocity
+      ~MotorController.test_connection
+   
+   
+
+   
+   
+   

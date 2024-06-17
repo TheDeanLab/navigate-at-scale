@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grippers &mdash; navigate-at-scale  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Custom vials" href="vials_and_headers.html" />
+    <link rel="prev" title="Manual Tuning" href="manual_tuning.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            navigate-at-scale
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autonomous_routines.html">Autonomously Generated Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_tuning.html">Manual Tuning</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Grippers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vials_and_headers.html">Custom vials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vials_and_headers.html#vial-headers">Vial Headers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample_tray.html">Sample tray</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">navigate-at-scale</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Grippers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/user_guide/grippers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="grippers">
+<h1>Grippers<a class="headerlink" href="#grippers" title="Permalink to this heading"></a></h1>
+<p>The grippers designed for the Meca500 Robot Arm are printed using ONYX Carbon Infused 3D printing.</p>
+<img alt="Opening **navigate**." src="user_guide/user_guide/images/gripper_vol_2.png" />
+<p>The pinholes on the base of the grippers are used to stabilize the fingers on the end effector (MEGP 25E Grippers).</p>
+<p>The design is primarily influenced by constraints of the robot arm end-effector itself, and the design of the header plate used to house the sample. Additional adjustments have been made throughout the design iterations, as well as due to observations during experimental testing.
+Given that the MECA500 robot arm is being used by the client, a compatible gripper needs to be selected. Of the available grippers, the MEGP 25E gripper has been selected, with the additional peripherals for desired adjustments. As the MEGP 25E has a limited stroke per jaw of 3 mm, the gripper fingertips need to be designed such that the ‘open’ gripper range i.e., the gap between the two fingertips when attached to the ‘open’ gripper, is slightly larger than the width of the header plate. This way, the gripper range is wide enough to position the gripper fingertips around the header plate before gripping. It must also be small enough that when the gripper is closed, the fingertips are able to effectively hold and secure the header plate and biological sample of interest. These dimensions are affected by the range of the MEGP 25E gripper and the width of the header plate and vial sleeve, to define a concise constraint for the gripper fingertips.
+Additional guidelines regarding the length and positioning of the gripper fingertips are also observed, to maximize the available force and performance. The length of the gripper fingertips is adjusted to permit suitable gripping of the header plate while avoiding collision of the header plate with other objects in the environment. This includes the staging area support for the microscope, both the mockup and the physical optical microscope, as well as the gripper itself. The length of the gripper fingertips is also adjusted to minimize observed flex during gripping patterns, a behavior influenced by the selected open and close positions for the gripper range.
+The final modification involves the addition of a thin silicone layer on the gripper fingertips. Recall that the MEGP 25E is an electric parallel gripper, with the ability to regulate the force and range when gripping an object. As such, the gripper performs a friction grip for its various maneuvers, including the shearing of the header plate, when magnetically secured to the microscope staging area. There is a potential for the header plate to shift here, particularly due to the force applied on one of the gripper fingertips, as well as the smooth texture of the ONYX material used to manufacture the stiffer model utilized. The silicon layer provides more friction, and strengthens the grip, ensuring that more complex and challenging maneuvers can be performed with minimal effort, while simultaneously limiting any potential deviations or errors. The increased friction reduces the distance and force required to secure a biological sample, while greatly limiting rotational forces that occur due to shearing maneuvers and slippage promoted by the use of smooth materials.
+The gripper fingertips are attached to the gripper using a set of M4 screws and additional dowel pins. The screws firmly hold the gripper fingertips in place, limiting any potential for flex while gripping or undesirable movement. The selected dowel pins prevent rotation of the gripper fingertips, maintaining alignment during and between operations. Given that the dowel inserts for gripper fingertips are asymmetric, the fingertip design has been modified to have four holes for dowel inserts, such that a spare gripper fingertip could be utilized for either side of the gripper. This reduces the number of backups required and provides a more robust and effective design. Previous tests and routines demonstrate better stability and prevent any movement that may occur to the grippers while in procedure. All engineering drawings can be found in Appendix – Engineering Drawings at the end of the document.</p>
+<p>The taper pins purchased which go through the gripper finger module and 3D printed gripper fingers were longer than required. This is due to the fact that it was difficult to obtain a pin with the custom sized diameter, so a taper pin is utilized in place of the common pin. The thinner end of the taper pin is inserted through the 3D printed gripper finger and a hammer is used to flush the pin at the wider end. After both the taper pins in the 3D printed gripper finger are inserted, these are aligned with the respective holes in the gripper finger module. Subsequently, the gripper finger is screwed onto the module and a bolt cutting tool is used to remove the excess length. This is repeated for the opposite side.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="manual_tuning.html" class="btn btn-neutral float-left" title="Manual Tuning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vials_and_headers.html" class="btn btn-neutral float-right" title="Custom vials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dean Lab, UT Southwestern Medical Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

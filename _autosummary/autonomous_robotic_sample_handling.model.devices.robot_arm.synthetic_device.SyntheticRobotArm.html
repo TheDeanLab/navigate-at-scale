@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm &mdash; navigate-at-scale  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="autonomous_robotic_sample_handling.model.features" href="autonomous_robotic_sample_handling.model.features.html" />
+    <link rel="prev" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device" href="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            navigate-at-scale
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/autonomous_routines.html">Autonomously Generated Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/manual_tuning.html">Manual Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/grippers.html">Grippers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/vials_and_headers.html">Custom vials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/vials_and_headers.html#vial-headers">Vial Headers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/sample_tray.html">Sample tray</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="autonomous_robotic_sample_handling.controller.html">autonomous_robotic_sample_handling.controller</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="autonomous_robotic_sample_handling.model.html">autonomous_robotic_sample_handling.model</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="autonomous_robotic_sample_handling.model.devices.html">autonomous_robotic_sample_handling.model.devices</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="autonomous_robotic_sample_handling.model.devices.motor.html">autonomous_robotic_sample_handling.model.devices.motor</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="autonomous_robotic_sample_handling.model.devices.robot_arm.html">autonomous_robotic_sample_handling.model.devices.robot_arm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autonomous_robotic_sample_handling.model.features.html">autonomous_robotic_sample_handling.model.features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autonomous_robotic_sample_handling.view.html">autonomous_robotic_sample_handling.view</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">navigate-at-scale</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="autonomous_robotic_sample_handling.model.html">autonomous_robotic_sample_handling.model</a></li>
+          <li class="breadcrumb-item"><a href="autonomous_robotic_sample_handling.model.devices.html">autonomous_robotic_sample_handling.model.devices</a></li>
+          <li class="breadcrumb-item"><a href="autonomous_robotic_sample_handling.model.devices.robot_arm.html">autonomous_robotic_sample_handling.model.devices.robot_arm</a></li>
+          <li class="breadcrumb-item"><a href="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.html">autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device</a></li>
+      <li class="breadcrumb-item active">autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="autonomous-robotic-sample-handling-model-devices-robot-arm-synthetic-device-syntheticrobotarm">
+<h1>autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm<a class="headerlink" href="#autonomous-robotic-sample-handling-model-devices-robot-arm-synthetic-device-syntheticrobotarm" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.</span></span><span class="sig-name descname"><span class="pre">SyntheticRobotArm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_connection</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A synthetic robot arm class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_connection</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize the Synthetic Device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device_connection</strong> (<em>object</em>) – The device connection object</p></li>
+<li><p><strong>args</strong> (<em>list</em>) – The arguments for the device</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.__init__" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(device_connection, *args)</p></td>
+<td><p>Initialize the Synthetic Device</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.activate_and_home" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.activate_and_home"><code class="xref py py-obj docutils literal notranslate"><span class="pre">activate_and_home</span></code></a>()</p></td>
+<td><p>Activates and Homes the Robot</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.close_gripper" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.close_gripper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close_gripper</span></code></a>()</p></td>
+<td><p>Close the robot gripper</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.delay" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.delay"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delay</span></code></a>(wait)</p></td>
+<td><p>Delays robot operation by a specified time</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.disconnect" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.disconnect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disconnect</span></code></a>()</p></td>
+<td><p>Disconnects the Mecademic Robot object from the robot and system</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.load_robot_config" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.load_robot_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_robot_config</span></code></a>()</p></td>
+<td><p>Loads robot configuration data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_joints" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_joints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_joints</span></code></a>(j1, j2, j3, j4, j5, j6)</p></td>
+<td><p>Move robot arm joints to the specified angles</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_lin</span></code></a>(x, y, z, rx, ry, rz)</p></td>
+<td><p>Move the robot arm along a linear path (in the Cartesian space) to a given pose</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin_ref_trf" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin_ref_trf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_lin_ref_trf</span></code></a>(x, y, z, rx, ry, rz)</p></td>
+<td><p>Move robot arm relative to the tool reference frame</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin_ref_wrf" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin_ref_wrf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_lin_ref_wrf</span></code></a>(x, y, z, rx, ry, rz)</p></td>
+<td><p>Move robot arm relative to the world reference frame</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_pose" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_pose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_pose</span></code></a>(x, y, z, rx, ry, rz)</p></td>
+<td><p>Move Robot Arm to the given Pose</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.open_gripper" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.open_gripper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">open_gripper</span></code></a>()</p></td>
+<td><p>Open the robot gripper</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.pause_robot_motion" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.pause_robot_motion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pause_robot_motion</span></code></a>()</p></td>
+<td><p>Pause robot motion for synthetic device</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.reset_error" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.reset_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_error</span></code></a>()</p></td>
+<td><p>Reset robot error for synthetic device</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.reset_robot_motion" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.reset_robot_motion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_robot_motion</span></code></a>()</p></td>
+<td><p>Reset robot motion for synthetic device</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.resume_robot_motion" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.resume_robot_motion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resume_robot_motion</span></code></a>()</p></td>
+<td><p>Resume robot motion for synthetic device</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.start_program" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.start_program"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_program</span></code></a>(program_name)</p></td>
+<td><p>Start offline robot program</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.zero_joints" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.zero_joints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_joints</span></code></a>()</p></td>
+<td><p>Zero the joints of the synthetic device</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.commands" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.commands"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commands</span></code></a></p></td>
+<td><p>Return the commands for the synthetic device</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.activate_and_home">
+<span class="sig-name descname"><span class="pre">activate_and_home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.activate_and_home" title="Permalink to this definition"></a></dt>
+<dd><p>Activates and Homes the Robot</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.close_gripper">
+<span class="sig-name descname"><span class="pre">close_gripper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.close_gripper" title="Permalink to this definition"></a></dt>
+<dd><p>Close the robot gripper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.delay">
+<span class="sig-name descname"><span class="pre">delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.delay" title="Permalink to this definition"></a></dt>
+<dd><p>Delays robot operation by a specified time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wait</strong> (<em>float</em>) – time in seconds to delay the robot</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.disconnect">
+<span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.disconnect" title="Permalink to this definition"></a></dt>
+<dd><p>Disconnects the Mecademic Robot object from the robot and system</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.load_robot_config">
+<span class="sig-name descname"><span class="pre">load_robot_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.load_robot_config" title="Permalink to this definition"></a></dt>
+<dd><p>Loads robot configuration data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_joints">
+<span class="sig-name descname"><span class="pre">move_joints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j6</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_joints" title="Permalink to this definition"></a></dt>
+<dd><p>Move robot arm joints to the specified angles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>j1</strong> (<em>float</em>) – Angle of joint 1</p></li>
+<li><p><strong>j2</strong> (<em>float</em>) – Angle of joint 2</p></li>
+<li><p><strong>j3</strong> (<em>float</em>) – Angle of joint 3</p></li>
+<li><p><strong>j4</strong> (<em>float</em>) – Angle of joint 4</p></li>
+<li><p><strong>j5</strong> (<em>float</em>) – Angle of joint 5</p></li>
+<li><p><strong>j6</strong> (<em>float</em>) – Angle of joint 6</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin">
+<span class="sig-name descname"><span class="pre">move_lin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin" title="Permalink to this definition"></a></dt>
+<dd><p>Move the robot arm along a linear path (in the Cartesian space) to a given pose</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – position in x</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – position in y</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – position in z</p></li>
+<li><p><strong>rx</strong> (<em>float</em>) – angle around x-axis</p></li>
+<li><p><strong>ry</strong> (<em>float</em>) – angle around y-axis</p></li>
+<li><p><strong>rz</strong> (<em>float</em>) – angle around z-axis</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin_ref_trf">
+<span class="sig-name descname"><span class="pre">move_lin_ref_trf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin_ref_trf" title="Permalink to this definition"></a></dt>
+<dd><p>Move robot arm relative to the tool reference frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – distance (mm) in x</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – distance (mm) in y</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance (mm) in z</p></li>
+<li><p><strong>rx</strong> (<em>float</em>) – angle around x-axis</p></li>
+<li><p><strong>ry</strong> (<em>float</em>) – angle around y-axis</p></li>
+<li><p><strong>rz</strong> (<em>float</em>) – angle around z-axis</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin_ref_wrf">
+<span class="sig-name descname"><span class="pre">move_lin_ref_wrf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_lin_ref_wrf" title="Permalink to this definition"></a></dt>
+<dd><p>Move robot arm relative to the world reference frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – distance (mm) in x</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – distance (mm) in y</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance (mm) in z</p></li>
+<li><p><strong>rx</strong> (<em>float</em>) – angle around x-axis</p></li>
+<li><p><strong>ry</strong> (<em>float</em>) – angle around y-axis</p></li>
+<li><p><strong>rz</strong> (<em>float</em>) – angle around z-axis</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_pose">
+<span class="sig-name descname"><span class="pre">move_pose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.move_pose" title="Permalink to this definition"></a></dt>
+<dd><p>Move Robot Arm to the given Pose</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – position in x</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – position in y</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – position in z</p></li>
+<li><p><strong>rx</strong> (<em>float</em>) – angle around x-axis</p></li>
+<li><p><strong>ry</strong> (<em>float</em>) – angle around y-axis</p></li>
+<li><p><strong>rz</strong> (<em>float</em>) – angle around z-axis</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.open_gripper">
+<span class="sig-name descname"><span class="pre">open_gripper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.open_gripper" title="Permalink to this definition"></a></dt>
+<dd><p>Open the robot gripper</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.pause_robot_motion">
+<span class="sig-name descname"><span class="pre">pause_robot_motion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.pause_robot_motion" title="Permalink to this definition"></a></dt>
+<dd><p>Pause robot motion for synthetic device</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.reset_error">
+<span class="sig-name descname"><span class="pre">reset_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.reset_error" title="Permalink to this definition"></a></dt>
+<dd><p>Reset robot error for synthetic device</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.reset_robot_motion">
+<span class="sig-name descname"><span class="pre">reset_robot_motion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.reset_robot_motion" title="Permalink to this definition"></a></dt>
+<dd><p>Reset robot motion for synthetic device</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.resume_robot_motion">
+<span class="sig-name descname"><span class="pre">resume_robot_motion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.resume_robot_motion" title="Permalink to this definition"></a></dt>
+<dd><p>Resume robot motion for synthetic device</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.start_program">
+<span class="sig-name descname"><span class="pre">start_program</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">program_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.start_program" title="Permalink to this definition"></a></dt>
+<dd><p>Start offline robot program</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>program_name</strong> (<em>str</em>) – String containing the offline program name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.zero_joints">
+<span class="sig-name descname"><span class="pre">zero_joints</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.zero_joints" title="Permalink to this definition"></a></dt>
+<dd><p>Zero the joints of the synthetic device</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.commands">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commands</span></span><a class="headerlink" href="#autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.SyntheticRobotArm.commands" title="Permalink to this definition"></a></dt>
+<dd><p>Return the commands for the synthetic device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>commands</strong> – commands that the device supports</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device.html" class="btn btn-neutral float-left" title="autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="autonomous_robotic_sample_handling.model.features.html" class="btn btn-neutral float-right" title="autonomous_robotic_sample_handling.model.features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dean Lab, UT Southwestern Medical Center.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

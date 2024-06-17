@@ -1,0 +1,37 @@
+autonomous\_robotic\_sample\_handling.model.devices.motor.synthetic\_device.SyntheticRobotArm
+=============================================================================================
+
+.. currentmodule:: autonomous_robotic_sample_handling.model.devices.motor.synthetic_device
+
+.. autoclass:: SyntheticRobotArm
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SyntheticRobotArm.__init__
+      ~SyntheticRobotArm.activate_and_home
+      ~SyntheticRobotArm.delay
+      ~SyntheticRobotArm.disconnect
+      ~SyntheticRobotArm.jog
+      ~SyntheticRobotArm.move_joints
+      ~SyntheticRobotArm.move_pose
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SyntheticRobotArm.commands
+   
+   

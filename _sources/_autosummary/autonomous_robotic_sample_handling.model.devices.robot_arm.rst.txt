@@ -1,0 +1,34 @@
+autonomous\_robotic\_sample\_handling.model.devices.robot\_arm
+==============================================================
+
+.. automodule:: autonomous_robotic_sample_handling.model.devices.robot_arm
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   autonomous_robotic_sample_handling.model.devices.robot_arm.device_startup_functions
+   autonomous_robotic_sample_handling.model.devices.robot_arm.robot_arm
+   autonomous_robotic_sample_handling.model.devices.robot_arm.synthetic_device
+
