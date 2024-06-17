@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 
 # Third party imports
-# from tkinter import messagebox
 
 # Local application imports
 from navigate.tools.common_functions import load_module_from_file
@@ -17,11 +16,35 @@ DEVICE_TYPE_NAME = "robot_arm"  # Same as in configuraion.yaml, for example "sta
 DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
 
 
-def load_device(configuration, is_synthetic=False):
+def build_robot_arm_connection(microscope_name, configuration, mdr):
+    """ Builds and returns a connection to the robot device
+
+    Parameters
+    ----------
+    configuration : yaml
+        Configuration data for the devices from .navigate/config/config.yaml
+    mdr : mecademicpy.Robot
+        Meca500 Robot object type
+
+    Returns
+    -------
+    Robot object with corresponding device connection
+    """
+    # TODO: Set up import statement to occur within initial load_device. Avoid re-importing package
+    robot_ip_address = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["ip_address"]
+    enable_synchronous_mode = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["enable_synchronous_mode"]
+    robot = mdr.Robot()
+    robot.Connect(address=robot_ip_address, enable_synchronous_mode=enable_synchronous_mode)
+    return robot
+
+
+def load_device(microscope_name, configuration, is_synthetic=False):
     """ Load the Robot Arm
 
     Parameters
     ----------
+    microscope_name : string
+        The name of the active microscope for the experiment, from navigate
     configuration : dict
         The configuration for the Robot Arm
     is_synthetic : bool
@@ -30,28 +53,25 @@ def load_device(configuration, is_synthetic=False):
     Returns
     -------
     object
-        The device connection object
+        The device connection object corresponding to the Meca500 robot arm
     """
     if is_synthetic:
-        robot_type = "SyntheticRobot"
+        device_type = "synthetic"
     else:
-        # Can be Meca500, SyntheticRobot, syntheticrobot, Synthetic, synthetic
-        robot_type = configuration["configuration"]["hardware"]["robot_arm"]["type"]
+        device_type = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["type"]
 
-    if robot_type == "Meca500":
-        #TODO: Consider auto_redial function.
-        robot_ip_address = configuration["configuration"]["hardware"]["robot_arm"]["ip_address"]
-        enable_synchronous_mode = configuration["configuration"]["hardware"]["robot_arm"]["enable_synchronous_mode"]
+    if device_type == "Meca500":
         import mecademicpy.robot as mdr
-        robot = mdr.Robot()
-        robot.Connect(address=robot_ip_address, enable_synchronous_mode=enable_synchronous_mode)
-        return robot
+        return auto_redial(
+            build_robot_arm_connection, (microscope_name, configuration, mdr,), exception=Exception
+        )
 
-    elif robot_type.lower() == "syntheticrobot" or robot_type.lower() == "synthetic":
+    elif device_type.lower() == "syntheticrobot" or device_type.lower() == "synthetic":
         return DummyDeviceConnection()
 
+
 def start_device(microscope_name, device_connection, configuration, is_synthetic=False):
-    """ Start the Robot ARm
+    """ Start the Robot Arm
 
     Parameters
     ----------

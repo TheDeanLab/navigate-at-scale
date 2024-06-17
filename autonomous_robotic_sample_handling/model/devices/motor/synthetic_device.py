@@ -1,4 +1,5 @@
 class SyntheticRobotArm:
+    """ A synthetic robot arm for testing purposes """
     def __init__(self, device_connection, *args):
         """ Initialize the Synthetic Device
 
@@ -20,7 +21,17 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: disconnect")
 
     def move_joints(self, a, b, c, d, e, f):
-        """ Move Robot Joints """
+        """ Move Robot Joints.
+
+        Parameters
+        ----------
+        a
+        b
+        c
+        d
+        e
+        f
+        """
         print("*** Synthetic robot receive command: move_joints")
 
     def move_pose(self, a, b, c, d, e, f):

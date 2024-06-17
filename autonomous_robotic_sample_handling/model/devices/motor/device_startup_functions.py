@@ -13,13 +13,19 @@ from navigate.config.config import get_navigate_path
 from navigate.model.device_startup_functions import (
     device_not_found,
     DummyDeviceConnection,
+    auto_redial,
 )
 
 DEVICE_TYPE_NAME = "motor"  # Same as in configuration.yaml, for example "stage", "filter_wheel", "remote_focus_device"...
 DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
 
 
-def load_device(configuration, is_synthetic=False):
+def build_motor_connection(configuration, motor, motor_serial_no):
+    motor.Connect(motor_serial_no)
+    return motor
+
+
+def load_device(microscope_name, configuration, is_synthetic=False):
     """ Load the Stepper Motor
 
     Parameters
@@ -47,7 +53,8 @@ def load_device(configuration, is_synthetic=False):
         motor_type = "SyntheticMotor"
     else:
         # Can be Meca500, SyntheticRobot, syntheticrobot, Synthetic, synthetic
-        motor_type = configuration["configuration"]["hardware"]["motor"]["type"]
+        motor_type = configuration["configuration"]["microscopes"][microscope_name][
+            "motor"]["hardware"]["type"]
 
     if motor_type == "HDR50":
         # TODO: Consider auto_redial function.
@@ -66,11 +73,14 @@ def load_device(configuration, is_synthetic=False):
         
         DeviceManagerCLI.BuildDeviceList()
         motor = BenchtopStepperMotor.CreateBenchtopStepperMotor(motor_serial_no)
-        motor.Connect(motor_serial_no)
-        return motor
+
+        return auto_redial(
+            build_motor_connection, (configuration, motor, motor_serial_no, ), exception=Exception
+        )
 
     elif motor_type.lower() == "SyntheticMotor" or motor_type.lower() == "synthetic":
         return DummyDeviceConnection()
+
 
 def start_device(microscope_name, device_connection, configuration, is_synthetic=False):
     """ Start the Robot ARm
