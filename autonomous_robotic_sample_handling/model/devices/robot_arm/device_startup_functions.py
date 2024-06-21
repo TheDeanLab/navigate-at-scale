@@ -16,7 +16,7 @@ DEVICE_TYPE_NAME = "robot_arm"  # Same as in configuraion.yaml, for example "sta
 DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
 
 
-def build_robot_arm_connection(microscope_name, configuration, mdr):
+def build_robot_arm_connection(configuration, mdr):
     """ Builds and returns a connection to the robot device
 
     Parameters
@@ -30,21 +30,21 @@ def build_robot_arm_connection(microscope_name, configuration, mdr):
     -------
     Robot object with corresponding device connection
     """
-    # TODO: Set up import statement to occur within initial load_device. Avoid re-importing package
-    robot_ip_address = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["ip_address"]
-    enable_synchronous_mode = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["enable_synchronous_mode"]
+    # TODO: Set up import statement to occur within initial load_device.
+    #  Avoid re-importing package
+    robot_ip_address = configuration["ip_address"]
+    enable_synchronous_mode = configuration["enable_synchronous_mode"]
     robot = mdr.Robot()
-    robot.Connect(address=robot_ip_address, enable_synchronous_mode=enable_synchronous_mode)
+    robot.Connect(address=robot_ip_address,
+                  enable_synchronous_mode=enable_synchronous_mode)
     return robot
 
 
-def load_device(microscope_name, configuration, is_synthetic=False):
+def load_device(configuration, is_synthetic=False):
     """ Load the Robot Arm
 
     Parameters
     ----------
-    microscope_name : string
-        The name of the active microscope for the experiment, from navigate
     configuration : dict
         The configuration for the Robot Arm
     is_synthetic : bool
@@ -58,12 +58,15 @@ def load_device(microscope_name, configuration, is_synthetic=False):
     if is_synthetic:
         device_type = "synthetic"
     else:
-        device_type = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["type"]
+        # configuration["configuration"]["hardware"]
+        device_type = configuration.get("type", "Meca500")
 
     if device_type == "Meca500":
         import mecademicpy.robot as mdr
         return auto_redial(
-            build_robot_arm_connection, (microscope_name, configuration, mdr,), exception=Exception
+            build_robot_arm_connection,
+            (configuration, mdr,),
+            exception=Exception
         )
 
     elif device_type.lower() == "syntheticrobot" or device_type.lower() == "synthetic":

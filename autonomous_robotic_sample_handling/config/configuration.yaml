@@ -1,6 +1,6 @@
  #Info necessary for each hardware
 environment:
-#microscope is the center of the environement
+#microscope is the center of the environment
   robot:
     #robot base is the reference
     position: [0,0,0]

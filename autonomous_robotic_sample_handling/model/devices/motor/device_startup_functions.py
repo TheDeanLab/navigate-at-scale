@@ -25,7 +25,7 @@ def build_motor_connection(configuration, motor, motor_serial_no):
     return motor
 
 
-def load_device(microscope_name, configuration, is_synthetic=False):
+def load_device(configuration, is_synthetic=False):
     """ Load the Stepper Motor
 
     Parameters
@@ -53,12 +53,11 @@ def load_device(microscope_name, configuration, is_synthetic=False):
         motor_type = "SyntheticMotor"
     else:
         # Can be Meca500, SyntheticRobot, syntheticrobot, Synthetic, synthetic
-        motor_type = configuration["configuration"]["microscopes"][microscope_name][
-            "motor"]["hardware"]["type"]
+        motor_type = configuration.get("type", "HDR50")
 
     if motor_type == "HDR50":
         # TODO: Consider auto_redial function.
-        motor_serial_no = configuration["configuration"]["hardware"]["motor"]["serial_no"]
+        motor_serial_no = configuration["serial_no"]
 
         dll_dir = os.path.join(plugin_path, 'API')
 
