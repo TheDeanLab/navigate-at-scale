@@ -43,7 +43,7 @@ class MoveSequence(tk.Frame):
             "offline_program": ttk.Button(self, text="Start program"),
             "automation_sequence": ttk.Button(self, text="Start automation sequence"),
             "process_sample": ttk.Button(self, text="Process a sample"),
-            "in_house": ttk.Button(self, text="In House Toools"),
+            "in_house": ttk.Button(self, text="In House Tools"),
             "import": ttk.Button(self, text="Load Positions from Disk"),
         }
         counter = 0
