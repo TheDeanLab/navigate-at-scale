@@ -18,7 +18,7 @@ program can continue running as expected.
     also be dependent on the precision of all measurements associated with the design approach, the
     manual tuning approach was selected as the primary focus of this project.
 
-----------------
+-------------------------------------
 
 The General Routine Procedure
 -------------------------------------
@@ -29,7 +29,11 @@ operating guidelines are built upon a set of conditions required for safe and ef
 of the system. Combined with other operational parameters and environmental conditions,
 appropriate control routines can be developed for automated sample handling.
 
-The general routine can be described as follows:
+The general routine can be described as follows. A visual of the end-effector path throughout the
+first half of the routine is also provided below:
+
+.. image:: user_guide/images/system_view_front.png
+  :alt: Alternative Routines
 
 #. The robot arm homes to the 'zero joints' position.
 
@@ -132,7 +136,7 @@ Following the completion of a complete routine, the program either:
 - continues with the next sample in queue, should the queue be non-empty.
     - The motor rotates by 15 degree increments to the next sample's loading zone.
 
---------------
+-----------------------------
 
 Routine Generation Approaches
 -----------------------------
