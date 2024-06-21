@@ -1,13 +1,19 @@
  #Info necessary for each hardware
 environment:
 #microscope is the center of the environment
+# All values are in mm
   robot:
-    #robot base is the reference
+    # All design-based approach. Not necessarily implemented for non-trivial
+    # geometries. Robot base is the reference
     position: [0,0,0]
     robot_base_plate_height: 9.77
-  motor: 
+  motor:
+    # Also design-based.
+    # Distance from the center of the robot to the center of the motor.
     units: 20
   microscope:
+    # Mecaportal position to the end effector. The magnetic location in the
+    # WRF.
     x: 167.5
     y: -181.5
     z: 219.75
@@ -16,6 +22,8 @@ environment:
     R3: -90
   loading_zone:
     flag: True
+    # If True, the robot will use the manual pose values indicated below.
+    # If False, uses the design-based approach above.
     pose:
       x: 259.0
       y: 0
