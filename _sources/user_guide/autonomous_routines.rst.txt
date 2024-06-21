@@ -21,6 +21,22 @@ program can continue running as expected.
     also be dependent on the precision of all measurements associated with the design approach, the
     manual tuning approach was selected as the primary focus of this project.
 
+------------------------------------
+
+Reference Frames
+------------------------------------
+
+Tool Reference Frame (TRF). This is relative to the gripper itself. positive
+Z is in the direction of the gripper fingers, positive X is downwards, and
+positive Y is to the left of the gripper. Euler angle rotations are defined
+as Rx, Ry, Rz, where Rx is the rotation about the X-axis, Ry is the rotation
+about the Y-axis, and Rz is the rotation about the Z-axis.
+
+World Reference Frame (WRF). This is relative to the robot arm base. Positive Z
+is vertical up, X is forward, Y is to the left. Euler angle rotations are
+defined as Rx, Ry, Rz, where Rx is the rotation about the X-axis, Ry is the
+rotation about the Y-axis, and Rz is the rotation about the Z-axis.
+
 -------------------------------------
 
 The General Routine Procedure
@@ -47,7 +63,8 @@ first half of the routine is also provided below:
      gripper, represents a minimum distance the robot arm should maintain before moving forward
      to grip the header plate.
 
-#. The robot arm moves forward (+z in the TRF) by the distance *engage_header_distance*.
+#. The robot arm moves forward (+z in the tool reference frame, or TRF) by the
+   distance *engage_header_distance*.
 
    * This sequence positions the gripper fingers exactly around the header plate, preparing for
      acquiring the sample.
@@ -61,6 +78,12 @@ first half of the routine is also provided below:
      feedback of the gripper has been satisfactory in closing the gripper effectively around the
      target header plater while limiting flex in the gripper fingertips.
 
+   * In the automatic gripper torque mode, a second LED indicates when
+     sufficient torque has been detected, indicating the presence of the
+     substrate that you are trying to grab. This is located on the side of the
+     gripper, and is adjacent to the LED that indicates that the gripper is
+     powered on.
+
 #. The robot arm lifts the header plate by a distance *sample_height*.
 
    * The sample height is a data parameter specified in the configuration.yaml file which
@@ -72,10 +95,16 @@ first half of the routine is also provided below:
 #. The robot arm performs a vertical oscillation maneuver.
 
    * The vertical oscillation maneuver is a simple drip management technique in place to limit
-     the amount of BABB that drips onto the operating environment space.
+     the amount of solvent that drips onto the operating environment space.
 
    * This maneuver is currently performed using sub-routine commands from the robot's offline
      program storage, rather than directly within the plugin software.
+     Specifically, the robot is capable of storing routines generated from
+     within MecaPortal in its memory. These can then be called and executed
+     from Python, as is done here.
+
+   .. Todo::
+        Paste the sequence here...
 
 #. The robot arm returns to the 'zero joints' position.
 
@@ -102,8 +131,8 @@ first half of the routine is also provided below:
 
 #. The robot arm retracts backward (w.r.t. to the TRF) by the *engage_header_distance*.
 
-   * The robot arm has now attached the sample and is waiting for the microscope to beign imaging
-     the sample.
+   * The robot arm has now attached the sample and is waiting for the
+     microscope to begin imaging the sample.
 
 #. The robot arm moves forward (w.r.t. to the TRF) by the *engage_header_distance* and grips the
    sample.
@@ -115,7 +144,7 @@ first half of the routine is also provided below:
 
    * In order to remove the magnetically attached sample and header plate, a simple linear motion
      is performed, a clean shear. The force of the gripper and speed of the motion is sufficient
-     to leave the microscope untouched adn smoothly remove the sample.
+     to leave the microscope untouched and smoothly remove the sample.
 
 #. The robot arm returns to the 'zero joints' position
 
@@ -125,9 +154,10 @@ first half of the routine is also provided below:
 #. The robot arm moves toward the loading zone of the carousel, positioning itself on top of
    the loading zone by a distance, *sample_height*.
 
-   * The robot arm positions the sample and header plate straight above the loading zone, algined
-     to lower it into place. The positioning of the header plate a distance of *sample_height*
-     above the loading zone is to prevent the sample from colliding with the vials or carousel.
+   * The robot arm positions the sample and header plate straight above the
+     loading zone, aligned to lower it into place. The positioning of the
+     header plate a distance of *sample_height* above the loading zone is to
+     prevent the sample from colliding with the vials or carousel.
 
 #. The robot arm opens the gripper, releasing the header plate.
 
@@ -166,8 +196,9 @@ automated sample handling system:
 
 Critical Data
 ---------------------
-All data for the generation of control routines is held within the configuration.yaml file,
-located within the plugin under the *config* directory.
+All data for the generation of control routines is held within the
+``configuration.yaml`` file, located within the plugin under the *config*
+directory.
 
 .. note::
     The configuration data for this experiment is retained within this plugin for the isolation of
@@ -180,19 +211,22 @@ program. These are discussed in more detail below:
 
 -   The most critical data refers to the robot arm poses for the loading zone and the microscope
     staging area. All routines are based off of these data points where the robot arm performs a
-    series of actions around these locations.
+    series of actions.
 
     - Currently, all locations are devised with reference to the robot arm's center base as the
       origin, to reflect the origin of the robot within Mecaportal. As discussed in the guide to
-      manual tuning, the location updated in the configuration.yaml refers to the robot arm's
+      manual tuning, the location updated in the ``configuration.yaml`` refers
+      to the robot arm's
       end-effector pose when the robot arm is in the desired position. This is the simplest
-      strategy as the MoveLin() commands that position the robot arm within the critical location
+      strategy as the `MoveLin()` commands that position the robot arm within
+      the critical location
       zones all operate on the robot arm's local world reference frame.
     - A feature has been set up to assume a non-zero robot base, should it be of interest to
       define all critical locations with respect to a global origin of the table or such. In such
       a case, simply find the difference between the critical location and the robot base to find
       the required movement of the robot arm within its local reference.
-    - There exists a flag in the configuration.yaml to enforce whether the manually tuned loading
+    - There exists a flag in the ``configuration.yaml`` to enforce whether the
+      manually tuned loading
       zone data should be used, or if the design-based approach results should be prioritized. It
       is currently set to **true** and should remain as such unless the design-based approach is
       adjusted.
@@ -218,12 +252,13 @@ Future Improvements
 -   The autonomous routine generation program has been designed to be re-configurable for all
     environments. However some aspects of it require manual adjustment, something that would
     preferably be avoided. This specifically applies to modifications to parameters of the
-    MoveLin() function calls within the autonomous script, as the remaining operations are based
+    `MoveLin()` function calls within the autonomous script, as the remaining
+    operations are based
     on the TRF and function irrespective of the robot arm orientation.
 
     - Consider 'Step 2' where the robot arm positions itself in front of the loading zone. The
-      robot arm sends a command ``self.robot_arm_controller.move_lin(x - engage_header_distance,
-      y, z, Rx, Ry, Rz)``. Here, the carousel is always assumed to be placed in front of the
+      robot arm sends a command `self.robot_arm_controller.move_lin(x - engage_header_distance,
+      y, z, Rx, Ry, Rz)`. Here, the carousel is always assumed to be placed in front of the
       robot arm (where x > 0 in the WRF) and for this reason, the *engage_header_distance* value
       must be subtracted from the *x* parameter to safely position the robot. Otherwise, the
       robot arm would crash into the carousel. This becomes more prominent with the positioning
