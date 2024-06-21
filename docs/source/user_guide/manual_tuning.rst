@@ -9,6 +9,9 @@ Mecaportal software to identify the loading zone and microscope staging area loc
 to the robot arm base. Any additional configuration parameters can then be reviewed and adjsuted
 before commencing the operation.
 
+.. image:: user_guide/images/system_view_back.png
+  :alt: System View of Routine (Back)
+
 Note that this can be somewhat of an iterative process, to identify a pose for the robot arm and
 adjust the loading zone with the motor accordingly.
 
@@ -48,7 +51,7 @@ loading zone.
       vial. This positioning must be repeated for the microscope staging area to ensure
       appropriate placement of the header plate and sample back within the vial.
 
-    .. image:: user_guide/images/gripper_fingertips_placement.png
+    .. image:: user_guide/images/gripper_fingertips_placement.jpg
          :alt: Gripper Fingertips Placement
 
 .. warning::
@@ -74,7 +77,7 @@ The loading zone and microscope staging are locations can be found by operating 
 with Mecaportal, keeping track of the end-effector pose. The process of utilizing this system is
 briefly discussed in the previous section.
 
-    .. image:: user_guide/images/mecaportal_end_effector_pose.png
+    .. image:: user_guide/images/mecaportal_end_effector_pose.jpg
          :alt: End-Effector Pose (Mecaportal)
 
 The six Cartesian values represent the pose of the robot arm's end-effector with respect to its
