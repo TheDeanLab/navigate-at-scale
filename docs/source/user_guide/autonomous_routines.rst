@@ -9,7 +9,10 @@ as the loading zone and microscope position in the Cartesian space, design speci
 vial height, and other such parameters. This allows for the application of this program to many
 reconfigurable environments. Consider if the robot arm or carousel subsystems must be
 repositioned or a new microscope or environment has been setup. Simply relocate the critical
-loading zones using the robot arm and update the configuration data accordingly. The **navigate**
+loading zones using the robot arm and update the configuration data
+accordingly, which can be found in the
+``autonomous_robotic_sample_handling/config/configuration.yaml`` file. The
+**navigate**
 program can continue running as expected.
 
 .. note::
@@ -32,7 +35,7 @@ appropriate control routines can be developed for automated sample handling.
 The general routine can be described as follows. A visual of the end-effector path throughout the
 first half of the routine is also provided below:
 
-.. image:: user_guide/images/system_view_front.png
+.. image:: images/system_view_front.png
   :alt: Alternative Routines
 
 #. The robot arm homes to the 'zero joints' position.
