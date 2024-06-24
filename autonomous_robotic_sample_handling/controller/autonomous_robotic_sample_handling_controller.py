@@ -88,10 +88,10 @@ def get_microscope_position(data):
     x = data["environment"]["microscope"]["x"]
     y = data["environment"]["microscope"]["y"]
     z = data["environment"]["microscope"]["z"]
-    theta_x = data["environment"]["microscope"]["R1"]
-    theta_y = data["environment"]["microscope"]["R2"]
-    theta_z = data["environment"]["microscope"]["R3"]
-    return [x, y, z, theta_x, theta_y, theta_z]
+    rot_x = data["environment"]["microscope"]["R1"]
+    rot_y = data["environment"]["microscope"]["R2"]
+    rot_z = data["environment"]["microscope"]["R3"]
+    return [x, y, z, rot_x, rot_y, rot_z]
 
 
 def get_loading_zone_position(data):
@@ -110,11 +110,11 @@ def get_loading_zone_position(data):
     x = data["environment"]["loading_zone"]["pose"]["x"]
     y = data["environment"]["loading_zone"]["pose"]["y"]
     z = data["environment"]["loading_zone"]["pose"]["z"]
-    theta_x = data["environment"]["loading_zone"]["pose"]["Rx"]
-    theta_y = data["environment"]["loading_zone"]["pose"]["Ry"]
-    theta_z = data["environment"]["loading_zone"]["pose"]["Rz"]
+    rot_x = data["environment"]["loading_zone"]["pose"]["Rx"]
+    rot_y = data["environment"]["loading_zone"]["pose"]["Ry"]
+    rot_z = data["environment"]["loading_zone"]["pose"]["Rz"]
     flag = data["environment"]["loading_zone"]["flag"]
-    return [x, y, z, theta_x, theta_y, theta_z] if flag else None
+    return [x, y, z, rot_x, rot_y, rot_z] if flag else None
 
 
 class AutonomousRoboticSampleHandlingController:
