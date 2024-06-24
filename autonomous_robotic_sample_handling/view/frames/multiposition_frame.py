@@ -1,8 +1,44 @@
+# Copyright (c) 2021-2024  The University of Texas Southwestern Medical Center.
+# All rights reserved.
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted for academic and research use only
+# (subject to the limitations in the disclaimer below)
+# provided that the following conditions are met:
+
+#      * Redistributions of source code must retain the above copyright notice,
+#      this list of conditions and the following disclaimer.
+
+#      * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+
+#      * Neither the name of the copyright holders nor the names of its
+#      contributors may be used to endorse or promote products derived from this
+#      software without specific prior written permission.
+
+# NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY
+# THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+# CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+# PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+# IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+
+# Standard Library Imports
 import tkinter as tk
 from tkinter import ttk
+
+# Third Party Imports
 import pandas as pd
-from pandastable import Table, Menu, RowHeader, ColumnHeader
-from navigate.controller.sub_controllers.gui_controller import GUIController
+from pandastable import Table
+
+# Local Imports
 
 
 class MultiPositionTab(tk.Frame):
@@ -11,12 +47,12 @@ class MultiPositionTab(tk.Frame):
     MultiPositionTab is a tab in the main window that allows the user to
     create and run multipoint experiments."""
 
-    def __init__(self, setntbk, *args, **kwargs):
+    def __init__(self, setting_notebook, *args, **kwargs):
         """Initialize the MultiPositionTab
 
         Parameters
         ----------
-        setntbk : ttk.Notebook
+        setting_notebook : ttk.Notebook
             The notebook that contains the settings tab.
         *args : tuple
             Variable length argument list.
@@ -24,9 +60,9 @@ class MultiPositionTab(tk.Frame):
             Arbitrary keyword arguments.
         """
         # Init Frame
-        tk.Frame.__init__(self, setntbk, *args, **kwargs)
+        tk.Frame.__init__(self, setting_notebook, *args, **kwargs)
 
-        #: The index of the tab in the notebook
+        #: int: The index of the tab in the notebook
         self.index = 3
 
         # Formatting
@@ -46,6 +82,8 @@ class MultiPositionTab(tk.Frame):
         self.multipoint_list.grid(
             row=1, column=0, columnspan=3, sticky=tk.NSEW, padx=10, pady=10
         )
+
+
 class MultiPointFrame(ttk.Labelframe):
     """MultiPointFrame
 
@@ -67,10 +105,7 @@ class MultiPointFrame(ttk.Labelframe):
         """
         text_label = "Multi-Position Acquisition"
         ttk.Labelframe.__init__(self, settings_tab, text=text_label, *args, **kwargs)
-        
-        #pd.options.display.max_rows = 9999
-        #position_data = pd.read_csv(r"C:\Users\jocam\Desktop\BMEN 4388\code\position_data.csv")
-        #print(position_data)
+
 
 class MultiPositionTable(Table):
     """MultiPositionTable
@@ -98,9 +133,6 @@ class MultiPositionTable(Table):
         self.generatePositions = None
         self.addStagePosition = None
 
-        #position_data = pd.read_csv("desktop/BMEN 4388/code/position_data.csv")
-        #position_data.head()
-        
 
 class MultiPointList(ttk.Frame):
     """MultiPointList
@@ -124,7 +156,9 @@ class MultiPointList(ttk.Frame):
         """
         ttk.Frame.__init__(self, settings_tab, *args, **kwargs)
 
-        df = pd.DataFrame({"X": [0], "Y": [0], "Z": [0], "θ1": [0], "θ2": [0], "θ3": [0]})
+        df = pd.DataFrame(
+            {"X": [0], "Y": [0], "Z": [0], "θ1": [0], "θ2": [0], "θ3": [0]}
+        )
         #: MultiPositionTable: The PandasTable instance that is being used.
         self.pt = MultiPositionTable(self, showtoolbar=False)
         self.pt.show()
@@ -144,12 +178,13 @@ class MultiPointList(ttk.Frame):
             Reference to table data as dataframe
         """
         return self.pt
-    
+
 
 class MultipositionButtons(tk.Frame):
     """frame that contains buttons for multiposition table"""
+
     def __init__(self, settings_tab, *args, **kwargs):
-        text_label = 'Multiposition Buttons'
+        text_label = "Multiposition Buttons"
         ttk.Labelframe.__init__(self, settings_tab, text=text_label, *args, **kwargs)
         # Formatting
         tk.Grid.columnconfigure(self, "all", weight=1)
@@ -160,7 +195,7 @@ class MultipositionButtons(tk.Frame):
             "import": ttk.Button(self, text="Load Positions from Disk"),
             "add row": ttk.Button(self, text="Add row"),
             "export": ttk.Button(self, text="Export Position Data"),
-            "add stage": ttk.Button(self,text='Add stage position')
+            "add stage": ttk.Button(self, text="Add stage position"),
         }
 
         counter = 0
@@ -172,7 +207,7 @@ class MultipositionButtons(tk.Frame):
             elif counter == 2:
                 row, column = 1, 0
             elif counter == 3:
-                row, column = 1,1
+                row, column = 1, 1
 
             button.grid(
                 row=row, column=column, sticky=tk.NSEW, padx=(4, 1), pady=(4, 6)

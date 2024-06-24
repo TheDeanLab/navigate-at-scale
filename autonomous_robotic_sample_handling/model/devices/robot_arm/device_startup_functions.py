@@ -1,3 +1,34 @@
+# Copyright (c) 2021-2024  The University of Texas Southwestern Medical Center.
+# All rights reserved.
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted for academic and research use only
+# (subject to the limitations in the disclaimer below)
+# provided that the following conditions are met:
+
+#      * Redistributions of source code must retain the above copyright notice,
+#      this list of conditions and the following disclaimer.
+
+#      * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+
+#      * Neither the name of the copyright holders nor the names of its
+#      contributors may be used to endorse or promote products derived from this
+#      software without specific prior written permission.
+
+# NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY
+# THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+# CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+# PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+# IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
 # Standard Imports
 import os
 from pathlib import Path
@@ -9,15 +40,18 @@ from navigate.tools.common_functions import load_module_from_file
 from navigate.model.device_startup_functions import (
     device_not_found,
     DummyDeviceConnection,
-    auto_redial
+    auto_redial,
 )
 
-DEVICE_TYPE_NAME = "robot_arm"  # Same as in configuraion.yaml, for example "stage", "filter_wheel", "remote_focus_device"...
-DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
+# Same as in configuraion.yaml, e.g. "stage", "filter_wheel", "remote_focus_device"...
+DEVICE_TYPE_NAME = "robot_arm"
+
+# the reference value from configuration.yaml
+DEVICE_REF_LIST = ["type"]
 
 
 def build_robot_arm_connection(configuration, mdr):
-    """ Builds and returns a connection to the robot device
+    """Builds and returns a connection to the robot device
 
     Parameters
     ----------
@@ -28,20 +62,22 @@ def build_robot_arm_connection(configuration, mdr):
 
     Returns
     -------
-    Robot object with corresponding device connection
+    robot : object
+        Robot object with corresponding device connection
     """
     # TODO: Set up import statement to occur within initial load_device.
     #  Avoid re-importing package
     robot_ip_address = configuration["ip_address"]
     enable_synchronous_mode = configuration["enable_synchronous_mode"]
     robot = mdr.Robot()
-    robot.Connect(address=robot_ip_address,
-                  enable_synchronous_mode=enable_synchronous_mode)
+    robot.Connect(
+        address=robot_ip_address, enable_synchronous_mode=enable_synchronous_mode
+    )
     return robot
 
 
 def load_device(configuration, is_synthetic=False):
-    """ Load the Robot Arm
+    """Load the Robot Arm
 
     Parameters
     ----------
@@ -63,10 +99,14 @@ def load_device(configuration, is_synthetic=False):
 
     if device_type == "Meca500":
         import mecademicpy.robot as mdr
+
         return auto_redial(
             build_robot_arm_connection,
-            (configuration, mdr,),
-            exception=Exception
+            (
+                configuration,
+                mdr,
+            ),
+            exception=Exception,
         )
 
     elif device_type.lower() == "syntheticrobot" or device_type.lower() == "synthetic":
@@ -74,7 +114,7 @@ def load_device(configuration, is_synthetic=False):
 
 
 def start_device(microscope_name, device_connection, configuration, is_synthetic=False):
-    """ Start the Robot Arm
+    """Start the Robot Arm
 
     Parameters
     ----------
@@ -95,7 +135,9 @@ def start_device(microscope_name, device_connection, configuration, is_synthetic
     if is_synthetic:
         device_type = "synthetic"
     else:
-        device_type = configuration["configuration"]["microscopes"][microscope_name]["robot_arm"]["hardware"]["type"]
+        device_type = configuration["configuration"]["microscopes"][microscope_name][
+            "robot_arm"
+        ]["hardware"]["type"]
 
     if device_type == "Meca500":
         robot_arm = load_module_from_file(
