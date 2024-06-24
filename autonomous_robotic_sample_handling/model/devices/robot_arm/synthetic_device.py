@@ -1,8 +1,40 @@
+# Copyright (c) 2021-2024  The University of Texas Southwestern Medical Center.
+# All rights reserved.
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted for academic and research use only
+# (subject to the limitations in the disclaimer below)
+# provided that the following conditions are met:
+
+#      * Redistributions of source code must retain the above copyright notice,
+#      this list of conditions and the following disclaimer.
+
+#      * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+
+#      * Neither the name of the copyright holders nor the names of its
+#      contributors may be used to endorse or promote products derived from this
+#      software without specific prior written permission.
+
+# NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY
+# THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+# CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+# PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+# IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+
 class SyntheticRobotArm:
-    """ A synthetic robot arm class """
+    """A synthetic robot arm class"""
 
     def __init__(self, device_connection, *args):
-        """ Initialize the Synthetic Device
+        """Initialize the Synthetic Device
 
         Parameters
         ----------
@@ -15,7 +47,7 @@ class SyntheticRobotArm:
         pass
 
     def start_program(self, program_name):
-        """ Start offline robot program
+        """Start offline robot program
 
         Parameters
         ----------
@@ -29,7 +61,7 @@ class SyntheticRobotArm:
         print(f"*** Synthetic robot receive command: Start {program_name} Program")
 
     def disconnect(self):
-        """ Disconnects the Mecademic Robot object from the robot and system
+        """Disconnects the Mecademic Robot object from the robot and system
 
         Returns
         -------
@@ -38,7 +70,7 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: Disconnect")
 
     def zero_joints(self):
-        """ Zero the joints of the synthetic device
+        """Zero the joints of the synthetic device
 
         Returns
         -------
@@ -47,7 +79,7 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: Zero Joints")
 
     def move_joints(self, j1, j2, j3, j4, j5, j6):
-        """ Move robot arm joints to the specified angles
+        """Move robot arm joints to the specified angles
 
         Parameters
         ----------
@@ -68,10 +100,13 @@ class SyntheticRobotArm:
         -------
 
         """
-        print(f"*** Synthetic robot receive command: MoveJoints({j1}, {j2}, {j3}, {j4}, {j5}, {j6})")
+        print(
+            f"*** Synthetic robot receive command: MoveJoints({j1}, "
+            f"{j2}, {j3}, {j4}, {j5}, {j6})"
+        )
 
     def move_lin(self, x, y, z, rx, ry, rz):
-        """ Move the robot arm along a linear path (in the Cartesian space) to a given pose
+        """Move the robot arm along a linear path (in Cartesian space) to a given pose
 
         Parameters
         ----------
@@ -92,10 +127,13 @@ class SyntheticRobotArm:
         -------
 
         """
-        print(f"*** Synthetic robot receive command: MoveLin({x}, {y}, {z}, {rx}, {ry}, {rz})")
+        print(
+            f"*** Synthetic robot receive command: MoveLin({x}, "
+            f"{y}, {z}, {rx}, {ry}, {rz})"
+        )
 
     def move_lin_ref_trf(self, x, y, z, rx, ry, rz):
-        """ Move robot arm relative to the tool reference frame
+        """Move robot arm relative to the tool reference frame
 
         Parameters
         ----------
@@ -116,10 +154,13 @@ class SyntheticRobotArm:
         -------
 
         """
-        print(f"*** Synthetic robot receive command: MoveLinRelTrf({x}, {y}, {z}, {rx}, {ry}, {rz})")
+        print(
+            f"*** Synthetic robot receive command: MoveLinRelTrf({x}, "
+            f"{y}, {z}, {rx}, {ry}, {rz})"
+        )
 
     def move_lin_ref_wrf(self, x, y, z, rx, ry, rz):
-        """ Move robot arm relative to the world reference frame
+        """Move robot arm relative to the world reference frame
 
         Parameters
         ----------
@@ -140,10 +181,13 @@ class SyntheticRobotArm:
         -------
 
         """
-        print(f"*** Synthetic robot receive command: MoveLinRelWrf({x}, {y}, {z}, {rx}, {ry}, {rz})")
+        print(
+            f"*** Synthetic robot receive command: MoveLinRelWrf({x}, "
+            f"{y}, {z}, {rx}, {ry}, {rz})"
+        )
 
     def move_pose(self, x, y, z, rx, ry, rz):
-        """ Move Robot Arm to the given Pose
+        """Move Robot Arm to the given Pose
 
         Parameters
         ----------
@@ -164,10 +208,13 @@ class SyntheticRobotArm:
         -------
 
         """
-        print(f"*** Synthetic robot receive command: MovePose({x}, {y}, {z}, {rx}, {ry}, {rz})")
+        print(
+            f"*** Synthetic robot receive command: MovePose({x}, "
+            f"{y}, {z}, {rx}, {ry}, {rz})"
+        )
 
     def delay(self, wait):
-        """ Delays robot operation by a specified time
+        """Delays robot operation by a specified time
 
         Parameters
         ----------
@@ -181,7 +228,7 @@ class SyntheticRobotArm:
         print(f"*** Synthetic robot receive command: Delay by {wait} seconds")
 
     def activate_and_home(self):
-        """ Activates and Homes the Robot
+        """Activates and Homes the Robot
 
         Returns
         -------
@@ -190,7 +237,7 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: Activate and Home")
 
     def load_robot_config(self):
-        """ Loads robot configuration data
+        """Loads robot configuration data
 
         Returns
         -------
@@ -199,7 +246,7 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: Load robot config")
 
     def open_gripper(self):
-        """ Open the robot gripper
+        """Open the robot gripper
 
         Returns
         -------
@@ -208,7 +255,7 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: Open gripper")
 
     def close_gripper(self):
-        """ Close the robot gripper
+        """Close the robot gripper
 
         Returns
         -------
@@ -217,7 +264,7 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: Close gripper")
 
     def pause_robot_motion(self):
-        """ Pause robot motion for synthetic device
+        """Pause robot motion for synthetic device
 
         Returns
         -------
@@ -226,7 +273,7 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: Pause robot motion")
 
     def resume_robot_motion(self):
-        """ Resume robot motion for synthetic device
+        """Resume robot motion for synthetic device
 
         Returns
         -------
@@ -235,7 +282,7 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: Resume robot motion")
 
     def reset_robot_motion(self):
-        """ Reset robot motion for synthetic device
+        """Reset robot motion for synthetic device
 
         Returns
         -------
@@ -244,7 +291,7 @@ class SyntheticRobotArm:
         print("*** Synthetic robot receive command: Reset robot motion")
 
     def reset_error(self):
-        """ Reset robot error for synthetic device
+        """Reset robot error for synthetic device
 
         Returns
         -------
@@ -265,14 +312,21 @@ class SyntheticRobotArm:
             "start_program": lambda *args: self.start_program(args[0]),
             "disconnect": lambda *args: self.disconnect(),
             "zero_joints": lambda *args: self.zero_joints(),
-            "move_joints": lambda *args: self.move_joints(args[0], args[1], args[2], args[3], args[4], args[5]),
-            "move_lin": lambda *args: self.move_joints(args[0], args[1], args[2], args[3],
-                                                          args[4], args[5]),
-            "move_lin_rel_trf": lambda *args: self.move_joints(args[0], args[1], args[2], args[3],
-                                                          args[4], args[5]),
-            "move_lin_rel_wrf": lambda *args: self.move_joints(args[0], args[1], args[2], args[3],
-                                                          args[4], args[5]),
-            "move_pose": lambda *args: self.move_pose(args[0], args[1], args[2], args[3], args[4], args[5]),
+            "move_joints": lambda *args: self.move_joints(
+                args[0], args[1], args[2], args[3], args[4], args[5]
+            ),
+            "move_lin": lambda *args: self.move_joints(
+                args[0], args[1], args[2], args[3], args[4], args[5]
+            ),
+            "move_lin_rel_trf": lambda *args: self.move_joints(
+                args[0], args[1], args[2], args[3], args[4], args[5]
+            ),
+            "move_lin_rel_wrf": lambda *args: self.move_joints(
+                args[0], args[1], args[2], args[3], args[4], args[5]
+            ),
+            "move_pose": lambda *args: self.move_pose(
+                args[0], args[1], args[2], args[3], args[4], args[5]
+            ),
             "delay": lambda *args: self.delay(args[0]),
             "activate_and_home": lambda *args: self.activate_and_home(),
             "open_gripper": lambda *args: self.open_gripper(),
