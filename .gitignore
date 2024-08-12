@@ -2,6 +2,7 @@
 autonomous_robotic_sample_handling/.DS_Store
 autonomous_robotic_sample_handling/view/.DS_Store
 .idea/*
+dist/
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
