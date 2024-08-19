@@ -7,7 +7,6 @@ from tkinter import ttk
 # RobotInitialization
 from autonomous_robotic_sample_handling.view.frames.move_sequence import MoveSequence
 from autonomous_robotic_sample_handling.view.frames.multiposition_frame import MultiPositionTab, MultipositionButtons
-from navigate.view.custom_widgets.validation import ValidatedSpinbox, ValidatedCombobox
 
 
 class AutonomousRoboticSampleHandlingFrame(ttk.Frame):
