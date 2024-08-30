@@ -12,3 +12,4 @@ __pycache__/
 *_autosummary*
 docs/build/*
 *DS_Store
+/.vscode

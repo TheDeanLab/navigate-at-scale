@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "navigate-at-scale"
-description = "High-Throughput Tissue Imaging."
+description = "A navigate plugin for high-throughput imaging with robotics."
 authors = [{name = "The Dean Lab, UT Southwestern Medical Center"}]
 readme = "README.md"
 license = {file = "LICENSE.md"}
