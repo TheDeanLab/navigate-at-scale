@@ -30,5 +30,6 @@
 
    autonomous_robotic_sample_handling.view.autonomous_robotic_sample_handling_frame
    autonomous_robotic_sample_handling.view.frames
+   autonomous_robotic_sample_handling.view.images
    autonomous_robotic_sample_handling.view.popups
 
