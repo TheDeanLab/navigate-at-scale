@@ -17,7 +17,7 @@ class MotorController:
         self.buttons = self.view.buttons
 
         self.buttons["import"].configure(command=self.test_connection)
-        self.buttons["movetoloadingzone"].configure(command=self.MoveToLoadingZone)
+        # self.buttons["movetoloadingzone"].configure(command=self.MoveToLoadingZone)
 
     def test_connection(self):
         """

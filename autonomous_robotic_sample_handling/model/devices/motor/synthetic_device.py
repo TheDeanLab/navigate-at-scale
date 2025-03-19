@@ -1,3 +1,4 @@
+from decimal import Decimal
 class SyntheticRobotArm:
     """ A synthetic robot arm for testing purposes """
     def __init__(self, device_connection, *args):
@@ -10,41 +11,71 @@ class SyntheticRobotArm:
         args : list
             The arguments for the device
         """
-        pass
+        self.position = 0
 
-    def jog(self):
-        """ Zero the joints of the synthetic device """
-        print("*** Synthetic motor receive command: jog")
+    def home(self):
+        """Home the motor"""
+        print("Homing Synthetic Motor")
 
-    def disconnect(self):
-        """ Disconnects the Mecademic Robot object from the robot and system"""
-        print("*** Synthetic robot receive command: disconnect")
-
-    def move_joints(self, a, b, c, d, e, f):
-        """ Move Robot Joints.
+    def MoveJog(self, MotorDirection):
+        """Move the motor in the specified direction.
 
         Parameters
         ----------
-        a
-        b
-        c
-        d
-        e
-        f
+        MotorDirection : str
+            The direction to move the motor in
         """
-        print("*** Synthetic robot receive command: move_joints")
+         #Pass string or initialize MotorDirection.Forward/Backward outside?
+         
+        print(f"Synthetic motor moves jog in {MotorDirection}")
+            
+    def setHomingVelocity(self, velocity):
+        print(f"Set Synthetic motor homing velocity: {velocity}")
 
-    def move_pose(self, a, b, c, d, e, f):
-        """ Move Robot Linearly """
-        print("*** Synthetic robot receive command: disconnect")
+    def MoveTo(self, Position):
+        """Move the motor to the specified position.
 
-    def delay(self, wait):
-        """ Makes the Robot wait """
-        print("*** Synthetic robot receive command: disconnect")
+        Parameters
+        ----------
+        Position : int
+            The position to move the motor to
+        """
+        self.position = Decimal(Position)
+        print(f"Moving Synthetic motor to position {Decimal(Position)}")
 
-    def activate_and_home(self):
-        """ Activates and Homes the Robot """
-        print("*** Synthetic robot receive command: disconnect")
+    def disconnect(self):
+        """Disconnect the motor"""
+        print("Disconnect from Synthetic motor!")
+        
+    def getPosition(self):
+        """Get the motor position.
+
+        Returns
+        -------
+        int
+            The motor position
+        """
+        return self.position
+    
+    def SetJogStepSize(self, JogStepSize):
+        """Set the jog step size.
+
+        Parameters
+        ----------
+        JogStepSize : int
+            The jog step size
+        """
+        print(f"Set Synthetic motor jog step size: {Decimal(JogStepSize)}")
+        
+    def SetJogVelocityParams(self, JogVelocity,JogAccel):
+        """Set the jog velocity parameters.
+
+        Parameters
+        ----------
+        JogVelocity : int
+            The jog velocity
+        """
+        print(f"Set Synthetic motor jog velocity params: {Decimal(JogVelocity)}, {Decimal(JogAccel)}")
 
     @property
     def commands(self):
@@ -56,5 +87,10 @@ class SyntheticRobotArm:
             commands that the device supports
         """
         return {
-            "jog": lambda *args: self.jog(),
+            "home": lambda *args: self.home(),
+            "disconnect": lambda *args: self.disconnect(),
+            "moveJog": lambda *args: self.MoveJog(args[0]),
+            "position": lambda *args: self.getPosition(),
+            "moveTo": lambda *args: self.MoveTo(args[0]),
+            "setHomingVelocity": lambda *args: self.setHomingVelocity(args[0])
         }

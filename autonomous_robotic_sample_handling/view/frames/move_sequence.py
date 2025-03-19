@@ -74,8 +74,8 @@ class MoveSequence(tk.Frame):
             # TODO: Consider benefits of specifying a number_of_samples variable for the num_samples LabelInput
         }
 
-        self.InHouseTools = InHouseToolsPopup(self)
-        self.buttons.update(InHouseToolsPopup.get_buttons(self.InHouseTools))
+        # self.InHouseTools = InHouseToolsPopup(self)
+        # self.buttons.update(InHouseToolsPopup.get_buttons(self.InHouseTools))
 
         # Define styles for widgets
         self.variables['progress_bar_style'].layout('text.Horizontal.TProgressbar',

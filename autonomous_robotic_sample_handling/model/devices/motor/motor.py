@@ -2,6 +2,7 @@
 import os
 import time
 from pathlib import Path
+from decimal import Decimal
 
 # Third party imports
 import clr
@@ -33,7 +34,6 @@ from Thorlabs.MotionControl.GenericMotorCLI import MotorDirection as MD
 # from ThorLabs.MotionControl.GenericMotorCLI import Settings
 # from ThorLabs.MotionControl.GenericMotorCLI import RotationDirections as RD
 # from Thorlabs.MotionControl.Benchtop.StepperMotorCLI import BenchtopStepperMotor
-from System import Decimal
 
 class Motor:
     """Motor Class"""

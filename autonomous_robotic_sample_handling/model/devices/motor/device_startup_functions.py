@@ -2,7 +2,8 @@
 import os
 from pathlib import Path
 import time
-import clr
+
+
 
 # Third party imports
 
@@ -18,7 +19,7 @@ from navigate.model.device_startup_functions import (
 
 DEVICE_TYPE_NAME = "motor"  # Same as in configuration.yaml, for example "stage", "filter_wheel", "remote_focus_device"...
 DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
-
+SUPPORTED_DEVICE_TYPES = ['HDR50', "synthetic"]
 
 def build_motor_connection(configuration, motor, motor_serial_no):
     motor.Connect(motor_serial_no)
@@ -42,22 +43,22 @@ def load_device(configuration, is_synthetic=False):
     """
     
     import os
-    plugins_config_path = os.path.join(
-        get_navigate_path(), "config", "plugins_config.yml"
-    )
-    
-    plugins_config = load_yaml_file(plugins_config_path)
-    plugin_path = plugins_config["Autonomous Robotic Sample Handling"]
     
     if is_synthetic:
-        motor_type = "SyntheticMotor"
+        motor_type = "synthetic"
     else:
         # Can be Meca500, SyntheticRobot, syntheticrobot, Synthetic, synthetic
         motor_type = configuration.get("type", "HDR50")
 
     if motor_type == "HDR50":
+        import pythonnet
+        pythonnet.load()
+        import clr
+        import importlib.resources
         # TODO: Consider auto_redial function.
         motor_serial_no = configuration["serial_no"]
+
+        plugin_path = importlib.resources.files("autonomous_robotic_sample_handling")
 
         dll_dir = os.path.join(plugin_path, 'API')
 
@@ -77,7 +78,7 @@ def load_device(configuration, is_synthetic=False):
             build_motor_connection, (configuration, motor, motor_serial_no, ), exception=Exception
         )
 
-    elif motor_type.lower() == "SyntheticMotor" or motor_type.lower() == "synthetic":
+    elif motor_type.lower().startswith("synthetic"):
         return DummyDeviceConnection()
 
 

@@ -31,6 +31,7 @@
 
 # Standard Library Imports
 import os
+import importlib.resources
 
 # Third Party Imports
 
@@ -62,11 +63,7 @@ def load_config_data():
     -------
 
     """
-    plugins_config_path = os.path.join(
-        get_navigate_path(), "config", "plugins_config.yml"
-    )
-    plugins_config = load_yaml_file(plugins_config_path)
-    plugin_path = plugins_config["Autonomous Robotic Sample Handling"]
+    plugin_path = importlib.resources.files("autonomous_robotic_sample_handling")
     local_config_path = os.path.join(plugin_path, "config", "configuration.yaml")
     data = load_yaml_file(local_config_path)
     return data
@@ -151,6 +148,9 @@ class AutonomousRoboticSampleHandlingController:
             command=self.start_offline_program)
         self.buttons['in_house'].configure(
             command=self.launch_in_house_tools)
+        
+        #: dict: The key positions
+        self.key_positions = None
 
         #: dict: The data from the configuration file
         self.data = load_config_data()
@@ -180,8 +180,6 @@ class AutonomousRoboticSampleHandlingController:
         #: InHouseToolsPopupController: The in house tools popup controller
         self.in_house_tools_controller = None
 
-        #: dict: The key positions
-        self.key_positions = None
 
     def launch_in_house_tools(self):
         """Launches inhouse tools popup.
@@ -197,6 +195,7 @@ class AutonomousRoboticSampleHandlingController:
         self.in_house_tools_controller = InHouseToolsPopupController(
             in_house_tools, self
         )
+        self.robot_arm_controller.bind_button_events(in_house_tools)
 
     def start_offline_program(self, program_name="Vertical_Oscillation"):
         """ Start the offline program
