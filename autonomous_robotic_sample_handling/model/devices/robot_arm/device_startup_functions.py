@@ -14,7 +14,7 @@ from navigate.model.device_startup_functions import (
 
 DEVICE_TYPE_NAME = "robot_arm"  # Same as in configuraion.yaml, for example "stage", "filter_wheel", "remote_focus_device"...
 DEVICE_REF_LIST = ["type"]  # the reference value from configuration.yaml
-
+SUPPORTED_DEVICE_TYPES = ["Meca500", "synthetic"]
 
 def build_robot_arm_connection(configuration, mdr):
     """ Builds and returns a connection to the robot device

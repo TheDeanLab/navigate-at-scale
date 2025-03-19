@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import pandas as pd
 from pandastable import Table, Menu, RowHeader, ColumnHeader
-from navigate.controller.sub_controllers.gui_controller import GUIController
+from navigate.controller.sub_controllers.gui import GUIController
 
 
 class MultiPositionTab(tk.Frame):

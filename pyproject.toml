@@ -3,7 +3,7 @@ requires = ["setuptools>=43.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "navigate-at-scale"
+name = "navigate_at_scale"
 description = "A navigate plugin for high-throughput imaging with robotics."
 authors = [{name = "The Dean Lab, UT Southwestern Medical Center"}]
 readme = "README.md"
@@ -24,11 +24,8 @@ dependencies = [
     'PIPython==2.6.0.1',
     'fsspec==2022.8.2; sys_platform != "darwin"',
     'fsspec==2022.5.0; sys_platform == "darwin"',
-    'pythonnet==3.0.3',
+    'pythonnet',
     ]
-
-[project.scripts]
-navigate-at-scale = "autonomous_robotic_sample_handling.main:main"
 
 [project.optional-dependencies]
 dev = [
@@ -60,7 +57,7 @@ Source = "https://github.com/TheDeanLab/navigate-at-scale"
 version = {file = "navigate-at-scale/VERSION"}
 
 [project.entry-points."navigate.plugins"]
-navigate_at_plugin = "autonomous_robotic_sample_handling"
+navigate_at_scale = "autonomous_robotic_sample_handling.main:main"
 
 [tools.setuptools.package-data]
-navigate_at_plugin_data = ["plugin_config.yml"]
+navigate_at_scale_data = ["plugin_config.yml"]

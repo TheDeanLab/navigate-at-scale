@@ -12,14 +12,28 @@ class RobotArmController:
         self.view = view
         self.parent_controller = parent_controller
 
-        # Get the variables and buttons from the view
-        self.variables = self.view.get_variables()
-        self.buttons = self.view.buttons
+    def MoveToLoadingZone(self, position = 302.3, view=None):
+        """
 
-        self.buttons["zero"].configure(command=self.zero_joints)
-        self.buttons["disconnect"].configure(command=self.disconnect)
-        self.buttons['opengripper'].configure(command=self.open_gripper)
-        self.buttons['closegripper'].configure(command=self.close_gripper)
+        Parameters
+        ----------
+        position
+
+        Returns
+        -------
+
+        """
+        def func(position=position, *args):
+            if view is not None:
+                text_input = view.buttons["input"].get(1.0, "end-1c")
+                if text_input.strip() != "":
+                    position = text_input
+                else:
+                    position = position
+            self.parent_controller.execute(
+                "moveTo", float(position)
+            )
+        return func
 
     def zero_joints(self):
         """
@@ -28,6 +42,7 @@ class RobotArmController:
         -------
 
         """
+        print("**** Zeroing joints ****")
         self.parent_controller.execute(
             "zero_joints"
         )
@@ -83,3 +98,9 @@ class RobotArmController:
     #     self.robot_arm.move_lin_rel_wrf(x, y, z, alpha, beta, gamma)
     #     print("Robot has finished moving [lin_rel_wrf]")
 
+    def bind_button_events(self, view):
+        view.buttons["zero"].configure(command=self.zero_joints)
+        view.buttons["disconnect"].configure(command=self.disconnect)
+        view.buttons['opengripper'].configure(command=self.open_gripper)
+        view.buttons['closegripper'].configure(command=self.close_gripper)
+        view.buttons['movetoloadingzone'].configure(command=self.MoveToLoadingZone(view=view))
